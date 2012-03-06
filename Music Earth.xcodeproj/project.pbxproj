@@ -1,0 +1,279 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DE97C99150688EB00154D2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE97C98150688EB00154D2F /* UIKit.framework */; };
+		8DE97C9B150688EB00154D2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE97C9A150688EB00154D2F /* Foundation.framework */; };
+		8DE97C9D150688EB00154D2F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE97C9C150688EB00154D2F /* CoreGraphics.framework */; };
+		8DE97CA3150688EB00154D2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CA1150688EB00154D2F /* InfoPlist.strings */; };
+		8DE97CA5150688EB00154D2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE97CA4150688EB00154D2F /* main.m */; };
+		8DE97CA9150688EB00154D2F /* Music_EarthAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE97CA8150688EB00154D2F /* Music_EarthAppDelegate.m */; };
+		8DE97CAC150688EB00154D2F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CAA150688EB00154D2F /* MainStoryboard.storyboard */; };
+		8DE97CAF150688EB00154D2F /* Music_EarthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8DE97C94150688EB00154D2F /* Music Earth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Earth.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DE97C98150688EB00154D2F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8DE97C9A150688EB00154D2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8DE97C9C150688EB00154D2F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8DE97CA0150688EB00154D2F /* Music Earth-Info.plist */ = {isa = PBXFileReference; path = "Music Earth-Info.plist"; sourceTree = "<group>"; };
+		8DE97CA2150688EB00154D2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8DE97CA4150688EB00154D2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DE97CA6150688EB00154D2F /* Music Earth-Prefix.pch */ = {isa = PBXFileReference; path = "Music Earth-Prefix.pch"; sourceTree = "<group>"; };
+		8DE97CA7150688EB00154D2F /* Music_EarthAppDelegate.h */ = {isa = PBXFileReference; path = Music_EarthAppDelegate.h; sourceTree = "<group>"; };
+		8DE97CA8150688EB00154D2F /* Music_EarthAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthAppDelegate.m; sourceTree = "<group>"; };
+		8DE97CAB150688EB00154D2F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		8DE97CAD150688EB00154D2F /* Music_EarthViewController.h */ = {isa = PBXFileReference; path = Music_EarthViewController.h; sourceTree = "<group>"; };
+		8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DE97C91150688EB00154D2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DE97C99150688EB00154D2F /* UIKit.framework in Frameworks */,
+				8DE97C9B150688EB00154D2F /* Foundation.framework in Frameworks */,
+				8DE97C9D150688EB00154D2F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8DE97C89150688EB00154D2F = {
+			isa = PBXGroup;
+			children = (
+				8DE97C9E150688EB00154D2F /* Music Earth */,
+				8DE97C97150688EB00154D2F /* Frameworks */,
+				8DE97C95150688EB00154D2F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8DE97C95150688EB00154D2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DE97C94150688EB00154D2F /* Music Earth.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8DE97C97150688EB00154D2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DE97C98150688EB00154D2F /* UIKit.framework */,
+				8DE97C9A150688EB00154D2F /* Foundation.framework */,
+				8DE97C9C150688EB00154D2F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DE97C9E150688EB00154D2F /* Music Earth */ = {
+			isa = PBXGroup;
+			children = (
+				8DE97CA7150688EB00154D2F /* Music_EarthAppDelegate.h */,
+				8DE97CA8150688EB00154D2F /* Music_EarthAppDelegate.m */,
+				8DE97CAA150688EB00154D2F /* MainStoryboard.storyboard */,
+				8DE97CAD150688EB00154D2F /* Music_EarthViewController.h */,
+				8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */,
+				8DE97C9F150688EB00154D2F /* Supporting Files */,
+			);
+			path = "Music Earth";
+			sourceTree = "<group>";
+		};
+		8DE97C9F150688EB00154D2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8DE97CA0150688EB00154D2F /* Music Earth-Info.plist */,
+				8DE97CA1150688EB00154D2F /* InfoPlist.strings */,
+				8DE97CA4150688EB00154D2F /* main.m */,
+				8DE97CA6150688EB00154D2F /* Music Earth-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DE97C93150688EB00154D2F /* Music Earth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DE97CB2150688EB00154D2F /* Build configuration list for PBXNativeTarget "Music Earth" */;
+			buildPhases = (
+				8DE97C90150688EB00154D2F /* Sources */,
+				8DE97C91150688EB00154D2F /* Frameworks */,
+				8DE97C92150688EB00154D2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Music Earth";
+			productName = "Music Earth";
+			productReference = 8DE97C94150688EB00154D2F /* Music Earth.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8DE97C8B150688EB00154D2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 8DE97C8E150688EB00154D2F /* Build configuration list for PBXProject "Music Earth" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8DE97C89150688EB00154D2F;
+			productRefGroup = 8DE97C95150688EB00154D2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DE97C93150688EB00154D2F /* Music Earth */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DE97C92150688EB00154D2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DE97CA3150688EB00154D2F /* InfoPlist.strings in Resources */,
+				8DE97CAC150688EB00154D2F /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DE97C90150688EB00154D2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DE97CA5150688EB00154D2F /* main.m in Sources */,
+				8DE97CA9150688EB00154D2F /* Music_EarthAppDelegate.m in Sources */,
+				8DE97CAF150688EB00154D2F /* Music_EarthViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8DE97CA1150688EB00154D2F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DE97CA2150688EB00154D2F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8DE97CAA150688EB00154D2F /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DE97CAB150688EB00154D2F /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8DE97CB0150688EB00154D2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8DE97CB1150688EB00154D2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8DE97CB3150688EB00154D2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Music Earth/Music Earth-Prefix.pch";
+				INFOPLIST_FILE = "Music Earth/Music Earth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8DE97CB4150688EB00154D2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Music Earth/Music Earth-Prefix.pch";
+				INFOPLIST_FILE = "Music Earth/Music Earth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8DE97C8E150688EB00154D2F /* Build configuration list for PBXProject "Music Earth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DE97CB0150688EB00154D2F /* Debug */,
+				8DE97CB1150688EB00154D2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DE97CB2150688EB00154D2F /* Build configuration list for PBXNativeTarget "Music Earth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DE97CB3150688EB00154D2F /* Debug */,
+				8DE97CB4150688EB00154D2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8DE97C8B150688EB00154D2F /* Project object */;
+}
