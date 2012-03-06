@@ -211,7 +211,7 @@
                                             <action selector="skipToNext" destination="2" eventType="touchUpInside" id="BzT-XS-QR8"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="volumeNum" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="MkM-HS-pHW">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="volumeNum" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="MkM-HS-pHW">
                                         <rect key="frame" x="114" y="34" width="92" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -252,63 +252,67 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="date" lineBreakMode="tailTruncation" minimumFontSize="10" id="2Yn-ja-ays">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="date" lineBreakMode="tailTruncation" minimumFontSize="10" id="2Yn-ja-ays">
                                 <rect key="frame" x="120" y="76" width="180" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="time" lineBreakMode="tailTruncation" minimumFontSize="10" id="GCp-OZ-u9h">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="time" lineBreakMode="tailTruncation" minimumFontSize="10" id="GCp-OZ-u9h">
                                 <rect key="frame" x="120" y="102" width="180" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="longitude:" lineBreakMode="tailTruncation" minimumFontSize="10" id="3sr-k8-tp1">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="longitude:" lineBreakMode="tailTruncation" minimumFontSize="10" id="3sr-k8-tp1">
                                 <rect key="frame" x="120" y="189" width="86" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="volumeChageTimes" lineBreakMode="tailTruncation" minimumFontSize="10" id="NzO-Jm-T2g">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="volumeChageTimes" lineBreakMode="tailTruncation" minimumFontSize="10" id="NzO-Jm-T2g">
                                 <rect key="frame" x="120" y="131" width="180" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LongitudeNum" lineBreakMode="tailTruncation" minimumFontSize="10" id="Ydh-Tu-Zkp">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LongitudeNum" lineBreakMode="tailTruncation" minimumFontSize="10" id="Ydh-Tu-Zkp">
                                 <rect key="frame" x="199" y="189" width="107" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="latitudeNum" lineBreakMode="tailTruncation" minimumFontSize="10" id="X91-ZD-QSu">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="latitudeNum" lineBreakMode="tailTruncation" minimumFontSize="10" id="X91-ZD-QSu">
                                 <rect key="frame" x="200" y="160" width="93" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="latitude:" lineBreakMode="tailTruncation" minimumFontSize="10" id="xmp-LO-7u1">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="latitude:" lineBreakMode="tailTruncation" minimumFontSize="10" id="xmp-LO-7u1">
                                 <rect key="frame" x="120.5" y="160" width="71" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="193-location-arrow.png" id="R9l-sM-HWT">
-                                <rect key="frame" x="20" y="162" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="1rH-eT-XSI">
-                                <rect key="frame" x="0.0" y="232" width="320" height="139"/>
+                                <rect key="frame" x="0.0" y="76" width="320" height="295"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
+                            <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" image="myCircleLine2.png" id="iiQ-Bc-yC7">
+                                <rect key="frame" x="10" y="86" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="193-location-arrow@2x.png" id="R9l-sM-HWT">
+                                <rect key="frame" x="23" y="99" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -325,14 +329,14 @@
                         <outlet property="labelAlbumTitle" destination="IM8-aT-4v2" id="Jmv-bc-BwR"/>
                         <outlet property="labelArtist" destination="cDH-Sc-1sg" id="pQk-Km-K4F"/>
                         <outlet property="labelDate" destination="2Yn-ja-ays" id="wZ7-eH-ZWz"/>
+                        <outlet property="labelLatitude" destination="X91-ZD-QSu" id="Gnm-eh-2ZG"/>
+                        <outlet property="labelLongitude" destination="Ydh-Tu-Zkp" id="zgs-cS-Ygv"/>
                         <outlet property="labelPastTime" destination="5sL-jd-ZQd" id="2KE-jd-uJ6"/>
                         <outlet property="labelRestTime" destination="3bk-GB-RaN" id="dCF-EV-J1m"/>
                         <outlet property="labelSongTitle" destination="7Mw-DY-Vrk" id="0bf-SI-XFg"/>
                         <outlet property="labelTime" destination="GCp-OZ-u9h" id="qvZ-89-haI"/>
                         <outlet property="labelVolumeChangedTimes" destination="NzO-Jm-T2g" id="1RG-zi-ydz"/>
                         <outlet property="labelVolumeNum" destination="MkM-HS-pHW" id="T5s-SY-WtB"/>
-                        <outlet property="latitude" destination="X91-ZD-QSu" id="ERk-Nt-XHf"/>
-                        <outlet property="longitude" destination="Ydh-Tu-Zkp" id="aFt-5a-HWh"/>
                         <outlet property="myMapView" destination="1rH-eT-XSI" id="von-L9-DO5"/>
                         <outlet property="sliderPlayerPos" destination="m2a-JT-k6N" id="itD-a3-0Wb"/>
                         <outlet property="sliderVolume" destination="LT9-gz-0uw" id="e7y-hY-hue"/>
@@ -342,9 +346,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="193-location-arrow.png" width="24" height="24"/>
+        <image name="193-location-arrow@2x.png" width="48" height="48"/>
         <image name="back_x2.png" width="62" height="44"/>
         <image name="music_2@2x_grey_50x50.png" width="50" height="50"/>
+        <image name="myCircleLine2.png" width="128" height="128"/>
         <image name="next_x2.png" width="62" height="44"/>
         <image name="pause_x2.png" width="34" height="52"/>
         <image name="play_x2.png" width="57" height="50"/>
@@ -378,14 +383,14 @@
                 <relationship kind="outlet" name="labelAlbumTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelArtist" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelLatitude" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelLongitude" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelPastTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelRestTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelSongTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelVolumeChangedTimes" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelVolumeNum" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="latitude" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="longitude" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="sliderPlayerPos" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="sliderVolume" candidateClass="UISlider"/>

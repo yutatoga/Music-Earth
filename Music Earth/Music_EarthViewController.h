@@ -10,6 +10,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "SimpleAnnotation.h"
+
 @interface Music_EarthViewController : UIViewController<MPMediaPickerControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate>{
     //ipod
     MPMusicPlayerController *player;
@@ -26,8 +28,8 @@
     //map
     IBOutlet MKMapView *myMapView;
     CLLocationManager *myLocationManager;
-    IBOutlet UILabel *latitude;
-    IBOutlet UILabel *longitude;
+    IBOutlet UILabel *labelLatitude;
+    IBOutlet UILabel *labelLongitude;
     IBOutlet UIImageView *compassImg;
     //time
     NSTimer *timerClock;//for renew the time view
@@ -47,7 +49,6 @@
     //xml
     int sceneNum;
     
-    
 }
 -(IBAction) playOrPause;
 -(IBAction) skipToNext;
@@ -61,4 +62,7 @@
 -(IBAction) dislike;
 -(IBAction) scene1;
 -(IBAction) scene2;
+
+
+
 @end

@@ -26,6 +26,15 @@
 		8DE97CCA150694BB00154D2F /* play_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CC9150694BB00154D2F /* play_x2.png */; };
 		8DE97CCC1506950600154D2F /* next_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CCB1506950600154D2F /* next_x2.png */; };
 		8DE97CCE1506954900154D2F /* thumbs_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CCD1506954900154D2F /* thumbs_down.png */; };
+		8DE97CD81506AC0D00154D2F /* SimpleAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE97CD71506AC0D00154D2F /* SimpleAnnotation.m */; };
+		8DE97CDE1506BD4A00154D2F /* myCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CDD1506BD4A00154D2F /* myCircle.png */; };
+		8DE97CE01506BF1F00154D2F /* myCircleLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CDF1506BF1F00154D2F /* myCircleLine.png */; };
+		8DE97CE21506C07600154D2F /* 193-location-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE11506C07600154D2F /* 193-location-arrow@2x.png */; };
+		8DE97CE41506C12500154D2F /* myCircleLine2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE31506C12500154D2F /* myCircleLine2.png */; };
+		8DE97CE61506C56600154D2F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE51506C56600154D2F /* Default@2x.png */; };
+		8DE97CE81506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE71506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png */; };
+		8DE97CEA1506C7DB00154D2F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE91506C7DB00154D2F /* Default.png */; };
+		8DE97CEC1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +62,16 @@
 		8DE97CC9150694BB00154D2F /* play_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_x2.png; sourceTree = "<group>"; };
 		8DE97CCB1506950600154D2F /* next_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_x2.png; sourceTree = "<group>"; };
 		8DE97CCD1506954900154D2F /* thumbs_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbs_down.png; sourceTree = "<group>"; };
+		8DE97CD61506AC0D00154D2F /* SimpleAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAnnotation.h; sourceTree = "<group>"; };
+		8DE97CD71506AC0D00154D2F /* SimpleAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAnnotation.m; sourceTree = "<group>"; };
+		8DE97CDD1506BD4A00154D2F /* myCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myCircle.png; sourceTree = "<group>"; };
+		8DE97CDF1506BF1F00154D2F /* myCircleLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myCircleLine.png; sourceTree = "<group>"; };
+		8DE97CE11506C07600154D2F /* 193-location-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "193-location-arrow@2x.png"; sourceTree = "<group>"; };
+		8DE97CE31506C12500154D2F /* myCircleLine2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myCircleLine2.png; sourceTree = "<group>"; };
+		8DE97CE51506C56600154D2F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8DE97CE71506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MusicEarth4iPhoneRetinaBlack.png; sourceTree = "<group>"; };
+		8DE97CE91506C7DB00154D2F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MusicEarth4iPhoneNotRetinaBlack.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +94,10 @@
 		8DE97C89150688EB00154D2F = {
 			isa = PBXGroup;
 			children = (
+				8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */,
+				8DE97CE91506C7DB00154D2F /* Default.png */,
+				8DE97CE71506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png */,
+				8DE97CE51506C56600154D2F /* Default@2x.png */,
 				8DE97CBD15068AB500154D2F /* MediaPlayer.framework */,
 				8DE97CBB15068AA100154D2F /* MapKit.framework */,
 				8DE97CB915068A9800154D2F /* CoreLocation.framework */,
@@ -111,6 +134,8 @@
 				8DE97CAD150688EB00154D2F /* Music_EarthViewController.h */,
 				8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */,
 				8DE97C9F150688EB00154D2F /* Supporting Files */,
+				8DE97CD61506AC0D00154D2F /* SimpleAnnotation.h */,
+				8DE97CD71506AC0D00154D2F /* SimpleAnnotation.m */,
 			);
 			path = "Music Earth";
 			sourceTree = "<group>";
@@ -121,7 +146,11 @@
 				8DE97CC51506942500154D2F /* back_x2.png */,
 				8DE97CC3150693EE00154D2F /* thumbs_up.png */,
 				8DE97CCD1506954900154D2F /* thumbs_down.png */,
+				8DE97CDD1506BD4A00154D2F /* myCircle.png */,
 				8DE97CC9150694BB00154D2F /* play_x2.png */,
+				8DE97CE11506C07600154D2F /* 193-location-arrow@2x.png */,
+				8DE97CE31506C12500154D2F /* myCircleLine2.png */,
+				8DE97CDF1506BF1F00154D2F /* myCircleLine.png */,
 				8DE97CCB1506950600154D2F /* next_x2.png */,
 				8DE97CC71506947500154D2F /* pause_x2.png */,
 				8DE97CC11506926200154D2F /* music_2@2x_grey_50x50.png */,
@@ -194,6 +223,14 @@
 				8DE97CCA150694BB00154D2F /* play_x2.png in Resources */,
 				8DE97CCC1506950600154D2F /* next_x2.png in Resources */,
 				8DE97CCE1506954900154D2F /* thumbs_down.png in Resources */,
+				8DE97CDE1506BD4A00154D2F /* myCircle.png in Resources */,
+				8DE97CE01506BF1F00154D2F /* myCircleLine.png in Resources */,
+				8DE97CE21506C07600154D2F /* 193-location-arrow@2x.png in Resources */,
+				8DE97CE41506C12500154D2F /* myCircleLine2.png in Resources */,
+				8DE97CE61506C56600154D2F /* Default@2x.png in Resources */,
+				8DE97CE81506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png in Resources */,
+				8DE97CEA1506C7DB00154D2F /* Default.png in Resources */,
+				8DE97CEC1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +244,7 @@
 				8DE97CA5150688EB00154D2F /* main.m in Sources */,
 				8DE97CA9150688EB00154D2F /* Music_EarthAppDelegate.m in Sources */,
 				8DE97CAF150688EB00154D2F /* Music_EarthViewController.m in Sources */,
+				8DE97CD81506AC0D00154D2F /* SimpleAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +354,7 @@
 				8DE97CB4150688EB00154D2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

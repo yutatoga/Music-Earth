@@ -10,6 +10,8 @@
 
 @implementation Music_EarthViewController
 
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -75,6 +77,8 @@
     [buttonScene1 setTitle:@"Relax" forState:UIControlStateNormal];
     [buttonScene2 setTitle:@"Work" forState:UIControlStateNormal];
     sceneNum=1;
+    
+
 }
 
 //ipod----------------------------------------------------
@@ -176,8 +180,8 @@
                                 [curItem valueForProperty:MPMediaItemPropertyTitle], @"Title", 
                                 [curItem valueForProperty:MPMediaItemPropertyArtist], @"Artist",
                                 [curItem valueForProperty:MPMediaItemPropertyAlbumTitle], @"Album",
-                                latitude.text, @"Latitude",
-                                longitude.text, @"Longitude",
+                                labelLatitude.text, @"Latitude",
+                                labelLongitude.text, @"Longitude",
                                 labelDate.text, @"Time",
                                 labelVolumeNum.text, @"Volume",
                                 sceneNSNum, @"Scene",
@@ -205,6 +209,12 @@
     //NSDictionary* hoge = [userDefaults dictionaryForKey:@"userData"];
     NSLog(@"%d", array.count);
     
+    
+    //annotation
+    [myMapView addAnnotation:
+     [[[SimpleAnnotation alloc]initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.0001-0.005 , [labelLongitude.text floatValue]+arc4random()%100*0.0001-0.005)
+                                                    title:[curItem valueForProperty:MPMediaItemPropertyTitle]
+                                                 subtitle:labelDate.text]autorelease]];
     
 }
 
@@ -239,8 +249,8 @@
 }
 //map----------------------------------------------------
 -(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    latitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
-    longitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
+    labelLatitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
+    labelLongitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
     MKCoordinateRegion  region = myMapView.region;
     region.center.latitude = newLocation.coordinate.latitude;
@@ -319,7 +329,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    //return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end
