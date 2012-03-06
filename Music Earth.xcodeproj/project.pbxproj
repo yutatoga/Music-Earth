@@ -15,6 +15,17 @@
 		8DE97CA9150688EB00154D2F /* Music_EarthAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE97CA8150688EB00154D2F /* Music_EarthAppDelegate.m */; };
 		8DE97CAC150688EB00154D2F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CAA150688EB00154D2F /* MainStoryboard.storyboard */; };
 		8DE97CAF150688EB00154D2F /* Music_EarthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */; };
+		8DE97CBA15068A9800154D2F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE97CB915068A9800154D2F /* CoreLocation.framework */; };
+		8DE97CBC15068AA100154D2F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE97CBB15068AA100154D2F /* MapKit.framework */; };
+		8DE97CBE15068AB500154D2F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE97CBD15068AB500154D2F /* MediaPlayer.framework */; };
+		8DE97CC0150691BB00154D2F /* 193-location-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CBF150691BB00154D2F /* 193-location-arrow.png */; };
+		8DE97CC21506926200154D2F /* music_2@2x_grey_50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CC11506926200154D2F /* music_2@2x_grey_50x50.png */; };
+		8DE97CC4150693EE00154D2F /* thumbs_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CC3150693EE00154D2F /* thumbs_up.png */; };
+		8DE97CC61506942500154D2F /* back_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CC51506942500154D2F /* back_x2.png */; };
+		8DE97CC81506947500154D2F /* pause_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CC71506947500154D2F /* pause_x2.png */; };
+		8DE97CCA150694BB00154D2F /* play_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CC9150694BB00154D2F /* play_x2.png */; };
+		8DE97CCC1506950600154D2F /* next_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CCB1506950600154D2F /* next_x2.png */; };
+		8DE97CCE1506954900154D2F /* thumbs_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CCD1506954900154D2F /* thumbs_down.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +33,26 @@
 		8DE97C98150688EB00154D2F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8DE97C9A150688EB00154D2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8DE97C9C150688EB00154D2F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8DE97CA0150688EB00154D2F /* Music Earth-Info.plist */ = {isa = PBXFileReference; path = "Music Earth-Info.plist"; sourceTree = "<group>"; };
+		8DE97CA0150688EB00154D2F /* Music Earth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Music Earth-Info.plist"; sourceTree = "<group>"; };
 		8DE97CA2150688EB00154D2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DE97CA4150688EB00154D2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8DE97CA6150688EB00154D2F /* Music Earth-Prefix.pch */ = {isa = PBXFileReference; path = "Music Earth-Prefix.pch"; sourceTree = "<group>"; };
-		8DE97CA7150688EB00154D2F /* Music_EarthAppDelegate.h */ = {isa = PBXFileReference; path = Music_EarthAppDelegate.h; sourceTree = "<group>"; };
+		8DE97CA6150688EB00154D2F /* Music Earth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music Earth-Prefix.pch"; sourceTree = "<group>"; };
+		8DE97CA7150688EB00154D2F /* Music_EarthAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Music_EarthAppDelegate.h; sourceTree = "<group>"; };
 		8DE97CA8150688EB00154D2F /* Music_EarthAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthAppDelegate.m; sourceTree = "<group>"; };
 		8DE97CAB150688EB00154D2F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		8DE97CAD150688EB00154D2F /* Music_EarthViewController.h */ = {isa = PBXFileReference; path = Music_EarthViewController.h; sourceTree = "<group>"; };
+		8DE97CAD150688EB00154D2F /* Music_EarthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Music_EarthViewController.h; sourceTree = "<group>"; };
 		8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthViewController.m; sourceTree = "<group>"; };
+		8DE97CB915068A9800154D2F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8DE97CBB15068AA100154D2F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8DE97CBD15068AB500154D2F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		8DE97CBF150691BB00154D2F /* 193-location-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "193-location-arrow.png"; sourceTree = "<group>"; };
+		8DE97CC11506926200154D2F /* music_2@2x_grey_50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music_2@2x_grey_50x50.png"; sourceTree = "<group>"; };
+		8DE97CC3150693EE00154D2F /* thumbs_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbs_up.png; sourceTree = "<group>"; };
+		8DE97CC51506942500154D2F /* back_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_x2.png; sourceTree = "<group>"; };
+		8DE97CC71506947500154D2F /* pause_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_x2.png; sourceTree = "<group>"; };
+		8DE97CC9150694BB00154D2F /* play_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_x2.png; sourceTree = "<group>"; };
+		8DE97CCB1506950600154D2F /* next_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_x2.png; sourceTree = "<group>"; };
+		8DE97CCD1506954900154D2F /* thumbs_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbs_down.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE97CBE15068AB500154D2F /* MediaPlayer.framework in Frameworks */,
+				8DE97CBC15068AA100154D2F /* MapKit.framework in Frameworks */,
+				8DE97CBA15068A9800154D2F /* CoreLocation.framework in Frameworks */,
 				8DE97C99150688EB00154D2F /* UIKit.framework in Frameworks */,
 				8DE97C9B150688EB00154D2F /* Foundation.framework in Frameworks */,
 				8DE97C9D150688EB00154D2F /* CoreGraphics.framework in Frameworks */,
@@ -50,6 +75,9 @@
 		8DE97C89150688EB00154D2F = {
 			isa = PBXGroup;
 			children = (
+				8DE97CBD15068AB500154D2F /* MediaPlayer.framework */,
+				8DE97CBB15068AA100154D2F /* MapKit.framework */,
+				8DE97CB915068A9800154D2F /* CoreLocation.framework */,
 				8DE97C9E150688EB00154D2F /* Music Earth */,
 				8DE97C97150688EB00154D2F /* Frameworks */,
 				8DE97C95150688EB00154D2F /* Products */,
@@ -90,6 +118,14 @@
 		8DE97C9F150688EB00154D2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8DE97CC51506942500154D2F /* back_x2.png */,
+				8DE97CC3150693EE00154D2F /* thumbs_up.png */,
+				8DE97CCD1506954900154D2F /* thumbs_down.png */,
+				8DE97CC9150694BB00154D2F /* play_x2.png */,
+				8DE97CCB1506950600154D2F /* next_x2.png */,
+				8DE97CC71506947500154D2F /* pause_x2.png */,
+				8DE97CC11506926200154D2F /* music_2@2x_grey_50x50.png */,
+				8DE97CBF150691BB00154D2F /* 193-location-arrow.png */,
 				8DE97CA0150688EB00154D2F /* Music Earth-Info.plist */,
 				8DE97CA1150688EB00154D2F /* InfoPlist.strings */,
 				8DE97CA4150688EB00154D2F /* main.m */,
@@ -150,6 +186,14 @@
 			files = (
 				8DE97CA3150688EB00154D2F /* InfoPlist.strings in Resources */,
 				8DE97CAC150688EB00154D2F /* MainStoryboard.storyboard in Resources */,
+				8DE97CC0150691BB00154D2F /* 193-location-arrow.png in Resources */,
+				8DE97CC21506926200154D2F /* music_2@2x_grey_50x50.png in Resources */,
+				8DE97CC4150693EE00154D2F /* thumbs_up.png in Resources */,
+				8DE97CC61506942500154D2F /* back_x2.png in Resources */,
+				8DE97CC81506947500154D2F /* pause_x2.png in Resources */,
+				8DE97CCA150694BB00154D2F /* play_x2.png in Resources */,
+				8DE97CCC1506950600154D2F /* next_x2.png in Resources */,
+				8DE97CCE1506954900154D2F /* thumbs_down.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
