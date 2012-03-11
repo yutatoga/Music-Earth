@@ -25,13 +25,15 @@
 }  
 
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   
-						   title:(NSString *)annTitle subtitle:(NSString *)annSubtitle {  
+						   title:(NSString *)annTitle
+                        subtitle:(NSString *)annSubtitle {  
 	coordinate.latitude = coord.latitude;  
 	coordinate.longitude = coord.longitude;  
 	self.annotationTitle = annTitle;  
 	self.annotationSubtitle = annSubtitle;  
 	return self;  
 }  
+
 
 - (void) dealloc {  
 	[annotationTitle release];  

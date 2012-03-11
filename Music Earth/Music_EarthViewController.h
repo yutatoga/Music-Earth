@@ -15,7 +15,6 @@
 @interface Music_EarthViewController : UIViewController<MPMediaPickerControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate>{
     //ipod
     MPMusicPlayerController *player;
-    IBOutlet UIView *viewMainSide;
     IBOutlet UILabel *labelSongTitle;
     IBOutlet UILabel *labelAlbumTitle;
     IBOutlet UILabel *labelArtist;
@@ -25,12 +24,18 @@
     IBOutlet UILabel *labelRestTime;
     IBOutlet UIButton *buttonPlay;
     IBOutlet UIButton *buttonPause;
+    IBOutlet UIButton *buttonRepeatWhite;
+    IBOutlet UIButton *buttonRepeatBlue;
+    IBOutlet UIButton *buttonRepeatOne;
+    IBOutlet UIButton *buttonShuffleWhite;
+    IBOutlet UIButton *buttonShuffleBlue;
     //map
     IBOutlet MKMapView *myMapView;
     CLLocationManager *myLocationManager;
     IBOutlet UILabel *labelLatitude;
     IBOutlet UILabel *labelLongitude;
     IBOutlet UIImageView *compassImg;
+    IBOutlet UIView *viewMapBack;
     //time
     NSTimer *timerClock;//for renew the time view
     IBOutlet UILabel *labelDate;
@@ -45,10 +50,23 @@
     IBOutlet UIButton *buttonScene2;
     IBOutlet UIButton *buttonScene1Back;
     IBOutlet UIButton *buttonScene2Back;
-    
+    //rating
+    IBOutlet UIButton *buttonLikeWhite;
+    IBOutlet UIButton *buttonLikeBlue;
     //xml
     int sceneNum;
     
+    //coodination
+    //CLLocationCoordinate2D
+    float latitudeOld, longitudeOld;
+    CGPoint PinPos;
+    //air play button
+    IBOutlet UIView *viewAirplay;
+    IBOutlet MPVolumeView *airplayButton;
+    //volume bar
+    IBOutlet UIView *viewVolumeBack;
+    IBOutlet MPVolumeView *viewVolume;
+    IBOutlet UILabel *labelAirplay;
 }
 -(IBAction) playOrPause;
 -(IBAction) skipToNext;
@@ -58,11 +76,15 @@
 -(IBAction) showMediaPicker;
 -(IBAction) volumeChange;
 -(IBAction) playerPosChange;
--(IBAction) like;
+-(IBAction) likeWhite;
+-(IBAction) likeBlue;
 -(IBAction) dislike;
 -(IBAction) scene1;
 -(IBAction) scene2;
-
-
-
+-(IBAction) repeatWhite;
+-(IBAction) repeatBlue;
+-(IBAction) repeatOne;
+-(IBAction) shuffleWhite;
+-(IBAction) shuffleBlue;
+-(IBAction) volvol;
 @end

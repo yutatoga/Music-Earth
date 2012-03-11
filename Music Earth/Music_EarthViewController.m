@@ -11,7 +11,6 @@
 @implementation Music_EarthViewController
 
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -26,14 +25,13 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     //ipod
-    player = [MPMusicPlayerController applicationMusicPlayer];
-    
-    MPMediaQuery *query = [MPMediaQuery artistsQuery];
-    [player setQueueWithQuery:query];
-    
-    
-    player.repeatMode = MPMusicRepeatModeAll;
-    player.shuffleMode = MPMusicShuffleModeOff;
+    //1.not use iPod app
+    //player = [MPMusicPlayerController applicationMusicPlayer];
+    //MPMediaQuery *query = [MPMediaQuery artistsQuery];
+    //[player setQueueWithQuery:query];
+
+    //2.use iPod app
+    player = [MPMusicPlayerController iPodMusicPlayer];    
     [player play];
     
     [self updateView];
@@ -57,6 +55,51 @@
     //player volume
     sliderVolume.value = player.volume;
     labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
+    //repeat
+    switch (player.repeatMode) {
+        case MPMusicRepeatModeNone:
+            buttonRepeatBlue.hidden = false;
+            buttonRepeatWhite.hidden = true;
+            buttonRepeatOne.hidden = true;
+            NSLog(@"REPEAT:defalt is none!");
+            break;
+        case MPMusicRepeatModeAll:
+            buttonRepeatWhite.hidden = true;
+            buttonRepeatBlue.hidden = false;
+            buttonRepeatOne.hidden = true;            
+            NSLog(@"REPEAT:defalt is all!");
+            break;
+        case MPMusicRepeatModeOne:
+            buttonRepeatWhite.hidden = true;
+            buttonRepeatBlue.hidden = true;
+            buttonRepeatOne.hidden = false;
+            NSLog(@"REPEAT:defalt is one!");
+            break;
+        default:
+            NSLog(@"REPEAT:defalt is defalt!");
+            break;
+    }
+    //shuffle
+    switch (player.shuffleMode) {
+        case MPMusicShuffleModeOff:
+            buttonShuffleWhite.hidden=false;
+            buttonShuffleBlue.hidden=true;
+            NSLog(@"SHUFFLE:defalt is off!");
+            break;
+        case MPMusicShuffleModeSongs:
+            buttonShuffleWhite.hidden=true;
+            buttonShuffleBlue.hidden=false;
+            NSLog(@"SHUFFLE:defalt is songs!");
+            break;
+        case MPMusicShuffleModeAlbums:
+            buttonShuffleWhite.hidden=true;
+            buttonShuffleBlue.hidden=false;
+            NSLog(@"SHUFFLE:defalt is albums!");
+            break;            
+        default:
+            NSLog(@"SHUFFLE:defalt is defalt!");
+            break;
+    }
     //map
     myLocationManager = [[CLLocationManager alloc] init];
     myLocationManager.delegate = self;
@@ -70,15 +113,56 @@
     
     //read user defaults
     //play button
-    buttonPlay.hidden = false;
-    buttonPause.hidden = true;
-    
+    buttonPlay.hidden = true;
+    buttonPause.hidden = false;
+    //rating
+    buttonLikeBlue.hidden = true;
+    buttonLikeWhite.hidden = false;
     //scene
     [buttonScene1 setTitle:@"Relax" forState:UIControlStateNormal];
     [buttonScene2 setTitle:@"Work" forState:UIControlStateNormal];
     sceneNum=1;
     
-
+    //1.read uer defaul and add pins on map
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *arrayOld=[defaults arrayForKey:@"userData"];
+    NSLog(@"read pinNum: %d", arrayOld.count);
+    
+    NSMutableArray* array = [NSMutableArray array];
+    //add old pins
+    for (int i=0; i<arrayOld.count; i++) {
+        [array addObject:[arrayOld objectAtIndex:i]];
+    }
+    //[array addObject:myArray];
+    [defaults setObject:array forKey:@"userData"];
+    
+    if ( ![defaults synchronize] ) {
+        NSLog( @"failed ..." );
+    }
+    
+    //2.p41 on location programing guide
+    
+    //convertCoordinate:toPointToView
+    //airplayButton = [[MPVolumeView alloc] init];
+    //airplayButton.frame = CGRectMake(0, 0, 40, 40);
+    //[airplayButton setShowsVolumeSlider:NO];
+    //[viewAirPlayButton addSubview:airplayButton];
+    //air play button
+    airplayButton = [[MPVolumeView alloc] init];
+    airplayButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    airplayButton.frame = CGRectMake(0, 0, 57, 33);//original size is 38x22
+    [airplayButton setShowsVolumeSlider:NO];
+    [viewAirplay addSubview:airplayButton];
+    // volume
+    viewVolume = [[MPVolumeView alloc] init];
+    viewVolume.frame = CGRectMake(0, 0, 180, 22);
+    [viewVolume setShowsRouteButton:NO];
+    [viewVolumeBack addSubview:viewVolume];
+    //CGSize check = [viewVolume sizeThatFits:CGSizeMake(300, 200)];
+    //NSLog(@"checkWidth:%f", check.width);
+    //NSLog(@"checkHeight:%f", check.height);//result is that height is needed 22px.(2012_03_11)
+    
+    //labelAirplay.text = [NSString stringWithFormat:@"%f", player.volume];
 }
 
 //ipod----------------------------------------------------
@@ -95,6 +179,7 @@
     NSString *noteName = [aNote name];
     if ([noteName isEqualToString:MPMusicPlayerControllerVolumeDidChangeNotification]) {
         labelVolumeChangedTimes.text = [NSString stringWithFormat:@"%d", volumeChagedTimes++];
+        labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
         sliderVolume.value = player.volume;
         
     }
@@ -103,14 +188,15 @@
 -(IBAction)playOrPause{
     MPMusicPlaybackState state = player.playbackState;
     if (state == MPMusicPlaybackStatePaused) {
-        buttonPlay.hidden = false;
-        buttonPause.hidden = true;
         [player play];
-    }
-    else if(state == MPMusicPlaybackStatePlaying){
         buttonPlay.hidden = true;
         buttonPause.hidden = false;
+        
+    }
+    else if(state == MPMusicPlaybackStatePlaying){
         [player pause];
+        buttonPlay.hidden = false;
+        buttonPause.hidden = true;
     }
 }
 
@@ -128,6 +214,33 @@
     
 }
 
+-(IBAction) repeatWhite{
+    buttonRepeatWhite.hidden = true;
+    buttonRepeatBlue.hidden = false;
+    player.repeatMode = MPMusicRepeatModeAll;    
+}
+-(IBAction) repeatBlue{
+    buttonRepeatBlue.hidden = true;
+    buttonRepeatOne.hidden = false;
+    player.repeatMode = MPMusicRepeatModeOne;
+}
+-(IBAction) repeatOne{
+    buttonRepeatOne.hidden = true;
+    buttonRepeatWhite.hidden = false;
+    player.repeatMode = MPMusicRepeatModeNone;
+}
+
+-(IBAction) shuffleWhite{
+    buttonShuffleWhite.hidden = true;
+    buttonShuffleBlue.hidden = false;
+    player.shuffleMode = MPMusicShuffleModeSongs;
+}
+-(IBAction) shuffleBlue{
+    buttonShuffleBlue.hidden = true;
+    buttonShuffleWhite.hidden = false;
+    player.shuffleMode = MPMusicShuffleModeOff;
+}
+
 -(IBAction)volumeChange{
     labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
     player.volume = sliderVolume.value;
@@ -138,10 +251,16 @@
     labelRestTime.text = [NSString stringWithFormat:@"-%01i:%02i ", ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)/60, ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)%60];
 }
 
--(IBAction)like{
-    
+-(IBAction)likeWhite{
+    buttonLikeWhite.hidden = true;
+    buttonLikeBlue.hidden = false;
     
 }
+-(IBAction)likeBlue{
+    buttonLikeBlue.hidden = true;
+    buttonLikeWhite.hidden = false;
+}
+
 
 -(IBAction)dislike{
     [player skipToNextItem];
@@ -199,10 +318,8 @@
     //add new pin
     [array addObject:pin];
     //[array addObject:myArray];
-    
-    
-    
     [defaults setObject:array forKey:@"userData"];
+    
     if ( ![defaults synchronize] ) {
         NSLog( @"failed ..." );
     }
@@ -211,11 +328,24 @@
     
     
     //annotation
+    //user random
+    /*
     [myMapView addAnnotation:
      [[[SimpleAnnotation alloc]initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.0001-0.005 , [labelLongitude.text floatValue]+arc4random()%100*0.0001-0.005)
                                                     title:[curItem valueForProperty:MPMediaItemPropertyTitle]
                                                  subtitle:labelDate.text]autorelease]];
+    */
+     //not use random
+    [myMapView addAnnotation:
+     [[[SimpleAnnotation alloc]initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue] , [labelLongitude.text floatValue])
+                                                    title:[curItem valueForProperty:MPMediaItemPropertyTitle]
+                                                 subtitle:labelDate.text]autorelease]];
     
+    
+    //adjest annotation
+    //NSSet *nearbySet = [self.mapView annotationsInMapRect:self.mapView.frame];
+    //- (NSSet *)annotationsInMapRect:(MKMapRect)mapRect
+    //[myMapView annotationsInMapRect:myMapView.visibleMapRect];
 }
 
 
@@ -279,9 +409,11 @@
     labelTime.text = [form stringFromDate: date];
     
     //ipod progress bar
-    sliderPlayerPos.value = sliderPlayerPos.value+1;
-    labelPastTime.text = [NSString stringWithFormat:@"%01i:%02i ", (int)sliderPlayerPos.value/60, (int)sliderPlayerPos.value%60];
-    labelRestTime.text = [NSString stringWithFormat:@"-%01i:%02i ", ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)/60, ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)%60];
+    if (player.playbackState == MPMusicPlaybackStatePlaying) {
+        sliderPlayerPos.value = sliderPlayerPos.value+1;
+        labelPastTime.text = [NSString stringWithFormat:@"%01i:%02i ", (int)sliderPlayerPos.value/60, (int)sliderPlayerPos.value%60];
+        labelRestTime.text = [NSString stringWithFormat:@"-%01i:%02i ", ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)/60, ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)%60];        
+    }
     
 }
 
@@ -299,6 +431,24 @@
 }
 
 
+//- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
+//    if(!animated){
+//        //Instantaneous change, which means you probably did something code-wise, so you should have handled anything there, but you can do it here as well.
+//        
+//    } else {
+//        //User is most likely scrolling, so the best way to do things here is check if the new region is significantly (by whatever standard) away from the starting region
+//        
+//        CLLocationDistance *distance = [myMapView.centerCoordinate distanceFromLocation:originalCoodinate];
+//        if(distance > 1000){
+//            //The map region was shifted by 1000 meters
+//            //Remove annotations outsides the view, or whatever
+//            //Most likely, instead of checking for a distance change, you might want to check for a change relative to the view size
+//        }
+//        
+//    }
+//    
+//}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -311,14 +461,16 @@
     [super viewWillAppear:animated];
 }
 
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -333,4 +485,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc {
+    [super dealloc];
+}
 @end
