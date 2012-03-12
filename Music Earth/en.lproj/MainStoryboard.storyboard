@@ -404,13 +404,6 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="LT9-gz-0uw" userLabel="Horizontal Slider_volumeBar">
-                                                <rect key="frame" x="59" y="109" width="200" height="23"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <connections>
-                                                    <action selector="volumeChange" destination="2" eventType="valueChanged" id="Hfj-cm-zE5"/>
-                                                </connections>
-                                            </slider>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="volumeNum" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="MkM-HS-pHW">
                                                 <rect key="frame" x="113" y="95" width="92" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -465,7 +458,6 @@
                         <outlet property="labelVolumeNum" destination="MkM-HS-pHW" id="T5s-SY-WtB"/>
                         <outlet property="myMapView" destination="1rH-eT-XSI" id="von-L9-DO5"/>
                         <outlet property="sliderPlayerPos" destination="m2a-JT-k6N" id="itD-a3-0Wb"/>
-                        <outlet property="sliderVolume" destination="LT9-gz-0uw" id="jiV-Eu-8Mr"/>
                         <outlet property="viewAirplay" destination="bZy-Uu-LD7" id="5LF-aW-h7X"/>
                         <outlet property="viewMapBack" destination="5D3-mx-4Vd" id="5Sp-py-7ss"/>
                         <outlet property="viewVolumeBack" destination="mV2-Kx-pQw" id="i64-Ic-nIN"/>
@@ -484,7 +476,7 @@
         <image name="myLike_white.png" width="48" height="48"/>
         <image name="myRepeatOne.png" width="64" height="64"/>
         <image name="myRepeat_blue.png" width="64" height="64"/>
-        <image name="myRepeat_white.png" width="480" height="480"/>
+        <image name="myRepeat_white.png" width="64" height="64"/>
         <image name="myShuffle_blue.png" width="52" height="52"/>
         <image name="myShuffle_white.png" width="52" height="52"/>
         <image name="next_x2.png" width="62" height="44"/>

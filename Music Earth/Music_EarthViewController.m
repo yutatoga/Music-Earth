@@ -56,10 +56,11 @@
     sliderVolume.value = player.volume;
     labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
     //repeat
+    player.repeatMode=MPMusicRepeatModeDefault;
     switch (player.repeatMode) {
         case MPMusicRepeatModeNone:
-            buttonRepeatBlue.hidden = false;
-            buttonRepeatWhite.hidden = true;
+            buttonRepeatWhite.hidden = false;
+            buttonRepeatBlue.hidden = true;
             buttonRepeatOne.hidden = true;
             NSLog(@"REPEAT:defalt is none!");
             break;
@@ -76,10 +77,14 @@
             NSLog(@"REPEAT:defalt is one!");
             break;
         default:
+            buttonRepeatBlue.hidden = true;
+            buttonRepeatWhite.hidden = false;
+            buttonRepeatOne.hidden = true;
             NSLog(@"REPEAT:defalt is defalt!");
             break;
     }
     //shuffle
+    player.shuffleMode = MPMusicShuffleModeDefault;
     switch (player.shuffleMode) {
         case MPMusicShuffleModeOff:
             buttonShuffleWhite.hidden=false;
@@ -97,6 +102,8 @@
             NSLog(@"SHUFFLE:defalt is albums!");
             break;            
         default:
+            buttonShuffleWhite.hidden=false;
+            buttonShuffleBlue.hidden=true;
             NSLog(@"SHUFFLE:defalt is defalt!");
             break;
     }
@@ -107,6 +114,7 @@
     myLocationManager.distanceFilter = kCLHeadingFilterNone;
     [myLocationManager startUpdatingLocation];
     [myLocationManager startUpdatingHeading];
+    myMapView.showsUserLocation = YES;
     
     //time
     timerClock=[NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateClock:) userInfo:nil repeats:YES];
@@ -179,9 +187,7 @@
     NSString *noteName = [aNote name];
     if ([noteName isEqualToString:MPMusicPlayerControllerVolumeDidChangeNotification]) {
         labelVolumeChangedTimes.text = [NSString stringWithFormat:@"%d", volumeChagedTimes++];
-        labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
-        sliderVolume.value = player.volume;
-        
+        labelVolumeNum.text = [NSString stringWithFormat:@"%f", player.volume];
     }
 }
 
@@ -241,10 +247,7 @@
     player.shuffleMode = MPMusicShuffleModeOff;
 }
 
--(IBAction)volumeChange{
-    labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
-    player.volume = sliderVolume.value;
-}
+
 -(IBAction)playerPosChange{
     player.currentPlaybackTime = sliderPlayerPos.value;
     labelPastTime.text = [NSString stringWithFormat:@"%01i:%02i ", (int)sliderPlayerPos.value/60, (int)sliderPlayerPos.value%60];
@@ -336,16 +339,26 @@
                                                  subtitle:labelDate.text]autorelease]];
     */
      //not use random
-    [myMapView addAnnotation:
-     [[[SimpleAnnotation alloc]initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue] , [labelLongitude.text floatValue])
-                                                    title:[curItem valueForProperty:MPMediaItemPropertyTitle]
-                                                 subtitle:labelDate.text]autorelease]];
-    
+    //[myMapView addAnnotation:
+    // [[[SimpleAnnotation alloc]initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue] , [labelLongitude.text floatValue])
+    //                                                title:[curItem valueForProperty:MPMediaItemPropertyTitle]
+    //                                             subtitle:labelDate.text]autorelease]];
     
     //adjest annotation
     //NSSet *nearbySet = [self.mapView annotationsInMapRect:self.mapView.frame];
     //- (NSSet *)annotationsInMapRect:(MKMapRect)mapRect
     //[myMapView annotationsInMapRect:myMapView.visibleMapRect];
+    
+    
+    //NSString *url4YouTube = [NSString stringWithFormat:@"http://www.youtube.com/results?search_query=%@&aq=f", labelArtist.text ];
+    //NSLog(url4YouTube);
+
+    //[test setUrl: url4YouTube];
+    
+    SimpleAnnotation *test=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue],[labelLongitude.text floatValue]) title:@"music" subtitle:nil];
+    [test setUrl:@"http://apple.com"];
+    [myMapView addAnnotation:test];
+    [myMapView setDelegate:self];
 }
 
 
@@ -448,6 +461,23 @@
 //    }
 //    
 //}
+
+-(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    if (annotation == mapView.userLocation) {
+        return nil;
+    }
+    CustomAnnotationView *annotationView;
+    NSString *identifier = @"pin";
+    annotationView = (CustomAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if (nil==annotationView) {
+        annotationView  = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+    }
+    annotationView.annotation = annotation;
+    return  annotationView;
+    
+}
+
+
 
 - (void)viewDidUnload
 {

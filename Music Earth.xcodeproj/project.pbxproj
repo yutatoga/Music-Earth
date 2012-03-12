@@ -16,6 +16,14 @@
 		8D211943150C531B0005DAC1 /* myDislike_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D21193F150C531B0005DAC1 /* myDislike_white.png */; };
 		8D211944150C531B0005DAC1 /* myLike_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211940150C531B0005DAC1 /* myLike_blue.png */; };
 		8D211945150C531B0005DAC1 /* myLike_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211941150C531B0005DAC1 /* myLike_white.png */; };
+		8D211948150D22CB0005DAC1 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D211947150D22CB0005DAC1 /* CustomAnnotationView.m */; };
+		8D21194A150D2F4E0005DAC1 /* singleNote.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211949150D2F4E0005DAC1 /* singleNote.png */; };
+		8D211955150D6D3D0005DAC1 /* pinGreen_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D21194F150D6D3D0005DAC1 /* pinGreen_2x.png */; };
+		8D211956150D6D3D0005DAC1 /* pinGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211950150D6D3D0005DAC1 /* pinGreen.png */; };
+		8D211957150D6D3D0005DAC1 /* pinPurple_x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211951150D6D3D0005DAC1 /* pinPurple_x2.png */; };
+		8D211958150D6D3D0005DAC1 /* pinPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211952150D6D3D0005DAC1 /* pinPurple.png */; };
+		8D211959150D6D3D0005DAC1 /* pinRed_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211953150D6D3D0005DAC1 /* pinRed_2x.png */; };
+		8D21195A150D6D3D0005DAC1 /* pinRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211954150D6D3D0005DAC1 /* pinRed.png */; };
 		8DA5CF76150BBFEF00CF90CE /* myRepeat_blue_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF73150BBFEF00CF90CE /* myRepeat_blue_01.png */; };
 		8DA5CF77150BBFEF00CF90CE /* myRepeat_blue_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF74150BBFEF00CF90CE /* myRepeat_blue_02.png */; };
 		8DA5CF78150BBFEF00CF90CE /* myRepeat_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF75150BBFEF00CF90CE /* myRepeat_white.png */; };
@@ -60,6 +68,15 @@
 		8D21193F150C531B0005DAC1 /* myDislike_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myDislike_white.png; sourceTree = "<group>"; };
 		8D211940150C531B0005DAC1 /* myLike_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLike_blue.png; sourceTree = "<group>"; };
 		8D211941150C531B0005DAC1 /* myLike_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLike_white.png; sourceTree = "<group>"; };
+		8D211946150D22CA0005DAC1 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		8D211947150D22CB0005DAC1 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		8D211949150D2F4E0005DAC1 /* singleNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singleNote.png; sourceTree = "<group>"; };
+		8D21194F150D6D3D0005DAC1 /* pinGreen_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinGreen_2x.png; sourceTree = "<group>"; };
+		8D211950150D6D3D0005DAC1 /* pinGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinGreen.png; sourceTree = "<group>"; };
+		8D211951150D6D3D0005DAC1 /* pinPurple_x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinPurple_x2.png; sourceTree = "<group>"; };
+		8D211952150D6D3D0005DAC1 /* pinPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinPurple.png; sourceTree = "<group>"; };
+		8D211953150D6D3D0005DAC1 /* pinRed_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinRed_2x.png; sourceTree = "<group>"; };
+		8D211954150D6D3D0005DAC1 /* pinRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinRed.png; sourceTree = "<group>"; };
 		8DA5CF73150BBFEF00CF90CE /* myRepeat_blue_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_blue_01.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_blue_01.png; sourceTree = "<group>"; };
 		8DA5CF74150BBFEF00CF90CE /* myRepeat_blue_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_blue_02.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_blue_02.png; sourceTree = "<group>"; };
 		8DA5CF75150BBFEF00CF90CE /* myRepeat_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_white.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_white.png; sourceTree = "<group>"; };
@@ -161,6 +178,8 @@
 				8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */,
 				8DE97CD61506AC0D00154D2F /* SimpleAnnotation.h */,
 				8DE97CD71506AC0D00154D2F /* SimpleAnnotation.m */,
+				8D211946150D22CA0005DAC1 /* CustomAnnotationView.h */,
+				8D211947150D22CB0005DAC1 /* CustomAnnotationView.m */,
 				8DE97C9F150688EB00154D2F /* Supporting Files */,
 			);
 			path = "Music Earth";
@@ -169,6 +188,13 @@
 		8DE97C9F150688EB00154D2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D21194F150D6D3D0005DAC1 /* pinGreen_2x.png */,
+				8D211950150D6D3D0005DAC1 /* pinGreen.png */,
+				8D211951150D6D3D0005DAC1 /* pinPurple_x2.png */,
+				8D211952150D6D3D0005DAC1 /* pinPurple.png */,
+				8D211953150D6D3D0005DAC1 /* pinRed_2x.png */,
+				8D211954150D6D3D0005DAC1 /* pinRed.png */,
+				8D211949150D2F4E0005DAC1 /* singleNote.png */,
 				8D21193E150C531B0005DAC1 /* myDislike_blue.png */,
 				8D21193F150C531B0005DAC1 /* myDislike_white.png */,
 				8D211940150C531B0005DAC1 /* myLike_blue.png */,
@@ -283,6 +309,13 @@
 				8D211943150C531B0005DAC1 /* myDislike_white.png in Resources */,
 				8D211944150C531B0005DAC1 /* myLike_blue.png in Resources */,
 				8D211945150C531B0005DAC1 /* myLike_white.png in Resources */,
+				8D21194A150D2F4E0005DAC1 /* singleNote.png in Resources */,
+				8D211955150D6D3D0005DAC1 /* pinGreen_2x.png in Resources */,
+				8D211956150D6D3D0005DAC1 /* pinGreen.png in Resources */,
+				8D211957150D6D3D0005DAC1 /* pinPurple_x2.png in Resources */,
+				8D211958150D6D3D0005DAC1 /* pinPurple.png in Resources */,
+				8D211959150D6D3D0005DAC1 /* pinRed_2x.png in Resources */,
+				8D21195A150D6D3D0005DAC1 /* pinRed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +330,7 @@
 				8DE97CA9150688EB00154D2F /* Music_EarthAppDelegate.m in Sources */,
 				8DE97CAF150688EB00154D2F /* Music_EarthViewController.m in Sources */,
 				8DE97CD81506AC0D00154D2F /* SimpleAnnotation.m in Sources */,
+				8D211948150D22CB0005DAC1 /* CustomAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
