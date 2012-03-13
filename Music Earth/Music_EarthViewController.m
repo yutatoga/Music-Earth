@@ -7,7 +7,7 @@
 //
 
 #import "Music_EarthViewController.h"
-
+#import "AlbumViewController.h"
 @implementation Music_EarthViewController
 
 
@@ -22,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Music Earth";
 	// Do any additional setup after loading the view, typically from a nib.
     
     //ipod
@@ -171,6 +172,12 @@
     //NSLog(@"checkHeight:%f", check.height);//result is that height is needed 22px.(2012_03_11)
     
     //labelAirplay.text = [NSString stringWithFormat:@"%f", player.volume];
+    
+    //navigate
+    
+    // this line calls the viewDidLoad method of detailController
+
+
 }
 
 //ipod----------------------------------------------------
@@ -462,20 +469,60 @@
 //    
 //}
 
--(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+//-(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+//    if (annotation == mapView.userLocation) {
+//        return nil;
+//    }
+//    CustomAnnotationView *annotationView;
+//    NSString *identifier = @"pin";
+//    annotationView = (CustomAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+//    if (nil==annotationView) {
+//        annotationView  = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+//    }
+//    annotationView.annotation = annotation;
+//    return  annotationView;
+//    
+//}
+//ピンが落ちてくる処理。    [_mapView addAnnotation:annotation]が呼ばれると、このメソッドが自動的に呼ばれ、上からピンが落ちてくるアニメーションになる。
+-(MKAnnotationView*)mapView:(MKMapView*) mapView viewForAnnotation:(id )annotation
+{
     if (annotation == mapView.userLocation) {
         return nil;
-    }
-    CustomAnnotationView *annotationView;
-    NSString *identifier = @"pin";
-    annotationView = (CustomAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (nil==annotationView) {
-        annotationView  = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-    }
-    annotationView.annotation = annotation;
-    return  annotationView;
+    }  
     
+    MKPinAnnotationView *annotationView;  
+    
+    NSString* identifier = @"Pin"; 
+    
+    annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if(nil == annotationView) {
+        annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier] autorelease];
+    } 
+    
+    annotationView.animatesDrop = YES; //このプロパティでアニメーションドロップを設定
+    annotationView.canShowCallout = YES; //このプロパティを設定してコールアウト（文字を表示する吹出し）を表示
+    annotationView.annotation = annotation; //このメソッドで設定したアノテーションをannotationViewに再追加してreturnで返す
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [button addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
+    annotationView.rightCalloutAccessoryView = button;
+    return annotationView;
+} 
+
+
+
+- (void)showDetails:(id)sender
+{
+    NSLog(@"Details comes");
+    // the detail view does not want a toolbar so hide it
+    [self.navigationController setToolbarHidden:YES animated:NO];
+    AlbumViewController *albumViewControllerK= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+
+    [[self navigationController] pushViewController:albumViewControllerK animated:YES];
+
 }
+
+
+
 
 
 

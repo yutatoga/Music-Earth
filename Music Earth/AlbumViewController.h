@@ -1,0 +1,15 @@
+//
+//  AlbumViewController.h
+//  Music Earth
+//
+//  Created by  on 3/14/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AlbumViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UILabel *label;
+@property (copy, nonatomic) NSString *message;
+
+@end

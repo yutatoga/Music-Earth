@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "SimpleAnnotation.h"
 #import "CustomAnnotationView.h"
+@class AlbumViewController;
 
 @interface Music_EarthViewController : UIViewController<MPMediaPickerControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate>{
     //ipod
@@ -69,6 +70,7 @@
     IBOutlet MPVolumeView *viewVolume;
     IBOutlet UILabel *labelAirplay;
 }
+
 -(IBAction) playOrPause;
 -(IBAction) skipToNext;
 -(IBAction) skipToPrevious;
