@@ -69,6 +69,8 @@
     IBOutlet UIView *viewVolumeBack;
     IBOutlet MPVolumeView *viewVolume;
     IBOutlet UILabel *labelAirplay;
+    //indexPath.row
+    IBOutlet UILabel *labelIndexPathRow;
 }
 
 -(IBAction) playOrPause;

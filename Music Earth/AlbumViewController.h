@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AlbumViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *label;
-@property (copy, nonatomic) NSString *message;
+#import <MediaPlayer/MediaPlayer.h>
+@interface AlbumViewController : UITableViewController{
+    NSArray *songItems;
+    IBOutlet UITableView *myTableView;
+}
 
 @end

@@ -19,6 +19,8 @@
 
 #pragma mark - View lifecycle
 
+#pragma mark -
+#pragma mark viewDidLoad
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,7 +57,7 @@
     labelPastTime.text =[NSString stringWithFormat:@"%d", player.currentPlaybackTime];
     //player volume
     sliderVolume.value = player.volume;
-    labelVolumeNum.text = [NSString stringWithFormat:@"%f", sliderVolume.value];
+    labelVolumeNum.text = [NSString stringWithFormat:@"%f", player.volume];
     //repeat
     player.repeatMode=MPMusicRepeatModeDefault;
     switch (player.repeatMode) {
@@ -179,7 +181,8 @@
 
 
 }
-
+#pragma mark -
+#pragma mark iPod
 //ipod----------------------------------------------------
 -(void)didItemChanged: (NSNotification*) aNote{
     NSString *noteName = [aNote name];
@@ -276,7 +279,8 @@
     [player skipToNextItem];
 }
 
-
+#pragma mark -
+#pragma mark updateView
 -(void)updateView{
     MPMediaItem *curItem = [player nowPlayingItem];
     labelSongTitle.text = [curItem valueForProperty:MPMediaItemPropertyTitle];
@@ -366,9 +370,37 @@
     [test setUrl:@"http://apple.com"];
     [myMapView addAnnotation:test];
     [myMapView setDelegate:self];
+    
+    //read user defaults
+    NSLog(@"loadUserMediaItemCollection called.");
+    NSArray *array1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"userData"];
+    NSArray *array2 = [array1 valueForKeyPath:@"Latitude"];
+    //NSLog(@"items2:%@", [array2 description]);
+    //NSLog(@"-----------------------------------------------------------------------------------------");
+    //NSLog(@"items:%@",[array1 description]);
+    //NSLog(@"ppppppppppppppppp     %i    pppppppppppppppppppppp",  [[array1 valueForKeyPath:@"Latitude"] indexOfObject:@"35.747427"]  );
+    
+    NSLog(@"%@", [array1 description]);
+    //NSMutableArray *array3 = [array1 objectAtIndex:0];
+    NSDictionary *mydict = [array1 objectAtIndex:0];
+    NSArray *myArray = [mydict allValues];
+    //NSLog(@"mmmmmmmmmmmmmmmmm     %@    mmmmmmmmmmmmmmmmmmmmmm", [array3 description]);
+    //NSLog(@"%@", [[array1 objectAtIndex:0] objectAtIndex:2]);
+    
+    
+    
+    
+    
+    NSLog(@"my Array count is %d", [myArray count]);
+    NSLog(@"my Array description is %@", [myArray description]);
+    NSString *hoge= [myArray objectAtIndex:1];
+    NSLog(hoge);
+
+     //2147483647      
 }
 
-
+#pragma mark -
+#pragma mark picker
 //picker----------------------------------------------------
 - (void) mediaPicker: (MPMediaPickerController *) mediaPicker
    didPickMediaItems: (MPMediaItemCollection *) collection {
@@ -397,6 +429,9 @@
     [self presentModalViewController: picker animated: YES]; // 4
     [picker release];
 }
+
+#pragma mark -
+#pragma mark map
 //map----------------------------------------------------
 -(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     labelLatitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
@@ -414,7 +449,8 @@
     compassImg.transform = CGAffineTransformMakeRotation(newHeading.magneticHeading * M_PI/180*-1);
 }
 
-
+#pragma mark -
+#pragma mark time
 //time------------------------------------------------------------------
 -(void) updateClock:(NSTimer*) theTimer{
     NSDate* date = [NSDate date];
@@ -436,7 +472,8 @@
     }
     
 }
-
+#pragma mark -
+#pragma mark scene
 //scene----------------------------------------------------------------------------------
 -(IBAction)scene1{
     buttonScene1Back.highlighted=true;
@@ -483,9 +520,14 @@
 //    return  annotationView;
 //    
 //}
+#pragma mark -
+#pragma mark annnotation
 //ピンが落ちてくる処理。    [_mapView addAnnotation:annotation]が呼ばれると、このメソッドが自動的に呼ばれ、上からピンが落ちてくるアニメーションになる。
 -(MKAnnotationView*)mapView:(MKMapView*) mapView viewForAnnotation:(id )annotation
 {
+    //for album
+    labelIndexPathRow.text = [NSString stringWithFormat:@"%i", player.indexOfNowPlayingItem];
+    //annotation
     if (annotation == mapView.userLocation) {
         return nil;
     }  
@@ -525,7 +567,8 @@
 
 
 
-
+#pragma mark -
+#pragma mark Unload
 - (void)viewDidUnload
 {
     [super viewDidUnload];

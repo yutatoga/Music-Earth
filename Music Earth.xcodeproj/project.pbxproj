@@ -23,9 +23,9 @@
 		8D211958150D6D3D0005DAC1 /* pinPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211952150D6D3D0005DAC1 /* pinPurple.png */; };
 		8D211959150D6D3D0005DAC1 /* pinRed_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211953150D6D3D0005DAC1 /* pinRed_2x.png */; };
 		8D21195A150D6D3D0005DAC1 /* pinRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D211954150D6D3D0005DAC1 /* pinRed.png */; };
-		8D5820AB150FD10F0065DCDA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5820AA150FD10F0065DCDA /* AlbumViewController.m */; };
-		8D5820AD150FD1240065DCDA /* AlbumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5820AC150FD1240065DCDA /* AlbumViewController.xib */; };
 		8D5820AF150FDD510065DCDA /* myRepeat_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5820AE150FDD510065DCDA /* myRepeat_white.png */; };
+		8D5820B2150FE8110065DCDA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5820B1150FE8110065DCDA /* AlbumViewController.m */; };
+		8D5820B4150FE8200065DCDA /* AlbumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5820B3150FE8200065DCDA /* AlbumViewController.xib */; };
 		8DA5CF76150BBFEF00CF90CE /* myRepeat_blue_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF73150BBFEF00CF90CE /* myRepeat_blue_01.png */; };
 		8DA5CF77150BBFEF00CF90CE /* myRepeat_blue_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF74150BBFEF00CF90CE /* myRepeat_blue_02.png */; };
 		8DA5CF78150BBFEF00CF90CE /* myRepeat_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF75150BBFEF00CF90CE /* myRepeat_white.png */; };
@@ -78,10 +78,10 @@
 		8D211952150D6D3D0005DAC1 /* pinPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinPurple.png; sourceTree = "<group>"; };
 		8D211953150D6D3D0005DAC1 /* pinRed_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinRed_2x.png; sourceTree = "<group>"; };
 		8D211954150D6D3D0005DAC1 /* pinRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinRed.png; sourceTree = "<group>"; };
-		8D5820A9150FD10F0065DCDA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
-		8D5820AA150FD10F0065DCDA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
-		8D5820AC150FD1240065DCDA /* AlbumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumViewController.xib; sourceTree = "<group>"; };
 		8D5820AE150FDD510065DCDA /* myRepeat_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myRepeat_white.png; sourceTree = "<group>"; };
+		8D5820B0150FE8110065DCDA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		8D5820B1150FE8110065DCDA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
+		8D5820B3150FE8200065DCDA /* AlbumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumViewController.xib; sourceTree = "<group>"; };
 		8DA5CF73150BBFEF00CF90CE /* myRepeat_blue_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_blue_01.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_blue_01.png; sourceTree = "<group>"; };
 		8DA5CF74150BBFEF00CF90CE /* myRepeat_blue_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_blue_02.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_blue_02.png; sourceTree = "<group>"; };
 		8DA5CF75150BBFEF00CF90CE /* myRepeat_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_white.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_white.png; sourceTree = "<group>"; };
@@ -182,9 +182,9 @@
 				8D211946150D22CA0005DAC1 /* CustomAnnotationView.h */,
 				8D211947150D22CB0005DAC1 /* CustomAnnotationView.m */,
 				8DE97C9F150688EB00154D2F /* Supporting Files */,
-				8D5820A9150FD10F0065DCDA /* AlbumViewController.h */,
-				8D5820AA150FD10F0065DCDA /* AlbumViewController.m */,
-				8D5820AC150FD1240065DCDA /* AlbumViewController.xib */,
+				8D5820B0150FE8110065DCDA /* AlbumViewController.h */,
+				8D5820B1150FE8110065DCDA /* AlbumViewController.m */,
+				8D5820B3150FE8200065DCDA /* AlbumViewController.xib */,
 			);
 			path = "Music Earth";
 			sourceTree = "<group>";
@@ -323,8 +323,8 @@
 				8D211958150D6D3D0005DAC1 /* pinPurple.png in Resources */,
 				8D211959150D6D3D0005DAC1 /* pinRed_2x.png in Resources */,
 				8D21195A150D6D3D0005DAC1 /* pinRed.png in Resources */,
-				8D5820AD150FD1240065DCDA /* AlbumViewController.xib in Resources */,
 				8D5820AF150FDD510065DCDA /* myRepeat_white.png in Resources */,
+				8D5820B4150FE8200065DCDA /* AlbumViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +340,7 @@
 				8DE97CAF150688EB00154D2F /* Music_EarthViewController.m in Sources */,
 				8DE97CD81506AC0D00154D2F /* SimpleAnnotation.m in Sources */,
 				8D211948150D22CB0005DAC1 /* CustomAnnotationView.m in Sources */,
-				8D5820AB150FD10F0065DCDA /* AlbumViewController.m in Sources */,
+				8D5820B2150FE8110065DCDA /* AlbumViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
