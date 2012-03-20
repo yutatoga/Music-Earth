@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString *annotationSubtitle;
 @property (nonatomic, retain) NSString *url;
 
+
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   
 						   title:(NSString *)annTitle subtitle:(NSString *)annSubtitle;  
 - (NSString *)title;  

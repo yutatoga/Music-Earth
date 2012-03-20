@@ -14,6 +14,9 @@
 
 @implementation AlbumViewController
 
+@synthesize annotationLatitude;
+@synthesize annotationLongitude;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -64,7 +67,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return  [songItems count];
+    
+    //<< I WILL CHANGE HERE!! >>
+    //1. get correct times that current coodinate is equal to user defaults
+    // this time I use one to one pin so use 1 but i will chante grouping pin
+    
+    return 1;
+    //old ver
+    //return  [songItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,9 +94,20 @@
     
     //cell.textLabel.text = [NSString stringWithFormat:@"行=%d", indexPath.row];
     //cell.textLabel.text = [NSString stringWithFormat:@"行=%d", indexPath.row];
-    cell.textLabel.text = [item valueForProperty:MPMediaItemPropertyTitle];
+    
+    //<< I WILL CHANGE HERE!! >>
+    //1. get tapped latitude and longitude
+    //2. search from user defaults
+    //3. if correnct add cell
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"Song：LAT%@LON%@", annotationLatitude, annotationLongitude];
+    //oldver
+    //cell.textLabel.text = [item valueForProperty:MPMediaItemPropertyTitle];
+    
     return cell;
 }
+
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -139,6 +160,14 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    NSLog(@"%d selected!!---------------------------------", indexPath.row);
+    UITableViewCell  *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *cellText = selectedCell.textLabel.text;
+    NSLog(@"%@", cellText);
+    
+    //search song 
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

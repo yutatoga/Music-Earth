@@ -36,6 +36,8 @@
     CLLocationManager *myLocationManager;
     IBOutlet UILabel *labelLatitude;
     IBOutlet UILabel *labelLongitude;
+    IBOutlet UILabel *labelTappedLatitude;
+    IBOutlet UILabel *labelTappedLongitude;
     IBOutlet UIImageView *compassImg;
     IBOutlet UIView *viewMapBack;
     //time
@@ -71,6 +73,10 @@
     IBOutlet UILabel *labelAirplay;
     //indexPath.row
     IBOutlet UILabel *labelIndexPathRow;
+    
+    
+
+
 }
 
 -(IBAction) playOrPause;
@@ -92,4 +98,6 @@
 -(IBAction) shuffleWhite;
 -(IBAction) shuffleBlue;
 -(IBAction) volvol;
+//test
+    @property (nonatomic, retain) NSDictionary* logDict;
 @end

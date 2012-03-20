@@ -143,6 +143,13 @@
     //add old pins
     for (int i=0; i<arrayOld.count; i++) {
         [array addObject:[arrayOld objectAtIndex:i]];
+        //draw pin
+        float instantLatitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Latitude"]) floatValue]+arc4random()%100*0.00001-0.0005;
+        float instantLongitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Longitude"]) floatValue]+arc4random()%100*0.00001-0.0005;
+        SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude) title:@"music" subtitle:nil];
+        [myAnnotation setUrl:@"http://apple.com"];
+        [myMapView addAnnotation:myAnnotation];
+        [myMapView setDelegate:self];
     }
     //[array addObject:myArray];
     [defaults setObject:array forKey:@"userData"];
@@ -366,9 +373,16 @@
 
     //[test setUrl: url4YouTube];
     
-    SimpleAnnotation *test=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue],[labelLongitude.text floatValue]) title:@"music" subtitle:nil];
-    [test setUrl:@"http://apple.com"];
-    [myMapView addAnnotation:test];
+    
+    /* 1/2-not use random
+    SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue],[labelLongitude.text floatValue]) title:@"music" subtitle:nil];
+    [myAnnotation setUrl:@"http://apple.com"];
+    [myMapView addAnnotation:myAnnotation];
+    */
+    // 2/2-use random
+    SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"music" subtitle:nil];
+    [myAnnotation setUrl:@"http://apple.com"];
+    [myMapView addAnnotation:myAnnotation];
     [myMapView setDelegate:self];
     
     //read user defaults
@@ -381,20 +395,12 @@
     //NSLog(@"ppppppppppppppppp     %i    pppppppppppppppppppppp",  [[array1 valueForKeyPath:@"Latitude"] indexOfObject:@"35.747427"]  );
     
     NSLog(@"%@", [array1 description]);
-    //NSMutableArray *array3 = [array1 objectAtIndex:0];
-    NSDictionary *mydict = [array1 objectAtIndex:0];
-    NSArray *myArray = [mydict allValues];
-    //NSLog(@"mmmmmmmmmmmmmmmmm     %@    mmmmmmmmmmmmmmmmmmmmmm", [array3 description]);
-    //NSLog(@"%@", [[array1 objectAtIndex:0] objectAtIndex:2]);
-    
-    
-    
-    
-    
-    NSLog(@"my Array count is %d", [myArray count]);
-    NSLog(@"my Array description is %@", [myArray description]);
-    NSString *hoge= [myArray objectAtIndex:1];
-    NSLog(hoge);
+    NSDictionary *mydict = [array1 objectAtIndex:1];
+    NSString *myPinLatitude = [mydict objectForKey:@"Latitude"];
+    NSLog(@"%@",[mydict description]);
+    NSLog(@"%@", [mydict allKeys]);
+    NSLog(@"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+    NSLog(@"%@",[mydict objectForKey:@"Latitude"]);
 
      //2147483647      
 }
@@ -545,26 +551,39 @@
     annotationView.canShowCallout = YES; //このプロパティを設定してコールアウト（文字を表示する吹出し）を表示
     annotationView.annotation = annotation; //このメソッドで設定したアノテーションをannotationViewに再追加してreturnで返す
     UIButton* button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [button addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
+    //[button addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
     annotationView.rightCalloutAccessoryView = button;
     return annotationView;
 } 
 
 
-
+#pragma mark -
+#pragma mark Second Detail View
 - (void)showDetails:(id)sender
 {
-    NSLog(@"Details comes");
-    // the detail view does not want a toolbar so hide it
-    [self.navigationController setToolbarHidden:YES animated:NO];
-    AlbumViewController *albumViewControllerK= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
 
-    [[self navigationController] pushViewController:albumViewControllerK animated:YES];
 
 }
 
 
+- (void)mapView:(MKMapView*)mapView 
+ annotationView:(MKAnnotationView*)view 
+calloutAccessoryControlTapped:(UIControl*)control
+{
 
+    NSLog(@"kita---------------");
+    NSLog(@"PIN LAT2:%f", [((SimpleAnnotation*)view.annotation) coordinate].latitude);    
+    NSLog(@"PIN LON2:%f", [((SimpleAnnotation*)view.annotation) coordinate].longitude);
+    //change labelTappedLatitude and labelTappedLongitude
+    
+    NSLog(@"Details comes");
+    // the detail view does not want a toolbar so hide it
+    [self.navigationController setToolbarHidden:YES animated:NO];
+    AlbumViewController *albumViewControllerK= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+    albumViewControllerK.annotationLatitude=[NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
+    albumViewControllerK.annotationLongitude=[NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
+    [[self navigationController] pushViewController:albumViewControllerK animated:YES];    
+}
 
 
 #pragma mark -

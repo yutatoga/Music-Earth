@@ -12,5 +12,7 @@
     NSArray *songItems;
     IBOutlet UITableView *myTableView;
 }
+@property (nonatomic, retain) NSString *annotationLatitude;  
+@property (nonatomic, retain) NSString *annotationLongitude;
 
 @end
