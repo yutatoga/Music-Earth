@@ -73,10 +73,9 @@
     IBOutlet UILabel *labelAirplay;
     //indexPath.row
     IBOutlet UILabel *labelIndexPathRow;
-    
-    
-
-
+    //clustering
+    IBOutlet UILabel *labelZoomRange;
+    IBOutlet UILabel *labelMapSize;
 }
 
 -(IBAction) playOrPause;

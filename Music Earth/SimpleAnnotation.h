@@ -20,6 +20,8 @@
 @property (nonatomic, retain) NSString *annotationTitle;  
 @property (nonatomic, retain) NSString *annotationSubtitle;
 @property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *mediaTitle;
+@property (nonatomic, retain) NSString *mediaArtist;
 
 
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   

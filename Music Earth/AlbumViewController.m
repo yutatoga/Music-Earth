@@ -16,6 +16,8 @@
 
 @synthesize annotationLatitude;
 @synthesize annotationLongitude;
+@synthesize annotationMediaTitle;
+@synthesize annotationMediaArtist;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,6 +42,7 @@
     myTableView.delegate = self;
     //起動時は全ての曲をリストに追加する    
     MPMediaQuery *songsQuery = [MPMediaQuery songsQuery];
+    player = [MPMusicPlayerController iPodMusicPlayer];  
     songItems = songsQuery.items;
     [songItems retain];
 }
@@ -100,7 +103,10 @@
     //2. search from user defaults
     //3. if correnct add cell
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Song：LAT%@LON%@", annotationLatitude, annotationLongitude];
+    //cell.textLabel.text = [NSString stringWithFormat:@"Song：LAT%@LON%@", annotationLatitude, annotationLongitude];
+    //cell.textLabel.text = [NSString stringWithFormat:@"%@ by %@", annotationMediaTitle, annotationMediaArtist];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", annotationMediaTitle];
+    
     //oldver
     //cell.textLabel.text = [item valueForProperty:MPMediaItemPropertyTitle];
     
@@ -166,6 +172,13 @@
     NSLog(@"%@", cellText);
     
     //search song 
+    MPMediaQuery* query = [MPMediaQuery songsQuery];
+    MPMediaPropertyPredicate* pred;
+    pred = [MPMediaPropertyPredicate predicateWithValue:annotationMediaTitle forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
+    [query addFilterPredicate:pred];
+    [player setQueueWithQuery:query];
+    [player play];
+    
     
     [self.navigationController popViewControllerAnimated:YES];
 }

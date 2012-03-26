@@ -15,6 +15,8 @@
 @synthesize annotationTitle;  
 @synthesize annotationSubtitle;  
 @synthesize url;
+@synthesize mediaTitle;
+@synthesize mediaArtist;
 
 - (NSString *)title {  
 	return annotationTitle;  
