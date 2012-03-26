@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define GRIDWIDTH 10
-#define GRIDHEIGHT 13
+#define GRIDNUMX 10
+#define GRIDNUMY 13
 
 #import "Music_EarthViewController.h"
 #import "AlbumViewController.h"
@@ -193,8 +193,6 @@
     //navigate
     
     // this line calls the viewDidLoad method of detailController
-
-
 }
 #pragma mark -
 #pragma mark iPod
@@ -483,8 +481,7 @@
 #pragma mark -
 #pragma mark map
 //map----------------------------------------------------
--(void) 
-:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+-(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     labelLatitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
     labelLongitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
@@ -639,42 +636,63 @@ calloutAccessoryControlTapped:(UIControl*)control
     labelZoomRange.text = [NSString stringWithFormat:@"LAT:%f / LON:%f", mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta];
     labelMapSize.text = [NSString stringWithFormat:@"MAP W:%f / H:%f", mapView.visibleMapRect.size.width, mapView.visibleMapRect.size.height];
     NSSet *pinSet= [myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width/2, myMapView.visibleMapRect.size.height/2)];
-
+    
     
     //1.delete all pin
     //w10 x h13
-    //fix
-    float clusterStepWidth = myMapView.visibleMapRect.size.width/GRIDWIDTH;
-    float clusterStepHeight = myMapView.visibleMapRect.size.height/GRIDHEIGHT;
+    float clusterStepWidth = myMapView.visibleMapRect.size.width/GRIDNUMX;
+    float clusterStepHeight = myMapView.visibleMapRect.size.height/GRIDNUMY;    
+    
+    
+    
+    
     NSLog(@"clusterStepWidth%f", clusterStepWidth);
     NSLog(@"clusterStepHeight%f", clusterStepHeight);
     
     NSSet *visiblePins= [myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width, myMapView.visibleMapRect.size.height)];    
-    NSMutableArray *newPinArray = [NSMutableArray array];
-    for (int i=0; i<GRIDHEIGHT; i++) {
-        for (int j=0; j<GRIDWIDTH; j++) {
-            //fix            
-            if ([[myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x+clusterStepWidth*j, myMapView.visibleMapRect.origin.y+clusterStepHeight*i, clusterStepWidth, clusterStepHeight)] count]>0) {
+    
+    
+    
+    //#raw data of pins's coodinate
+    NSArray *visiblePinsArray = [visiblePins allObjects];
+    for (int i = 0; i<visiblePinsArray.count; i++) {
+        //NSLog(@"LAT:%f/ LON:%f", [[visiblePinsArray objectAtIndex:i] coordinate].latitude,[[visiblePinsArray objectAtIndex:i] coordinate].longitude );        
+    }
+    for (int i=0; i<GRIDNUMY+1; i++) {
+        for (int j=0; j<GRIDNUMX+1; j++) {
+            //fix
+            float x = myMapView.visibleMapRect.origin.x+clusterStepWidth*j;
+            float y = myMapView.visibleMapRect.origin.y+clusterStepHeight*i;
+            float clusterX = floorf(x/clusterStepWidth)*clusterStepWidth;
+            float clusterY = floorf(y/clusterStepHeight)*clusterStepHeight;
+            
+            //#centeral pos
+            //NSLog(@"X%d Y%d LAT:%f LON:%f", j, i, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude);
+            //the number of pins in the area
+            //NSLog(@"PIN NUM:%u", [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]);                
+            //#raw date of coodinate
+            
+            
+            
+            if ([[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]>0) {
                 //draw pin on the central of the grid
                 NSMutableArray *newCluterPin = [NSMutableArray array];
                 
-                
-               SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
-                                                        initWithLocationCoordinate:[myMapView convertPoint:(CGPointMake(myMapView.frame.origin.x+myMapView.frame.size.width/GRIDWIDTH*(j+0.5), myMapView.frame.origin.y+myMapView.frame.size.height/GRIDHEIGHT*(i+0.5))) toCoordinateFromView:myMapView]                                                                                                             
-                                                        title:@"music" 
-                                                        subtitle:nil]; 
-                
-                
-                
-                
-                //[newCluterAnnotation setMediaTitle:[[[visiblePins allObjects] objectAtIndex:i] :@"Title"]];
+                SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
+                                                         initWithLocationCoordinate:CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude)
+                                                         title:@"music"
+                                                         subtitle:nil];
                 [newCluterAnnotation setUrl:@"http://apple.com"];
                 [newCluterAnnotation setMediaTitle:@"test"];                
+                
+                //remove
+                [myMapView removeAnnotations:[visiblePins allObjects]];
+                //add
                 [myMapView addAnnotation:newCluterAnnotation];
                 [myMapView setDelegate:self];
                 
             }
-
+            
         }
     }
 }

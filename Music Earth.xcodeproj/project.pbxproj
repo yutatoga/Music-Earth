@@ -98,7 +98,7 @@
 		8DE97CA8150688EB00154D2F /* Music_EarthAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthAppDelegate.m; sourceTree = "<group>"; };
 		8DE97CAB150688EB00154D2F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		8DE97CAD150688EB00154D2F /* Music_EarthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Music_EarthViewController.h; sourceTree = "<group>"; };
-		8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthViewController.m; sourceTree = "<group>"; };
+		8DE97CAE150688EB00154D2F /* Music_EarthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music_EarthViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		8DE97CB915068A9800154D2F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8DE97CBB15068AA100154D2F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8DE97CBD15068AB500154D2F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
