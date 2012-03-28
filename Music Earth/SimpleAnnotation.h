@@ -33,6 +33,5 @@
 						   title:(NSString *)annTitle subtitle:(NSString *)annSubtitle;  
 - (NSString *)title;  
 - (NSString *)subtitle;
-- (NSArray *)mediaTitleArray;
 
 @end

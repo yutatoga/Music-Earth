@@ -31,9 +31,6 @@
 	return annotationSubtitle;  
 } 
 
--(NSArray *)mediaTitleArray{
-    return  mediaTitleArray;
-}
 
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   
 						   title:(NSString *)annTitle

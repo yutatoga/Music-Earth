@@ -157,15 +157,15 @@
         SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude) title:@"music" subtitle:nil];
         [myAnnotation setUrl:@"http://apple.com"];
         
-        NSLog(@"nozomin says: Hi!----------------- %i",i);
+        //if nil, bug happen, so i use "if" (if you fix the bug, you change below)
         if ([[arrayOld objectAtIndex:i] objectForKey:@"Title"]==nil) {
-            NSArray *titleArray= [NSArray arrayWithObject:@"Title by nozomi"];//ここでバグ
+            NSArray *titleArray= [NSArray arrayWithObject:@"Title by nozomi"];
             NSLog(@"nozomin-%@", [titleArray description]);
-            myAnnotation.mediaTitleArray = titleArray;
+            myAnnotation.mediaTitleArray = [NSArray arrayWithArray: titleArray ];
         }else {
-            NSArray *titleArray= [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];//ここでバグ
+            NSArray *titleArray= [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
             NSLog(@"nozomin-%@", [titleArray description]);
-            myAnnotation.mediaTitleArray = titleArray;
+            myAnnotation.mediaTitleArray = [NSArray arrayWithArray: titleArray ];
         }
 
         NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
@@ -637,12 +637,15 @@ calloutAccessoryControlTapped:(UIControl*)control
     NSLog(@"clusterStepHeight%f", clusterStepHeight);
     
     //[1] save the pins
-    NSSet *visiblePins= [myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width, myMapView.visibleMapRect.size.height)];    
+    NSSet *visiblePins= [NSSet setWithSet:[myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width, myMapView.visibleMapRect.size.height)]];    
     //#raw data of pins's coodinate
-    NSArray *visiblePinsArray = [visiblePins allObjects];
+    NSArray *visiblePinsArray = [NSArray arrayWithArray:[visiblePins allObjects]];
     NSLog(@"visiblePinNum:%i", [visiblePins count]);
     //[2] delete all pins in visible mapview
+    
     [mapView removeAnnotations:visiblePinsArray];
+    
+    
     //[3] set pins on the raw coodinate
     for (int i = 0; i<visiblePinsArray.count; i++) {
         
@@ -651,20 +654,44 @@ calloutAccessoryControlTapped:(UIControl*)control
         NSLog(@"LAT:%f/ LON:%f", [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
         SimpleAnnotation *rawAnnotatios=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
         [rawAnnotatios setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
-    
-        NSArray *titleArray= [NSArray arrayWithObjects:[[visiblePinsArray objectAtIndex:i] mediaTitleArray], nil];
-        NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
-        NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
-        //add raw pin (visiblePinsNum*clusteredNum)
-        for (int j=0; j<[titleArray count]; j++) {
-            //[mediaTitleForCluter addObjectsFromArray:titleArray];            
-            rawAnnotatios.mediaTitleArray = [titleArray objectAtIndex:j];
-            [myMapView addAnnotation:rawAnnotatios];
-            [myMapView setDelegate:self];
-            
-            //check
-            NSLog(@"titleCheck%@" ,[[rawAnnotatios mediaTitleArray] description]);
+        
+
+        
+        
+        //nil happens bug   escape bug, if you why plesase delete "if" below
+        if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {
+            NSArray *titleArray= [NSArray arrayWithObject:@"Title by nozomi 2"];
+            NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
+            NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
+            //add raw pin (visiblePinsNum*clusteredNum)
+            for (int j=0; j<[titleArray count]; j++) {
+                //[mediaTitleForCluter addObjectsFromArray:titleArray];            
+                rawAnnotatios.mediaTitleArray = [titleArray objectAtIndex:j];
+                [myMapView addAnnotation:rawAnnotatios];
+                [myMapView setDelegate:self];
+                
+                //check
+                NSLog(@"titleCheck(nozomi)%@" ,[[rawAnnotatios mediaTitleArray] description]);
+            }
+        }else {
+            NSArray *titleArray= [NSArray arrayWithObject:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
+            NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
+            NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
+            //add raw pin (visiblePinsNum*clusteredNum)
+            for (int j=0; j<[titleArray count]; j++) {
+                //[mediaTitleForCluter addObjectsFromArray:titleArray];            
+                rawAnnotatios.mediaTitleArray = [titleArray objectAtIndex:j];
+                [myMapView addAnnotation:rawAnnotatios];
+                [myMapView setDelegate:self];
+                
+                //check
+                NSLog(@"titleCheck%@" ,[[rawAnnotatios mediaTitleArray] description]);
+            }
         }
+        
+        
+        
+
         
     }
     //[4] cluster pins
