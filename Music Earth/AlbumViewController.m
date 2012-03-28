@@ -76,7 +76,7 @@
     //1. get correct times that current coodinate is equal to user defaults
     // this time I use one to one pin so use 1 but i will chante grouping pin
     
-    return annotationNum;
+    return [annotationMediaTitle count];
     //old ver
     //return  [songItems count];
 }
@@ -106,7 +106,7 @@
     
     //cell.textLabel.text = [NSString stringWithFormat:@"Song：LAT%@LON%@", annotationLatitude, annotationLongitude];
     //cell.textLabel.text = [NSString stringWithFormat:@"%@ by %@", annotationMediaTitle, annotationMediaArtist];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", annotationMediaTitle];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [annotationMediaTitle objectAtIndex:indexPath.row]];
     
     //oldver
     //cell.textLabel.text = [item valueForProperty:MPMediaItemPropertyTitle];

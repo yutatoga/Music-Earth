@@ -22,9 +22,6 @@
 @synthesize mediaArtist;
 
 
--(int) getCount{
-    return [mediaTitleArray count];
-}
 
 - (NSString *)title {  
 	return annotationTitle;  

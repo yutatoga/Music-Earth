@@ -672,7 +672,8 @@ calloutAccessoryControlTapped:(UIControl*)control
             //#the number of pins in the area
             //NSLog(@"PIN NUM:%u", [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]);
             
-            NSArray *clusteredArray = [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects];
+            NSSet *clusteredSet = [NSSet setWithSet:[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] ];
+            NSArray *clusteredArray = [NSArray arrayWithArray:[clusteredSet allObjects]];
             [myMapView removeAnnotations:[[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects]]; 
             NSLog(@"CLUSTEREDARRAYCOUNT %i",[clusteredArray count]);
             if ([clusteredArray count]>0) {
@@ -690,14 +691,26 @@ calloutAccessoryControlTapped:(UIControl*)control
                 NSMutableArray *clusterTitle = [NSMutableArray array];
                 for (int k=0; k<[clusteredArray count]; k++) {
                     
-                    NSArray *clusterTitleArray = [NSArray arrayWithObjects:[[clusteredArray objectAtIndex:k] mediaTitleArray], nil];
-                    [clusterTitle addObject:clusterTitleArray];
+                    /*OK
+                    NSArray *clusterTitleArray = [NSArray arrayWithObject:[NSString stringWithFormat:@"nozomi %i", k]];
+                    NSArray *clusterTitleArray2 = [NSArray arrayWithObject:[NSString stringWithFormat:@"nozomi %i", k*10]];
+                    [clusterTitle addObjectsFromArray:clusterTitleArray];
+                    [clusterTitle addObjectsFromArray:clusterTitleArray2];
+                    */
                     
+                    //NG
+                    NSArray *clusterTitleArray = [NSArray arrayWithObject:[[clusteredArray objectAtIndex:k] mediaTitleArray]];
+                    [clusterTitle addObjectsFromArray: clusterTitleArray];
+                                        
                     //newCluterAnnotation.mediaTitleArray= clusterTitleArray;//raw pin have only one mediatitle so objectatindex is zero.
+                    
+                    
                     //NSLog(@"1desc%@",[clusteredArray description]);
                     //NSLog(@"2desc%@", [newCluterAnnotation description]);
                     //NSLog(@"newClusterTitle%@", [[newCluterAnnotation mediaTitleArray] description]);
-                    [newCluterAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:k] rawCoodinate].latitude , [[clusteredArray objectAtIndex:k] rawCoodinate].longitude)];
+                    
+                    
+                    //[newCluterAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:k] rawCoodinate].latitude , [[clusteredArray objectAtIndex:k] rawCoodinate].longitude)];
                 }
                 NSLog(@"1desc%@ 1count%i",[clusterTitle description], [clusterTitle count]);
                 newCluterAnnotation.mediaTitleArray = clusterTitle;
