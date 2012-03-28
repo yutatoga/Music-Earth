@@ -15,6 +15,7 @@
 }
 @property (nonatomic, retain) NSString *annotationLatitude;  
 @property (nonatomic, retain) NSString *annotationLongitude;
-@property (nonatomic, retain) NSString *annotationMediaTitle;
+@property (nonatomic, retain) NSArray *annotationMediaTitle;
 @property (nonatomic, retain) NSString *annotationMediaArtist;
+@property (nonatomic, readwrite) float annotationNum;
 @end

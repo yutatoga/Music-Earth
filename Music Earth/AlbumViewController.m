@@ -18,6 +18,7 @@
 @synthesize annotationLongitude;
 @synthesize annotationMediaTitle;
 @synthesize annotationMediaArtist;
+@synthesize annotationNum;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -75,7 +76,7 @@
     //1. get correct times that current coodinate is equal to user defaults
     // this time I use one to one pin so use 1 but i will chante grouping pin
     
-    return 1;
+    return annotationNum;
     //old ver
     //return  [songItems count];
 }

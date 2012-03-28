@@ -143,10 +143,11 @@
     
     //1.read uer defaul and add pins on map
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *arrayOld=[defaults arrayForKey:@"userData"];
+    NSArray *arrayOld=[defaults arrayForKey:@"userData"];//DICTIONARY IN ARRAI!!
     NSLog(@"read pinNum: %d", arrayOld.count);
     
     NSMutableArray* array = [NSMutableArray array];
+    NSMutableArray* mediaTitleArray = [NSMutableArray array];
     //add old pins
     for (int i=0; i<arrayOld.count; i++) {
         [array addObject:[arrayOld objectAtIndex:i]];
@@ -155,7 +156,14 @@
         float instantLongitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Longitude"]) floatValue]+arc4random()%100*0.00001-0.0005;
         SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude) title:@"music" subtitle:nil];
         [myAnnotation setUrl:@"http://apple.com"];
-        [myAnnotation setMediaTitle:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
+        
+        
+        NSArray *titleArray= [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
+        NSLog(@"nozomin-%@", [titleArray description]);
+        myAnnotation.mediaTitleArray = titleArray;
+        NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
+        NSLog(@"hoge%i", [myAnnotation.mediaTitleArray count]);
+        [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude)];
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
     }
@@ -388,10 +396,11 @@
     // 2/2-use random
     SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"music" subtitle:nil];
     [myAnnotation setUrl:@"http://apple.com"];
-    [myAnnotation setMediaTitle:[curItem valueForProperty:MPMediaItemPropertyTitle]];
+    [myAnnotation setMediaTitleArray:[curItem valueForProperty:MPMediaItemPropertyTitle]];
     [myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
+    [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(myAnnotation.coordinate.latitude, myAnnotation.coordinate.longitude)];
     [myMapView addAnnotation:myAnnotation];
-    //[self updatePin];
+
     
     [myMapView setDelegate:self];
     
@@ -414,38 +423,7 @@
      */
      //2147483647      
 }
-#pragma mark -
-#pragma mark updatePin
--(void) updatePin{
-    //reduce pin if too near to other pin=============================================================================================================  
-    NSLog(@"ALLPINNUM:%i",[[myMapView annotations] count]);        
-    NSLog(@"VISIBLEPINNUM:%i",[[myMapView annotationsInMapRect:myMapView.visibleMapRect] count]);        
-    NSLog(@"RECTPINNUM:%i", [[myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width/2, myMapView.visibleMapRect.size.height/2)  ] count]);
-    //set central of the grid
-    if ([[myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width/2, myMapView.visibleMapRect.size.height/2)  ] count]>1) {
-        //save before removing
-        NSSet *gatheredPin= [myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width/2, myMapView.visibleMapRect.size.height/2)];
-        NSLog(@"DESCRIPT:%@",[gatheredPin description]);
-        
-        
-        NSMutableArray *savedPinMediaTitle = [NSMutableArray array];
-        for (int i=0; i<[gatheredPin count]; i++) {
-            NSLog(@"DESCRIPT2 %@",[[[gatheredPin allObjects] objectAtIndex:i] mediaTitle]);
-            [savedPinMediaTitle addObject:[[[gatheredPin allObjects] objectAtIndex:i] mediaTitle]];
-        }
-        NSLog(@"%@", [savedPinMediaTitle description]);
-        //remove
-        [myMapView removeAnnotations:[[myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width/2, myMapView.visibleMapRect.size.height/2) ] allObjects]];
-        //remake
-        //SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"music" subtitle:nil];
-        //[myAnnotation setUrl:@"http://apple.com"];
-        //[myAnnotation setMediaTitle:[curItem valueForProperty:MPMediaItemPropertyTitle]];
-        //[myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
-        //[myMapView addAnnotation:myAnnotation];
-        //[myMapView setDelegate:self];
-    }
-    
-}
+
 
 #pragma mark -
 #pragma mark picker
@@ -589,7 +567,7 @@
         annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier] autorelease];
     } 
     
-    annotationView.animatesDrop = YES; //このプロパティでアニメーションドロップを設定
+    annotationView.animatesDrop = NO; //このプロパティでアニメーションドロップを設定
     annotationView.canShowCallout = YES; //このプロパティを設定してコールアウト（文字を表示する吹出し）を表示
     annotationView.annotation = annotation; //このメソッドで設定したアノテーションをannotationViewに再追加してreturnで返す
     UIButton* button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -623,8 +601,17 @@ calloutAccessoryControlTapped:(UIControl*)control
     AlbumViewController *albumViewControllerK= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
     albumViewControllerK.annotationLatitude=[NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
     albumViewControllerK.annotationLongitude=[NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
-    albumViewControllerK.annotationMediaTitle=[(SimpleAnnotation*)view.annotation mediaTitle];
+    albumViewControllerK.annotationMediaTitle=[(SimpleAnnotation*)view.annotation mediaTitleArray];
     albumViewControllerK.annotationMediaArtist=[(SimpleAnnotation*)view.annotation mediaArtist];
+    NSLog(@"kokomade>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    
+    NSLog(@"%@", [[(SimpleAnnotation*)view.annotation mediaTitleArray] description]);
+    NSArray *titleArray = [NSArray arrayWithObjects:[(SimpleAnnotation*)view.annotation mediaTitleArray], nil];
+    NSLog(@"%i", [titleArray count]);
+    NSLog(@"%@", [titleArray description]);
+    albumViewControllerK.annotationNum = [titleArray count];
+    NSLog(@"mediaTitleArrayCount:%i", [[(SimpleAnnotation*)view.annotation mediaTitleArray] count]);
+    NSLog(@"%@", [[(SimpleAnnotation*)view.annotation mediaTitleArray] description]);
     [[self navigationController] pushViewController:albumViewControllerK animated:YES];    
 }
 
@@ -634,30 +621,44 @@ calloutAccessoryControlTapped:(UIControl*)control
     NSLog(@"REGION DID CHANGE!");
     //get the
     labelZoomRange.text = [NSString stringWithFormat:@"LAT:%f / LON:%f", mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta];
-    labelMapSize.text = [NSString stringWithFormat:@"MAP W:%f / H:%f", mapView.visibleMapRect.size.width, mapView.visibleMapRect.size.height];
-    NSSet *pinSet= [myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width/2, myMapView.visibleMapRect.size.height/2)];
-    
-    
-    //1.delete all pin
-    //w10 x h13
+    labelMapSize.text = [NSString stringWithFormat:@"MAP W:%f / H:%f", mapView.visibleMapRect.size.width, mapView.visibleMapRect.size.height];    
     float clusterStepWidth = myMapView.visibleMapRect.size.width/GRIDNUMX;
     float clusterStepHeight = myMapView.visibleMapRect.size.height/GRIDNUMY;    
-    
-    
-    
-    
     NSLog(@"clusterStepWidth%f", clusterStepWidth);
     NSLog(@"clusterStepHeight%f", clusterStepHeight);
     
+    //[1] save the pins
     NSSet *visiblePins= [myMapView annotationsInMapRect:MKMapRectMake(myMapView.visibleMapRect.origin.x, myMapView.visibleMapRect.origin.y, myMapView.visibleMapRect.size.width, myMapView.visibleMapRect.size.height)];    
-    
-    
-    
     //#raw data of pins's coodinate
     NSArray *visiblePinsArray = [visiblePins allObjects];
+    NSLog(@"visiblePinNum:%i", [visiblePins count]);
+    //[2] delete all pins in visible mapview
+    [mapView removeAnnotations:visiblePinsArray];
+    //[3] set pins on the raw coodinate
     for (int i = 0; i<visiblePinsArray.count; i++) {
-        //NSLog(@"LAT:%f/ LON:%f", [[visiblePinsArray objectAtIndex:i] coordinate].latitude,[[visiblePinsArray objectAtIndex:i] coordinate].longitude );        
+        
+        NSLog(@"mediatytleArray%@",[[visiblePinsArray objectAtIndex:i] mediaTitleArray]);
+        NSLog(@"YES++++++++");
+        NSLog(@"LAT:%f/ LON:%f", [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
+        SimpleAnnotation *rawAnnotatios=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
+        [rawAnnotatios setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
+    
+        NSArray *titleArray= [NSArray arrayWithObjects:[[visiblePinsArray objectAtIndex:i] mediaTitleArray], nil];
+        NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
+        NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
+        //add raw pin (visiblePinsNum*clusteredNum)
+        for (int j=0; j<[titleArray count]; j++) {
+            //[mediaTitleForCluter addObjectsFromArray:titleArray];            
+            rawAnnotatios.mediaTitleArray = [titleArray objectAtIndex:j];
+            [myMapView addAnnotation:rawAnnotatios];
+            [myMapView setDelegate:self];
+            
+            //check
+            NSLog(@"titleCheck%@" ,[[rawAnnotatios mediaTitleArray] description]);
+        }
+        
     }
+    //[4] cluster pins
     for (int i=0; i<GRIDNUMY+1; i++) {
         for (int j=0; j<GRIDNUMX+1; j++) {
             //fix
@@ -668,37 +669,50 @@ calloutAccessoryControlTapped:(UIControl*)control
             
             //#centeral pos
             //NSLog(@"X%d Y%d LAT:%f LON:%f", j, i, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude);
-            //the number of pins in the area
-            //NSLog(@"PIN NUM:%u", [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]);                
-            //#raw date of coodinate
+            //#the number of pins in the area
+            //NSLog(@"PIN NUM:%u", [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]);
             
-            
-            
-            if ([[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]>0) {
-                //draw pin on the central of the grid
-                NSMutableArray *newCluterPin = [NSMutableArray array];
+            NSArray *clusteredArray = [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects];
+            [myMapView removeAnnotations:[[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects]]; 
+            NSLog(@"CLUSTEREDARRAYCOUNT %i",[clusteredArray count]);
+            if ([clusteredArray count]>0) {
                 
+                NSLog(@"CLUSTURING==============================================");
+                
+                //draw pin on the central of the grid                
                 SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
                                                          initWithLocationCoordinate:CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude)
                                                          title:@"music"
                                                          subtitle:nil];
                 [newCluterAnnotation setUrl:@"http://apple.com"];
-                [newCluterAnnotation setMediaTitle:@"test"];                
                 
-                //remove
-                [myMapView removeAnnotations:[visiblePins allObjects]];
+                
+                NSMutableArray *clusterTitle = [NSMutableArray array];
+                for (int k=0; k<[clusteredArray count]; k++) {
+                    
+                    NSArray *clusterTitleArray = [NSArray arrayWithObjects:[[clusteredArray objectAtIndex:k] mediaTitleArray], nil];
+                    [clusterTitle addObject:clusterTitleArray];
+                    
+                    //newCluterAnnotation.mediaTitleArray= clusterTitleArray;//raw pin have only one mediatitle so objectatindex is zero.
+                    //NSLog(@"1desc%@",[clusteredArray description]);
+                    //NSLog(@"2desc%@", [newCluterAnnotation description]);
+                    //NSLog(@"newClusterTitle%@", [[newCluterAnnotation mediaTitleArray] description]);
+                    [newCluterAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:k] rawCoodinate].latitude , [[clusteredArray objectAtIndex:k] rawCoodinate].longitude)];
+                }
+                NSLog(@"1desc%@ 1count%i",[clusterTitle description], [clusterTitle count]);
+                newCluterAnnotation.mediaTitleArray = clusterTitle;
+                NSLog(@"2desc%@ 2count%i", [newCluterAnnotation.mediaTitleArray description], [newCluterAnnotation.mediaTitleArray count]);
                 //add
                 [myMapView addAnnotation:newCluterAnnotation];
-                [myMapView setDelegate:self];
+                [myMapView setDelegate:self];                
                 
             }
-            
         }
     }
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    NSLog(@"REGION WILL CHANGE");
+    NSLog(@"REGION WILL CHANGE"); 
 }
 
 #pragma mark -

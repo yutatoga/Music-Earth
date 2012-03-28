@@ -11,12 +11,20 @@
 @implementation SimpleAnnotation
 
 
-@synthesize coordinate;  
-@synthesize annotationTitle;  
-@synthesize annotationSubtitle;  
+@synthesize coordinate;
+@synthesize rawCoodinate;
+@synthesize rawCoodinateLatitudeArray;
+@synthesize rawCoodinateLongitudeArray;
+@synthesize annotationTitle;
+@synthesize annotationSubtitle;
 @synthesize url;
-@synthesize mediaTitle;
+@synthesize mediaTitleArray;
 @synthesize mediaArtist;
+
+
+-(int) getCount{
+    return [mediaTitleArray count];
+}
 
 - (NSString *)title {  
 	return annotationTitle;  
@@ -24,7 +32,11 @@
 
 - (NSString *)subtitle {  
 	return annotationSubtitle;  
-}  
+} 
+
+-(NSArray *)mediaTitleArray{
+    return  mediaTitleArray;
+}
 
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   
 						   title:(NSString *)annTitle
@@ -41,6 +53,7 @@
 	[annotationTitle release];  
 	[annotationSubtitle release];  
 	[url release];
+    [mediaTitleArray release];
 	[super dealloc];  
 }  
 
