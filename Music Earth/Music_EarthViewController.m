@@ -147,8 +147,7 @@
     NSLog(@"read pinNum: %d", arrayOld.count);
     
     NSMutableArray* array = [NSMutableArray array];
-    NSMutableArray* mediaTitleArray = [NSMutableArray array];
-    //add old pins
+    //add raw old pins
     for (int i=0; i<arrayOld.count; i++) {
         [array addObject:[arrayOld objectAtIndex:i]];
         //draw pin
@@ -159,13 +158,9 @@
         
         //if nil, bug happen, so i use "if" (if you fix the bug, you change below)
         if ([[arrayOld objectAtIndex:i] objectForKey:@"Title"]==nil) {
-            NSArray *titleArray= [NSArray arrayWithObject:@"Title by nozomi"];
-            NSLog(@"nozomin-%@", [titleArray description]);
-            myAnnotation.mediaTitleArray = [NSArray arrayWithArray: titleArray ];
+            myAnnotation.mediaTitleArray = [NSArray arrayWithObject: [NSString stringWithString: @"Title by nozomi"]];
         }else {
-            NSArray *titleArray= [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
-            NSLog(@"nozomin-%@", [titleArray description]);
-            myAnnotation.mediaTitleArray = [NSArray arrayWithArray: titleArray ];
+            myAnnotation.mediaTitleArray = [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
         }
 
         NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
@@ -403,20 +398,25 @@
     [myMapView addAnnotation:myAnnotation];
     */
     // 2/2-use random
-    SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"music" subtitle:nil];
-    [myAnnotation setUrl:@"http://apple.com"];
-    [myAnnotation setMediaTitleArray:[curItem valueForProperty:MPMediaItemPropertyTitle]];
-    [myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
-    [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(myAnnotation.coordinate.latitude, myAnnotation.coordinate.longitude)];
-    [myMapView addAnnotation:myAnnotation];
-
     
-    [myMapView setDelegate:self];
+    //再生してなかったらnilでbug
+    if (player.playbackState == MPMusicPlaybackStatePlaying) {
+        SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"music" subtitle:nil];
+        [myAnnotation setUrl:@"http://apple.com"]; 
+        
+        //[myAnnotation setMediaTitleArray:[curItem valueForProperty:MPMediaItemPropertyTitle]];//注意 change to below
+        [myAnnotation setMediaTitleArray:[NSArray arrayWithObject:[NSString stringWithString:[curItem valueForProperty:MPMediaItemPropertyTitle]]]];
+        
+        [myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
+        [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(myAnnotation.coordinate.latitude, myAnnotation.coordinate.longitude)];
+        [myMapView addAnnotation:myAnnotation];
+        [myMapView setDelegate:self];
+    }
     
     //read user defaults
-    NSLog(@"loadUserMediaItemCollection called.");
-    NSArray *array1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"userData"];
-    NSArray *array2 = [array1 valueForKeyPath:@"Latitude"];
+    //NSLog(@"loadUserMediaItemCollection called.");
+    //NSArray *array1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"userData"];
+    //NSArray *array2 = [array1 valueForKeyPath:@"Latitude"];
     //NSLog(@"items2:%@", [array2 description]);
     //NSLog(@"-----------------------------------------------------------------------------------------");
     //NSLog(@"items:%@",[array1 description]);
@@ -608,19 +608,18 @@ calloutAccessoryControlTapped:(UIControl*)control
     // the detail view does not want a toolbar so hide it
     [self.navigationController setToolbarHidden:YES animated:NO];
     AlbumViewController *albumViewControllerK= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
-    albumViewControllerK.annotationLatitude=[NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
-    albumViewControllerK.annotationLongitude=[NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
-    albumViewControllerK.annotationMediaTitle=[(SimpleAnnotation*)view.annotation mediaTitleArray];
-    albumViewControllerK.annotationMediaArtist=[(SimpleAnnotation*)view.annotation mediaArtist];
+    albumViewControllerK.annotationLatitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
+    albumViewControllerK.annotationLongitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
+    albumViewControllerK.annotationMediaTitle = [NSArray arrayWithArray:[(SimpleAnnotation*)view.annotation mediaTitleArray]];// array!
+    albumViewControllerK.annotationMediaArtist = [(SimpleAnnotation*)view.annotation mediaArtist];
     NSLog(@"kokomade>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     
-    NSLog(@"%@", [[(SimpleAnnotation*)view.annotation mediaTitleArray] description]);
-    NSArray *titleArray = [NSArray arrayWithObjects:[(SimpleAnnotation*)view.annotation mediaTitleArray], nil];
-    NSLog(@"%i", [titleArray count]);
-    NSLog(@"%@", [titleArray description]);
+    NSLog(@"tappedMediaTitle:%@", [[(SimpleAnnotation*)view.annotation mediaTitleArray] description]);
+    NSArray *titleArray = [NSArray arrayWithArray:[(SimpleAnnotation*)view.annotation mediaTitleArray]];
+    NSLog(@"tappedTitleArrayCount:%i", [titleArray count]);
+    NSLog(@"tappedTitleDesc:%@", [titleArray description]);
     albumViewControllerK.annotationNum = [titleArray count];
     NSLog(@"mediaTitleArrayCount:%i", [[(SimpleAnnotation*)view.annotation mediaTitleArray] count]);
-    NSLog(@"%@", [[(SimpleAnnotation*)view.annotation mediaTitleArray] description]);
     [[self navigationController] pushViewController:albumViewControllerK animated:YES];    
 }
 
@@ -659,22 +658,21 @@ calloutAccessoryControlTapped:(UIControl*)control
         
         
         //nil happens bug   escape bug, if you why plesase delete "if" below
-        if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {
-            NSArray *titleArray= [NSArray arrayWithObject:@"Title by nozomi 2"];
-            NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
-            NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
-            //add raw pin (visiblePinsNum*clusteredNum)
-            for (int j=0; j<[titleArray count]; j++) {
-                //[mediaTitleForCluter addObjectsFromArray:titleArray];            
-                rawAnnotatios.mediaTitleArray = [titleArray objectAtIndex:j];
+        if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {           
+                rawAnnotatios.mediaTitleArray = [NSArray arrayWithObject:[NSString stringWithString:@"title by nozomi2"]];
                 [myMapView addAnnotation:rawAnnotatios];
                 [myMapView setDelegate:self];
-                
                 //check
                 NSLog(@"titleCheck(nozomi)%@" ,[[rawAnnotatios mediaTitleArray] description]);
-            }
         }else {
-            NSArray *titleArray= [NSArray arrayWithObject:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
+            
+            NSArray *titleArray= [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
+            NSLog(@"nozomiCheck1%@", [titleArray description]);
+            
+            //hope ver
+            //NSArray *nozomiCheck = [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
+            //NSLog(@"nozomiCheck2%@", [nozomiCheck description]);
+            
             NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
             NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
             //add raw pin (visiblePinsNum*clusteredNum)
@@ -749,7 +747,7 @@ calloutAccessoryControlTapped:(UIControl*)control
                     //[newCluterAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:k] rawCoodinate].latitude , [[clusteredArray objectAtIndex:k] rawCoodinate].longitude)];
                 }
                 NSLog(@"1desc%@ 1count%i",[clusterTitle description], [clusterTitle count]);
-                newCluterAnnotation.mediaTitleArray = clusterTitle;
+                newCluterAnnotation.mediaTitleArray = [NSArray arrayWithArray: clusterTitle];
                 NSLog(@"2desc%@ 2count%i", [newCluterAnnotation.mediaTitleArray description], [newCluterAnnotation.mediaTitleArray count]);
                 //add
                 [myMapView addAnnotation:newCluterAnnotation];
