@@ -175,7 +175,7 @@
     //search song 
     MPMediaQuery* query = [MPMediaQuery songsQuery];
     MPMediaPropertyPredicate* pred;
-    pred = [MPMediaPropertyPredicate predicateWithValue:annotationMediaTitle forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
+    pred = [MPMediaPropertyPredicate predicateWithValue:cellText forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
     [query addFilterPredicate:pred];
     [player setQueueWithQuery:query];
     [player play];

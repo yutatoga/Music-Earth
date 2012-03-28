@@ -157,17 +157,26 @@
         SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude) title:@"music" subtitle:nil];
         [myAnnotation setUrl:@"http://apple.com"];
         
-        
-        NSArray *titleArray= [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
-        NSLog(@"nozomin-%@", [titleArray description]);
-        myAnnotation.mediaTitleArray = titleArray;
+        NSLog(@"nozomin says: Hi!----------------- %i",i);
+        if ([[arrayOld objectAtIndex:i] objectForKey:@"Title"]==nil) {
+            NSArray *titleArray= [NSArray arrayWithObject:@"Title by nozomi"];//ここでバグ
+            NSLog(@"nozomin-%@", [titleArray description]);
+            myAnnotation.mediaTitleArray = titleArray;
+        }else {
+            NSArray *titleArray= [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];//ここでバグ
+            NSLog(@"nozomin-%@", [titleArray description]);
+            myAnnotation.mediaTitleArray = titleArray;
+        }
+
         NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
         NSLog(@"hoge%i", [myAnnotation.mediaTitleArray count]);
         [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude)];
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
+        NSLog(@"nozomin says: OK! here is %i",i);
     }
     //[array addObject:myArray];
+    
     [defaults setObject:array forKey:@"userData"];
     
     if ( ![defaults synchronize] ) {
