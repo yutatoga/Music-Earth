@@ -158,9 +158,9 @@
         
         //if nil, bug happen, so i use "if" (if you fix the bug, you change below)
         if ([[arrayOld objectAtIndex:i] objectForKey:@"Title"]==nil) {
-            myAnnotation.mediaTitleArray = [NSArray arrayWithObject: [NSString stringWithString: @"Title by nozomi"]];
+            myAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[NSString stringWithString: @"Title by nozomi"], nil];
         }else {
-            myAnnotation.mediaTitleArray = [NSArray arrayWithObject:[[arrayOld objectAtIndex:i] objectForKey:@"Title"]];
+            myAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[[arrayOld objectAtIndex:i] objectForKey:@"Title"], nil];
         }
 
         NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
@@ -168,7 +168,6 @@
         [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude)];
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
-        NSLog(@"nozomin says: OK! here is %i",i);
     }
     //[array addObject:myArray];
     
@@ -405,7 +404,7 @@
         [myAnnotation setUrl:@"http://apple.com"]; 
         
         //[myAnnotation setMediaTitleArray:[curItem valueForProperty:MPMediaItemPropertyTitle]];//注意 change to below
-        [myAnnotation setMediaTitleArray:[NSArray arrayWithObject:[NSString stringWithString:[curItem valueForProperty:MPMediaItemPropertyTitle]]]];
+        [myAnnotation setMediaTitleArray:[NSArray arrayWithObjects:[NSString stringWithString:[curItem valueForProperty:MPMediaItemPropertyTitle]],nil]];
         
         [myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
         [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(myAnnotation.coordinate.latitude, myAnnotation.coordinate.longitude)];
@@ -582,6 +581,7 @@
     UIButton* button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     //[button addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
     annotationView.rightCalloutAccessoryView = button;
+    NSLog(@"PIN DROPPED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     return annotationView;
 } 
 
@@ -626,7 +626,7 @@ calloutAccessoryControlTapped:(UIControl*)control
 #pragma mark -
 #pragma mark regionDidChange
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    NSLog(@"REGION DID CHANGE!");
+    NSLog(@"REGION DID CHANGE!---------------------------------------------------------------------------");
     //get the
     labelZoomRange.text = [NSString stringWithFormat:@"LAT:%f / LON:%f", mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta];
     labelMapSize.text = [NSString stringWithFormat:@"MAP W:%f / H:%f", mapView.visibleMapRect.size.width, mapView.visibleMapRect.size.height];    
@@ -642,48 +642,51 @@ calloutAccessoryControlTapped:(UIControl*)control
     NSLog(@"visiblePinNum:%i", [visiblePins count]);
     //[2] delete all pins in visible mapview
     
+    
+    //problem: here  STILL NOT ADD RAW PINS
     [mapView removeAnnotations:visiblePinsArray];
+    
+    
     
     
     //[3] set pins on the raw coodinate
     for (int i = 0; i<visiblePinsArray.count; i++) {
         
-        NSLog(@"mediatytleArray%@",[[visiblePinsArray objectAtIndex:i] mediaTitleArray]);
-        NSLog(@"YES++++++++");
-        NSLog(@"LAT:%f/ LON:%f", [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
-        SimpleAnnotation *rawAnnotatios=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
-        [rawAnnotatios setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
+        NSLog(@"visiblePin-- No.%u mediatytleArray COUNT:%i DESC:%@ LAT:%f LON:%f", i, [[[visiblePinsArray objectAtIndex:i] mediaTitleArray] count] ,[[[visiblePinsArray objectAtIndex:i] mediaTitleArray] description], [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
+        SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
+        [rawAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
         
 
         
         
         //nil happens bug   escape bug, if you why plesase delete "if" below
         if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {           
-                rawAnnotatios.mediaTitleArray = [NSArray arrayWithObject:[NSString stringWithString:@"title by nozomi2"]];
-                [myMapView addAnnotation:rawAnnotatios];
+                rawAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[NSString stringWithString:@"title by nozomi2"], nil];
+                [myMapView addAnnotation:rawAnnotation];
                 [myMapView setDelegate:self];
                 //check
-                NSLog(@"titleCheck(nozomi)%@" ,[[rawAnnotatios mediaTitleArray] description]);
+                NSLog(@"visiblePin error desc: %@" ,[[rawAnnotation mediaTitleArray] description]);
         }else {
             
             NSArray *titleArray= [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
-            NSLog(@"nozomiCheck1%@", [titleArray description]);
+            NSLog(@"visiblePins No.%i: count:%i desc:%@", i,[titleArray count], [titleArray description]);//if raw pin(not clustered pin), count is 1
             
             //hope ver
             //NSArray *nozomiCheck = [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
             //NSLog(@"nozomiCheck2%@", [nozomiCheck description]);
             
-            NSLog(@"か%i", [titleArray count]);//if raw pin(not clustered pin), count is 1
-            NSMutableArray *mediaTitleForCluter = [NSMutableArray array];
+
             //add raw pin (visiblePinsNum*clusteredNum)
             for (int j=0; j<[titleArray count]; j++) {
                 //[mediaTitleForCluter addObjectsFromArray:titleArray];            
-                rawAnnotatios.mediaTitleArray = [titleArray objectAtIndex:j];
-                [myMapView addAnnotation:rawAnnotatios];
+                rawAnnotation.mediaTitleArray =[NSArray arrayWithObject:[titleArray objectAtIndex:j]];//here is strange????????????????????????? arrayWithArray?????????????????
+                //ADDED wrong latitude and longitude????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+                NSLog(@"ADD RAW PIN: titleArray's desc:%@", [rawAnnotation.mediaTitleArray description]);
+                [myMapView addAnnotation:rawAnnotation];
                 [myMapView setDelegate:self];
                 
                 //check
-                NSLog(@"titleCheck%@" ,[[rawAnnotatios mediaTitleArray] description]);
+                NSLog(@"titleCheck:%@" ,[[rawAnnotation mediaTitleArray] description]);
             }
         }
         
@@ -706,13 +709,15 @@ calloutAccessoryControlTapped:(UIControl*)control
             //#the number of pins in the area
             //NSLog(@"PIN NUM:%u", [[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] count]);
             
+            
+            
             NSSet *clusteredSet = [NSSet setWithSet:[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] ];
             NSArray *clusteredArray = [NSArray arrayWithArray:[clusteredSet allObjects]];
             [myMapView removeAnnotations:[[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects]]; 
-            NSLog(@"CLUSTEREDARRAYCOUNT %i",[clusteredArray count]);
+            NSLog(@"CLUSTERING--GRIDNUM:%02ux%02u / COUNT:%i", j, i, [clusteredArray count]);
             if ([clusteredArray count]>0) {
                 
-                NSLog(@"CLUSTURING==============================================");
+                NSLog(@"CLUSTERING %u pins==-----------------------------------------------------------------------------------------------------------------------------", [clusteredArray count]);
                 
                 //draw pin on the central of the grid                
                 SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
@@ -732,10 +737,16 @@ calloutAccessoryControlTapped:(UIControl*)control
                     [clusterTitle addObjectsFromArray:clusterTitleArray2];
                     */
                     
-                    //NG
-                    NSArray *clusterTitleArray = [NSArray arrayWithObject:[[clusteredArray objectAtIndex:k] mediaTitleArray]];
+                    //NG????????????
+                    NSLog(@"here add this:%@",[[[clusteredArray objectAtIndex:k] mediaTitleArray] description]);
+                    NSArray *clusterTitleArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaTitleArray]];//here is mediaTitle is just one media title, arraywithObjects, but fine (maybe)
+                    NSLog(@"results:%@", [clusterTitleArray description]);
+                    //NSLog(@"nozomin says 20120329 1: %@", [clusterTitleArray description]);
                     [clusterTitle addObjectsFromArray: clusterTitleArray];
-                                        
+                    //NSLog(@"nozomin says 20120329 2: %@", [clusterTitle description]);                    
+                    
+                    
+                    
                     //newCluterAnnotation.mediaTitleArray= clusterTitleArray;//raw pin have only one mediatitle so objectatindex is zero.
                     
                     
@@ -746,16 +757,17 @@ calloutAccessoryControlTapped:(UIControl*)control
                     
                     //[newCluterAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:k] rawCoodinate].latitude , [[clusteredArray objectAtIndex:k] rawCoodinate].longitude)];
                 }
-                NSLog(@"1desc%@ 1count%i",[clusterTitle description], [clusterTitle count]);
+                NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
                 newCluterAnnotation.mediaTitleArray = [NSArray arrayWithArray: clusterTitle];
-                NSLog(@"2desc%@ 2count%i", [newCluterAnnotation.mediaTitleArray description], [newCluterAnnotation.mediaTitleArray count]);
                 //add
                 [myMapView addAnnotation:newCluterAnnotation];
                 [myMapView setDelegate:self];                
-                
+                NSLog(@"Finished Clustering!!----------------------------------------------------------------------------------------");
             }
         }
     }
+    
+    NSLog(@"END OF regionDidChangeAnimated");
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
