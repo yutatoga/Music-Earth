@@ -13,8 +13,7 @@
 
 @synthesize coordinate;
 @synthesize rawCoodinate;
-@synthesize rawCoodinateLatitudeArray;
-@synthesize rawCoodinateLongitudeArray;
+@synthesize rawCoodinateArray;
 @synthesize annotationTitle;
 @synthesize annotationSubtitle;
 @synthesize url;

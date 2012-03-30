@@ -165,7 +165,14 @@
 
         NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
         NSLog(@"hoge%i", [myAnnotation.mediaTitleArray count]);
-        [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude)];
+        
+        //change below to array version
+        //[myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude)];
+        CLLocation *myAnnotationLocation = [[CLLocation alloc] initWithLatitude:instantLatitude longitude:instantLongitude];
+        NSArray *myAnnotationLocationArray = [NSArray arrayWithObject:myAnnotationLocation];
+        [myAnnotation setRawCoodinateArray:myAnnotationLocationArray];
+        
+        
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
     }
@@ -408,7 +415,13 @@
         [myAnnotation setMediaTitleArray:[NSArray arrayWithObjects:[NSString stringWithString:[curItem valueForProperty:MPMediaItemPropertyTitle]],nil]];
         
         [myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
-        [myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(myAnnotation.coordinate.latitude, myAnnotation.coordinate.longitude)];
+        
+        //change below to array version
+        //[myAnnotation setRawCoodinate:CLLocationCoordinate2DMake(myAnnotation.coordinate.latitude, myAnnotation.coordinate.longitude)];        
+        CLLocation *myAnnotationLocation = [[CLLocation alloc] initWithLatitude:myAnnotation.coordinate.latitude longitude:myAnnotation.coordinate.longitude];
+        NSArray *myAnnotationLocationArray = [NSArray arrayWithObject:myAnnotationLocation];
+        [myAnnotation setRawCoodinateArray:myAnnotationLocationArray];
+        
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
     }
@@ -645,6 +658,7 @@ calloutAccessoryControlTapped:(UIControl*)control
     
     
     //problem: here  STILL NOT ADD RAW PINS
+    //comment out happen infinite loop???????????????
     [mapView removeAnnotations:visiblePinsArray];
     
     
@@ -652,49 +666,56 @@ calloutAccessoryControlTapped:(UIControl*)control
     
     //[3] set pins on the raw coodinate
     for (int i = 0; i<visiblePinsArray.count; i++) {
-        
-        NSLog(@"visiblePin-- No.%u mediatytleArray COUNT:%i DESC:%@ LAT:%f LON:%f", i, [[[visiblePinsArray objectAtIndex:i] mediaTitleArray] count] ,[[[visiblePinsArray objectAtIndex:i] mediaTitleArray] description], [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
-        SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
-        [rawAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
-        
-        
-        
-        
-        //nil happens bug   escape bug, if you why plesase delete "if" below
-        if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {           
+        for (int j =0; j<[[[visiblePinsArray objectAtIndex:i] rawCoodinateArray] count]; j++) {
+            
+            
+            
+            
+            NSLog(@"visiblePin-- No.%u mediatytleArray COUNT:%i DESC:%@ LAT:%f LON:%f", i, [[[visiblePinsArray objectAtIndex:i] mediaTitleArray] count] ,[[[visiblePinsArray objectAtIndex:i] mediaTitleArray] description], [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
+            
+            //read visiblePins's rawCoodinateArray----
+            
+            //change below to array version
+            //SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
+            //[rawAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
+            
+            SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[[[visiblePinsArray objectAtIndex:i] rawCoodinateArray] objectAtIndex:j] coordinate].latitude, [[[[visiblePinsArray objectAtIndex:i] rawCoodinateArray] objectAtIndex:j] coordinate].longitude) title:@"music" subtitle:nil];
+            CLLocation *myRawAnnotationLocation = [[CLLocation alloc] initWithLatitude:rawAnnotation.coordinate.latitude longitude:rawAnnotation.coordinate.longitude];
+            NSArray *myRawAnnotationLocationArray = [NSArray arrayWithObject:myRawAnnotationLocation];            
+            [rawAnnotation setRawCoodinateArray:myRawAnnotationLocationArray];
+            
+            
+            
+            //nil happens bug   escape bug, if you why plesase delete "if" below
+            if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {           
                 rawAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[NSString stringWithString:@"title by nozomi2"], nil];
                 [myMapView addAnnotation:rawAnnotation];
                 [myMapView setDelegate:self];
                 //check
                 NSLog(@"visiblePin error desc: %@" ,[[rawAnnotation mediaTitleArray] description]);
-        }else {
-            
-            NSArray *titleArray= [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
-            NSLog(@"visiblePins No.%i: count:%i desc:%@", i,[titleArray count], [titleArray description]);//if raw pin(not clustered pin), count is 1
-            
-            //hope ver
-            //NSArray *nozomiCheck = [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
-            //NSLog(@"nozomiCheck2%@", [nozomiCheck description]);
-            
-
-            //add raw pin (visiblePinsNum*clusteredNum)
-            for (int j=0; j<[titleArray count]; j++) {
-                //[mediaTitleForCluter addObjectsFromArray:titleArray];            
-                rawAnnotation.mediaTitleArray =[NSArray arrayWithObject:[titleArray objectAtIndex:j]];//here is strange????????????????????????? arrayWithArray?????????????????
-                //ADDED wrong latitude and longitude????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-                NSLog(@"ADD RAW PIN: titleArray's desc:%@ LAT:%f LON:%f", [rawAnnotation.mediaTitleArray description], [rawAnnotation coordinate].latitude, [rawAnnotation coordinate].longitude);
-                [myMapView addAnnotation:rawAnnotation];
-                [myMapView setDelegate:self];
+            }else {
                 
-                //check
-                NSLog(@"titleCheck:%@" ,[[rawAnnotation mediaTitleArray] description]);
+                NSArray *titleArray= [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
+                NSLog(@"visiblePins No.%i: count:%i desc:%@", i,[titleArray count], [titleArray description]);//if raw pin(not clustered pin), count is 1
+                
+                //hope ver
+                //NSArray *nozomiCheck = [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
+                //NSLog(@"nozomiCheck2%@", [nozomiCheck description]);
+                
+                
+                //add raw pin (visiblePinsNum*clusteredNum)
+                for (int k=0; k<[titleArray count]; k++) {
+                    //[mediaTitleForCluter addObjectsFromArray:titleArray];            
+                    rawAnnotation.mediaTitleArray =[NSArray arrayWithObject:[titleArray objectAtIndex:k]];//here is strange????????????????????????? arrayWithArray?????????????????
+                    //ADDED wrong latitude and longitude????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+                    NSLog(@"ADD RAW PIN: titleArray's desc:%@ LAT:%f LON:%f", [rawAnnotation.mediaTitleArray description], [rawAnnotation coordinate].latitude, [rawAnnotation coordinate].longitude);
+                    [myMapView addAnnotation:rawAnnotation];
+                    [myMapView setDelegate:self];
+                    //check
+                    NSLog(@"titleCheck:%@" ,[[rawAnnotation mediaTitleArray] description]);
+                }
             }
-        }
-        
-        
-        
-
-        
+        } 
     }
     //[4] cluster pins
     for (int i=0; i<GRIDNUMY+1; i++) {
@@ -729,47 +750,45 @@ calloutAccessoryControlTapped:(UIControl*)control
                 
                 
                 NSMutableArray *clusterTitle = [NSMutableArray array];
+                NSMutableArray *clusterCoodinate = [NSMutableArray array];
                 for (int k=0; k<[clusteredArray count]; k++) {
-                    
-                    /*OK
-                    NSArray *clusterTitleArray = [NSArray arrayWithObject:[NSString stringWithFormat:@"nozomi %i", k]];
-                    NSArray *clusterTitleArray2 = [NSArray arrayWithObject:[NSString stringWithFormat:@"nozomi %i", k*10]];
-                    [clusterTitle addObjectsFromArray:clusterTitleArray];
-                    [clusterTitle addObjectsFromArray:clusterTitleArray2];
-                    */
-                    
-                    //NG????????????
                     NSLog(@"here add this:%@",[[[clusteredArray objectAtIndex:k] mediaTitleArray] description]);
                     NSArray *clusterTitleArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaTitleArray]];//here is mediaTitle is just one media title, arraywithObjects, but fine (maybe)
                     NSLog(@"results:%@", [clusterTitleArray description]);
-                    //NSLog(@"nozomin says 20120329 1: %@", [clusterTitleArray description]);
                     [clusterTitle addObjectsFromArray: clusterTitleArray];
-                    //NSLog(@"nozomin says 20120329 2: %@", [clusterTitle description]);                    
-                    
-                    
-                    
                     //newCluterAnnotation.mediaTitleArray= clusterTitleArray;//raw pin have only one mediatitle so objectatindex is zero.
                     
-                    
-                    //NSLog(@"1desc%@",[clusteredArray description]);
-                    //NSLog(@"2desc%@", [newCluterAnnotation description]);
-                    //NSLog(@"newClusterTitle%@", [[newCluterAnnotation mediaTitleArray] description]);
-                    
-                    
+                    //change below to array version
                     //[newCluterAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:k] rawCoodinate].latitude , [[clusteredArray objectAtIndex:k] rawCoodinate].longitude)];
+                    NSArray *clusterCoodinateArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] rawCoodinateArray]];
+                    [clusterCoodinate addObjectsFromArray:clusterCoodinateArray];
+                    
+                    
                 }
+                
+                
                 NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
                 newCluterAnnotation.mediaTitleArray = [NSArray arrayWithArray: clusterTitle];
-                //add
+                
+                //change to array version
+                newCluterAnnotation.rawCoodinateArray = [NSArray arrayWithArray:clusterCoodinate];
+                
+                
+                
+                
+                
                 //BUG here rawcoodinate is LON 0.0000 LAT:0.00000
-                NSLog(@"cluster LAT:%f LON:%f RAWLAT:%f RAWLON:%f",[newCluterAnnotation coordinate].latitude, [newCluterAnnotation coordinate].longitude, [newCluterAnnotation rawCoodinate].latitude, [newCluterAnnotation rawCoodinate].longitude);
+                NSLog(@"cluster LAT:%f LON:%f RAWCOO DESC:%@",[newCluterAnnotation coordinate].latitude, [newCluterAnnotation coordinate].longitude, [[newCluterAnnotation rawCoodinateArray] description]);
+                
+                
+                
+                
                 [myMapView addAnnotation:newCluterAnnotation];
                 [myMapView setDelegate:self];                
                 NSLog(@"Finished Clustering!!----------------------------------------------------------------------------------------");
             }
         }
     }
-    
     NSLog(@"END OF regionDidChangeAnimated");
 }
 
