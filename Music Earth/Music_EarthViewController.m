@@ -401,6 +401,7 @@
     //再生してなかったらnilでbug
     if (player.playbackState == MPMusicPlaybackStatePlaying) {
         SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"music" subtitle:nil];
+        NSLog(@"Now Playing Pin LAT:%f LON:%f", [myAnnotation coordinate].latitude, [myAnnotation coordinate].longitude);
         [myAnnotation setUrl:@"http://apple.com"]; 
         
         //[myAnnotation setMediaTitleArray:[curItem valueForProperty:MPMediaItemPropertyTitle]];//注意 change to below
@@ -656,7 +657,7 @@ calloutAccessoryControlTapped:(UIControl*)control
         SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude) title:@"music" subtitle:nil];
         [rawAnnotation setRawCoodinate:CLLocationCoordinate2DMake([[visiblePinsArray objectAtIndex:i] rawCoodinate].latitude, [[visiblePinsArray objectAtIndex:i] rawCoodinate].longitude)];
         
-
+        
         
         
         //nil happens bug   escape bug, if you why plesase delete "if" below
@@ -681,7 +682,7 @@ calloutAccessoryControlTapped:(UIControl*)control
                 //[mediaTitleForCluter addObjectsFromArray:titleArray];            
                 rawAnnotation.mediaTitleArray =[NSArray arrayWithObject:[titleArray objectAtIndex:j]];//here is strange????????????????????????? arrayWithArray?????????????????
                 //ADDED wrong latitude and longitude????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-                NSLog(@"ADD RAW PIN: titleArray's desc:%@", [rawAnnotation.mediaTitleArray description]);
+                NSLog(@"ADD RAW PIN: titleArray's desc:%@ LAT:%f LON:%f", [rawAnnotation.mediaTitleArray description], [rawAnnotation coordinate].latitude, [rawAnnotation coordinate].longitude);
                 [myMapView addAnnotation:rawAnnotation];
                 [myMapView setDelegate:self];
                 
@@ -760,6 +761,8 @@ calloutAccessoryControlTapped:(UIControl*)control
                 NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
                 newCluterAnnotation.mediaTitleArray = [NSArray arrayWithArray: clusterTitle];
                 //add
+                //BUG here rawcoodinate is LON 0.0000 LAT:0.00000
+                NSLog(@"cluster LAT:%f LON:%f RAWLAT:%f RAWLON:%f",[newCluterAnnotation coordinate].latitude, [newCluterAnnotation coordinate].longitude, [newCluterAnnotation rawCoodinate].latitude, [newCluterAnnotation rawCoodinate].longitude);
                 [myMapView addAnnotation:newCluterAnnotation];
                 [myMapView setDelegate:self];                
                 NSLog(@"Finished Clustering!!----------------------------------------------------------------------------------------");
@@ -771,7 +774,8 @@ calloutAccessoryControlTapped:(UIControl*)control
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    NSLog(@"REGION WILL CHANGE"); 
+    NSLog(@"REGION WILL CHANGE");
+    
 }
 
 #pragma mark -

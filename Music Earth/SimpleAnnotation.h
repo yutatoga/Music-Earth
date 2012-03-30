@@ -18,9 +18,8 @@
 }  
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;  
-@property (nonatomic, readwrite) CLLocationCoordinate2D rawCoodinate;
-@property (nonatomic, retain) NSMutableArray *rawCoodinateLatitudeArray;
-@property (nonatomic, retain) NSMutableArray *rawCoodinateLongitudeArray;
+@property (nonatomic, readwrite) CLLocationCoordinate2D rawCoodinate;// i will change to rawCoodinateArray
+@property (nonatomic, retain) NSArray *rawCoodinateArray;
 @property (nonatomic, retain) NSString *annotationTitle;
 @property (nonatomic, retain) NSString *annotationSubtitle;
 @property (nonatomic, retain) NSString *url;
