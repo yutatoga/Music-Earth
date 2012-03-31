@@ -12,7 +12,6 @@
 
 
 @synthesize coordinate;
-@synthesize rawCoodinate;
 @synthesize rawCoodinateArray;
 @synthesize annotationTitle;
 @synthesize annotationSubtitle;
