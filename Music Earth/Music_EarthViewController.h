@@ -62,7 +62,7 @@
     
     //coodination
     //CLLocationCoordinate2D
-    float latitudeOld, longitudeOld;
+    float latitudeDeltaOld, longitudeDeltaOld;
     CGPoint PinPos;
     //air play button
     IBOutlet UIView *viewAirplay;
