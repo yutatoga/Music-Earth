@@ -170,17 +170,36 @@
     NSLog(@"%d selected!!---------------------------------", indexPath.row);
     UITableViewCell  *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = selectedCell.textLabel.text;
-    NSLog(@"%@", cellText);
+    
+    //test
+    NSLog(@"all music in the tapped pin NUM:%i DESC:%@", [annotationMediaTitle count], [annotationMediaTitle description]);
+    NSLog(@"selected music:INDEX%i TITLE:%@", indexPath.row, cellText);
     
     //search song 
     MPMediaQuery* query = [MPMediaQuery songsQuery];
-    MPMediaPropertyPredicate* pred;
-    pred = [MPMediaPropertyPredicate predicateWithValue:cellText forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
-    [query addFilterPredicate:pred];
-    [player setQueueWithQuery:query];
-    [player play];
-    
-    
+    NSMutableArray *collections = [[NSMutableArray alloc] initWithCapacity:1];
+    //below row user tapped 
+    for (int i=indexPath.row; i<annotationMediaTitle.count; i++) {
+        MPMediaPropertyPredicate* pred;
+        pred = [MPMediaPropertyPredicate predicateWithValue:[annotationMediaTitle objectAtIndex:i] forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
+        [query addFilterPredicate:pred];
+        [collections addObjectsFromArray:query.items];
+        [query  removeFilterPredicate:pred];
+    }
+    /*
+    //above row user tappd (from the index 0)
+    for (int i=0; i<indexPath.row; i++) {
+        MPMediaPropertyPredicate* pred;
+        pred = [MPMediaPropertyPredicate predicateWithValue:[annotationMediaTitle objectAtIndex:i] forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
+        [query addFilterPredicate:pred];
+        [collections addObjectsFromArray:query.items];
+        [query  removeFilterPredicate:pred];
+    } 
+    */
+    NSLog(@"collections:%@", [collections description]);
+    MPMediaItemCollection *finalCollection = [MPMediaItemCollection collectionWithItems:collections];
+    [player setQueueWithItemCollection:finalCollection];
+    [player play];    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
