@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSArray *mediaTitleArray;
 @property (nonatomic, retain) NSString *mediaArtist;
 
-
+@property (nonatomic, retain) NSArray *musicDictArray;
 
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   
 						   title:(NSString *)annTitle subtitle:(NSString *)annSubtitle;  

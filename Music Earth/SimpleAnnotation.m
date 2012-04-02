@@ -20,7 +20,6 @@
 @synthesize mediaArtist;
 
 
-
 - (NSString *)title {  
 	return annotationTitle;  
 }  

@@ -338,13 +338,62 @@
     
     //user default
     NSNumber* sceneNSNum = [[NSNumber alloc] initWithInt:sceneNum];
+
+    //date
+    NSDate *date = [NSDate date];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    //time zone
+    [formatter setDateFormat:@"Z"];
+    NSLog(@"Dict- time zone:%@----------------------------------------------------------", [formatter stringFromDate:date]);
+    NSString *timeZone = [NSString stringWithString:[formatter stringFromDate:date]];
+    //year
+    [formatter setDateFormat:@"y"];
+    NSLog(@"Dict- yaer:%@", [formatter stringFromDate:date]);
+    NSString *year = [NSString stringWithString:[formatter stringFromDate:date]];
+    //month
+    [formatter setDateFormat:@"M"];
+    NSLog(@"Dict- month:%@", [formatter stringFromDate:date]);
+    NSString *month = [NSString stringWithString:[formatter stringFromDate:date]];
+    //day of the month
+    [formatter setDateFormat:@"d"];
+    NSLog(@"Dict- day of the month:%@", [formatter stringFromDate:date]);
+    NSString *dayOfTheMonth = [NSString stringWithString:[formatter stringFromDate:date]];
+    //day of the week
+    //[formatter setDateFormat:@"E"];
+    //NSLog(@"day of the week:%@", [formatter stringFromDate:date]);
+    //NSString *dayOfTheWeek = [NSString stringWithString:[formatter stringFromDate:date]];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
+    NSLog(@"Dict- the number of the day of the week:%i", [comps weekday]);
+    NSString *dayOfTheWeek = [NSString stringWithFormat:@"%u", [comps weekday]];
+    //hour
+    [formatter setDateFormat:@"H"];
+    NSLog(@"Dict- hour:%@", [formatter stringFromDate:date]);
+    NSString *hour = [NSString stringWithString:[formatter stringFromDate:date]];
+    //min
+    [formatter setDateFormat:@"m"];
+    NSLog(@"Dict- minute:%@", [formatter stringFromDate:date]);
+    NSString *minute = [NSString stringWithString:[formatter stringFromDate:date]];
+    //sec
+    [formatter setDateFormat:@"s"];
+    NSLog(@"Dict- second:%@", [formatter stringFromDate:date]);
+    NSString *second = [NSString stringWithString:[formatter stringFromDate:date]];
+    
+    
     NSMutableDictionary* pin = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
                                 [curItem valueForProperty:MPMediaItemPropertyTitle], @"Title", 
                                 [curItem valueForProperty:MPMediaItemPropertyArtist], @"Artist",
                                 [curItem valueForProperty:MPMediaItemPropertyAlbumTitle], @"Album",
                                 labelLatitude.text, @"Latitude",
                                 labelLongitude.text, @"Longitude",
-                                labelDate.text, @"Time",
+                                timeZone,@"Time zone",
+                                year, @"Year",
+                                month, @"Month",
+                                dayOfTheMonth, @"DayOfTheMonth",
+                                dayOfTheWeek, @"DayOfTheWeek",
+                                hour, @"Hour",
+                                minute, @"Minute",
+                                second, @"Second",
                                 labelVolumeNum.text, @"Volume",
                                 sceneNSNum, @"Scene",
                                 nil];
@@ -477,16 +526,50 @@
 #pragma mark time
 //time------------------------------------------------------------------
 -(void) updateClock:(NSTimer*) theTimer{
-    NSDate* date = [NSDate date];
-    NSDateFormatter* form = [[NSDateFormatter alloc] init];
+    NSDate *date = [NSDate date];
+    NSLog(@"Date0:%@", [date description]);
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     //date
-    [form setDateStyle:NSDateFormatterFullStyle];
-    [form setTimeStyle:NSDateFormatterNoStyle];
-    labelDate.text = [form stringFromDate: date];
+    [formatter setDateStyle:NSDateFormatterFullStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    labelDate.text = [formatter stringFromDate: date];
+    NSLog(@"Date1:%@", labelDate.text);
     //time
-    [form setDateStyle:NSDateFormatterNoStyle];
-    [form setTimeStyle:NSDateFormatterMediumStyle];
-    labelTime.text = [form stringFromDate: date];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    labelTime.text = [formatter stringFromDate: date];
+    NSLog(@"Date2:%@", labelDate.text);
+    
+    
+    //time zone
+    [formatter setDateFormat:@"Z"];
+    NSLog(@"time zone:%@----------------------------------------------------------", [formatter stringFromDate:date]);
+    //year
+    [formatter setDateFormat:@"y"];
+    NSLog(@"yaer:%@", [formatter stringFromDate:date]);
+    //month
+    [formatter setDateFormat:@"M"];
+    NSLog(@"month:%@", [formatter stringFromDate:date]);
+    //day of the month
+    [formatter setDateFormat:@"d"];
+    NSLog(@"day of the month:%@", [formatter stringFromDate:date]);
+    //day of the week
+    [formatter setDateFormat:@"E"];
+    NSLog(@"day of the week:%@", [formatter stringFromDate:date]);
+    //hour
+    [formatter setDateFormat:@"H"];
+    NSLog(@"hour:%@", [formatter stringFromDate:date]);
+    //min
+    [formatter setDateFormat:@"m"];
+    NSLog(@"min:%@", [formatter stringFromDate:date]);
+    //sec
+    [formatter setDateFormat:@"s"];
+    NSLog(@"sec:%@", [formatter stringFromDate:date]);
+    
+    //user calendar
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
+    NSLog(@"the number of the day of the week:%i", [comps weekday]);
     
     //ipod progress bar
     if (player.playbackState == MPMusicPlaybackStatePlaying) {
@@ -649,6 +732,7 @@ calloutAccessoryControlTapped:(UIControl*)control
                     CLLocation *myRawAnnotationLocation = [[CLLocation alloc] initWithLatitude:rawAnnotation.coordinate.latitude longitude:rawAnnotation.coordinate.longitude];
                     NSArray *myRawAnnotationLocationArray = [NSArray arrayWithObject:myRawAnnotationLocation];            
                     [rawAnnotation setRawCoodinateArray:myRawAnnotationLocationArray];
+                    
                     
                     //nil happens bug   escape bug, if you why plesase delete "if" below
                     if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {           
