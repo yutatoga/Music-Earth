@@ -13,19 +13,12 @@
  	CLLocationCoordinate2D coordinate;  
  	NSString *annotationTitle;  
  	NSString *annotationSubtitle;
-    NSString *url;
-    NSArray *mediaTitleArray;
 }  
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;  
-@property (nonatomic, retain) NSArray *rawCoodinateArray;
 @property (nonatomic, retain) NSString *annotationTitle;
 @property (nonatomic, retain) NSString *annotationSubtitle;
-@property (nonatomic, retain) NSString *url;
-@property (nonatomic, retain) NSArray *mediaTitleArray;
-@property (nonatomic, retain) NSString *mediaArtist;
-
-@property (nonatomic, retain) NSArray *musicDictArray;
+@property (nonatomic, retain) NSArray *mediaDictArray;
 
 - (id)initWithLocationCoordinate:(CLLocationCoordinate2D) coord   
 						   title:(NSString *)annTitle subtitle:(NSString *)annSubtitle;  

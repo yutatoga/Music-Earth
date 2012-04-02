@@ -16,9 +16,7 @@
 
 @synthesize annotationLatitude;
 @synthesize annotationLongitude;
-@synthesize annotationMediaTitle;
-@synthesize annotationMediaArtist;
-@synthesize annotationNum;
+@synthesize annotationMediaTitleArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -76,14 +74,14 @@
     //1. get correct times that current coodinate is equal to user defaults
     // this time I use one to one pin so use 1 but i will chante grouping pin
     
-    return [annotationMediaTitle count];
+    return [annotationMediaTitleArray count];
     //old ver
     //return  [songItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MPMediaItem *item = [songItems objectAtIndex:indexPath.row];
+    //MPMediaItem *item = [songItems objectAtIndex:indexPath.row];
         
     
     static NSString *CellIdentifier = @"Cell";
@@ -106,7 +104,7 @@
     
     //cell.textLabel.text = [NSString stringWithFormat:@"Song：LAT%@LON%@", annotationLatitude, annotationLongitude];
     //cell.textLabel.text = [NSString stringWithFormat:@"%@ by %@", annotationMediaTitle, annotationMediaArtist];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [annotationMediaTitle objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [annotationMediaTitleArray objectAtIndex:indexPath.row]];
     
     //oldver
     //cell.textLabel.text = [item valueForProperty:MPMediaItemPropertyTitle];
@@ -172,16 +170,16 @@
     NSString *cellText = selectedCell.textLabel.text;
     
     //test
-    NSLog(@"all music in the tapped pin NUM:%i DESC:%@", [annotationMediaTitle count], [annotationMediaTitle description]);
+    NSLog(@"all music in the tapped pin NUM:%i DESC:%@", [annotationMediaTitleArray count], [annotationMediaTitleArray description]);
     NSLog(@"selected music:INDEX%i TITLE:%@", indexPath.row, cellText);
     
     //search song 
     MPMediaQuery* query = [MPMediaQuery songsQuery];
     NSMutableArray *collections = [[NSMutableArray alloc] initWithCapacity:1];
     //below row user tapped 
-    for (int i=indexPath.row; i<annotationMediaTitle.count; i++) {
+    for (int i=indexPath.row; i<annotationMediaTitleArray.count; i++) {
         MPMediaPropertyPredicate* pred;
-        pred = [MPMediaPropertyPredicate predicateWithValue:[annotationMediaTitle objectAtIndex:i] forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
+        pred = [MPMediaPropertyPredicate predicateWithValue:[annotationMediaTitleArray objectAtIndex:i] forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
         [query addFilterPredicate:pred];
         [collections addObjectsFromArray:query.items];
         [query  removeFilterPredicate:pred];

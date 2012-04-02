@@ -19,7 +19,7 @@
     return self;
 }
 -(void)revealDetail: (id)sender{
-    NSURL *url = [[NSURL alloc] initWithString:[(SimpleAnnotation*) self.annotation url]];
-    [[UIApplication sharedApplication] openURL:url];
+    //NSURL *url = [[NSURL alloc] initWithString:[(SimpleAnnotation*) self.annotation url]];
+    //[[UIApplication sharedApplication] openURL:url];
 }
 @end

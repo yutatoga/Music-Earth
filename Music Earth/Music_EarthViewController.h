@@ -81,10 +81,7 @@
 -(IBAction) playOrPause;
 -(IBAction) skipToNext;
 -(IBAction) skipToPrevious;
--(IBAction) flipTOMoreSide;
--(IBAction) flipToMainSide;
 -(IBAction) showMediaPicker;
--(IBAction) volumeChange;
 -(IBAction) playerPosChange;
 -(IBAction) likeWhite;
 -(IBAction) likeBlue;
@@ -96,7 +93,5 @@
 -(IBAction) repeatOne;
 -(IBAction) shuffleWhite;
 -(IBAction) shuffleBlue;
--(IBAction) volvol;
-//test
-    @property (nonatomic, retain) NSDictionary* logDict;
+
 @end

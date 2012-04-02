@@ -151,25 +151,11 @@
     for (int i=0; i<arrayOld.count; i++) {
         [array addObject:[arrayOld objectAtIndex:i]];
         //draw pin
-        float instantLatitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Latitude"]) floatValue]+arc4random()%100*0.00001-0.0005;
-        float instantLongitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Longitude"]) floatValue]+arc4random()%100*0.00001-0.0005;
+        double instantLatitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Latitude"]) floatValue];
+        double instantLongitude = [([[arrayOld objectAtIndex:i] objectForKey:@"Longitude"]) floatValue];
         SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLatitude, instantLongitude) title:@"1 music" subtitle:nil];
-        [myAnnotation setUrl:@"http://apple.com"];
         
-        //if nil, bug happen, so i use "if" (if you fix the bug, you change below)
-        if ([[arrayOld objectAtIndex:i] objectForKey:@"Title"]==nil) {
-            myAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[NSString stringWithString: @"error title 1"], nil];
-        }else {
-            myAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[[arrayOld objectAtIndex:i] objectForKey:@"Title"], nil];
-        }
-
-        NSLog(@"HOGE%@",[[myAnnotation mediaTitleArray] description]);
-        NSLog(@"hoge%i", [myAnnotation.mediaTitleArray count]);
-        
-        CLLocation *myAnnotationLocation = [[CLLocation alloc] initWithLatitude:instantLatitude longitude:instantLongitude];
-        NSArray *myAnnotationLocationArray = [NSArray arrayWithObject:myAnnotationLocation];
-        [myAnnotation setRawCoodinateArray:myAnnotationLocationArray];
-        
+        myAnnotation.mediaDictArray = [NSArray arrayWithObject:[arrayOld objectAtIndex:i]];
         
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
@@ -384,8 +370,8 @@
                                 [curItem valueForProperty:MPMediaItemPropertyTitle], @"Title", 
                                 [curItem valueForProperty:MPMediaItemPropertyArtist], @"Artist",
                                 [curItem valueForProperty:MPMediaItemPropertyAlbumTitle], @"Album",
-                                labelLatitude.text, @"Latitude",
-                                labelLongitude.text, @"Longitude",
+                                [NSString stringWithFormat:@"%f", [labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005], @"Latitude",
+                                [NSString stringWithFormat:@"%f", [labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005], @"Longitude",
                                 timeZone,@"Time zone",
                                 year, @"Year",
                                 month, @"Month",
@@ -397,7 +383,6 @@
                                 labelVolumeNum.text, @"Volume",
                                 sceneNSNum, @"Scene",
                                 nil];
-    
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSArray *arrayOld=[defaults arrayForKey:@"userData"];
     NSLog(@"arrayOldNum: %d", arrayOld.count);
@@ -454,18 +439,11 @@
     
     //再生してなかったらnilでbug
     if (player.playbackState == MPMusicPlaybackStatePlaying) {
-        SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([labelLatitude.text floatValue]+arc4random()%100*0.00001-0.0005,[labelLongitude.text floatValue]+arc4random()%100*0.00001-0.0005) title:@"1 music" subtitle:nil];
+        SimpleAnnotation *myAnnotation=[[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[pin objectForKey:@"Latitude"] doubleValue],[[pin objectForKey:@"Longitude"] doubleValue]) title:@"1 music" subtitle:nil];
         NSLog(@"Now Playing Pin LAT:%f LON:%f", [myAnnotation coordinate].latitude, [myAnnotation coordinate].longitude);
-        [myAnnotation setUrl:@"http://apple.com"]; 
         
-        //[myAnnotation setMediaTitleArray:[curItem valueForProperty:MPMediaItemPropertyTitle]];//注意 change to below
-        [myAnnotation setMediaTitleArray:[NSArray arrayWithObjects:[NSString stringWithString:[curItem valueForProperty:MPMediaItemPropertyTitle]],nil]];        
-        [myAnnotation setMediaArtist:[curItem valueForProperty:MPMediaItemPropertyArtist]];
-        
-        CLLocation *myAnnotationLocation = [[CLLocation alloc] initWithLatitude:myAnnotation.coordinate.latitude longitude:myAnnotation.coordinate.longitude];
-        NSArray *myAnnotationLocationArray = [NSArray arrayWithObject:myAnnotationLocation];
-        [myAnnotation setRawCoodinateArray:myAnnotationLocationArray];
-        
+        [myAnnotation setMediaDictArray:[NSArray arrayWithObject:pin]];
+        NSLog(@"musicDistArray:%@", [[myAnnotation mediaDictArray] description]);
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
     }     
@@ -533,43 +511,10 @@
     [formatter setDateStyle:NSDateFormatterFullStyle];
     [formatter setTimeStyle:NSDateFormatterNoStyle];
     labelDate.text = [formatter stringFromDate: date];
-    NSLog(@"Date1:%@", labelDate.text);
     //time
     [formatter setDateStyle:NSDateFormatterNoStyle];
     [formatter setTimeStyle:NSDateFormatterMediumStyle];
     labelTime.text = [formatter stringFromDate: date];
-    NSLog(@"Date2:%@", labelDate.text);
-    
-    
-    //time zone
-    [formatter setDateFormat:@"Z"];
-    NSLog(@"time zone:%@----------------------------------------------------------", [formatter stringFromDate:date]);
-    //year
-    [formatter setDateFormat:@"y"];
-    NSLog(@"yaer:%@", [formatter stringFromDate:date]);
-    //month
-    [formatter setDateFormat:@"M"];
-    NSLog(@"month:%@", [formatter stringFromDate:date]);
-    //day of the month
-    [formatter setDateFormat:@"d"];
-    NSLog(@"day of the month:%@", [formatter stringFromDate:date]);
-    //day of the week
-    [formatter setDateFormat:@"E"];
-    NSLog(@"day of the week:%@", [formatter stringFromDate:date]);
-    //hour
-    [formatter setDateFormat:@"H"];
-    NSLog(@"hour:%@", [formatter stringFromDate:date]);
-    //min
-    [formatter setDateFormat:@"m"];
-    NSLog(@"min:%@", [formatter stringFromDate:date]);
-    //sec
-    [formatter setDateFormat:@"s"];
-    NSLog(@"sec:%@", [formatter stringFromDate:date]);
-    
-    //user calendar
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
-    NSLog(@"the number of the day of the week:%i", [comps weekday]);
     
     //ipod progress bar
     if (player.playbackState == MPMusicPlaybackStatePlaying) {
@@ -679,19 +624,16 @@ calloutAccessoryControlTapped:(UIControl*)control
     NSLog(@"Details comes");
     // the detail view does not want a toolbar so hide it
     [self.navigationController setToolbarHidden:YES animated:NO];
-    AlbumViewController *albumViewControllerK= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
-    albumViewControllerK.annotationLatitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
-    albumViewControllerK.annotationLongitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
-    albumViewControllerK.annotationMediaTitle = [NSArray arrayWithArray:[(SimpleAnnotation*)view.annotation mediaTitleArray]];// array!
-    albumViewControllerK.annotationMediaArtist = [(SimpleAnnotation*)view.annotation mediaArtist];
+    AlbumViewController *myAlbumViewController= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+    myAlbumViewController.annotationLatitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
+    myAlbumViewController.annotationLongitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
     
-    NSLog(@"tappedMediaTitle:%@", [[(SimpleAnnotation*)view.annotation mediaTitleArray] description]);
-    NSArray *titleArray = [NSArray arrayWithArray:[(SimpleAnnotation*)view.annotation mediaTitleArray]];
-    NSLog(@"tappedTitleArrayCount:%i", [titleArray count]);
-    NSLog(@"tappedTitleDesc:%@", [titleArray description]);
-    albumViewControllerK.annotationNum = [titleArray count];
-    NSLog(@"mediaTitleArrayCount:%i", [[(SimpleAnnotation*)view.annotation mediaTitleArray] count]);
-    [[self navigationController] pushViewController:albumViewControllerK animated:YES];    
+    NSMutableArray *myMediaTitleArray = [NSMutableArray array];
+    for (int i=0; i<[[(SimpleAnnotation*)view.annotation mediaDictArray] count]; i++) {
+        [myMediaTitleArray addObject:[[[(SimpleAnnotation*)view.annotation mediaDictArray] objectAtIndex:i] objectForKey:@"Title"]];
+    }
+    myAlbumViewController.annotationMediaTitleArray = [NSArray arrayWithArray: myMediaTitleArray];// array!    
+    [[self navigationController] pushViewController:myAlbumViewController animated:YES];    
 }
 
 #pragma mark -
@@ -717,41 +659,23 @@ calloutAccessoryControlTapped:(UIControl*)control
         NSLog(@"clusterStepHeight%f", clusterStepHeight);
         
         //[A] in case map expands (zoom in) 
-        if (mapView.region.span.latitudeDelta < latitudeDeltaOld  || mapView.region.span.longitudeDelta < longitudeDeltaOld) {
+        if (mapView.region.span.latitudeDelta < latitudeDeltaOld || mapView.region.span.longitudeDelta < longitudeDeltaOld) {
 
             //[2] delete all pins in visible mapview
             [mapView removeAnnotations:visiblePinsArray];
             
             //[3] set pins on the raw coodinate
             for (int i = 0; i<pinCounter; i++) {
-                for (int j =0; j<[[[visiblePinsArray objectAtIndex:i] rawCoodinateArray] count]; j++) {
-                    NSLog(@"visiblePin-- No.%u mediatytleArray COUNT:%i DESC:%@ LAT:%f LON:%f", i, [[[visiblePinsArray objectAtIndex:i] mediaTitleArray] count] ,[[[visiblePinsArray objectAtIndex:i] mediaTitleArray] description], [[visiblePinsArray objectAtIndex:i] coordinate].latitude, [[visiblePinsArray objectAtIndex:i] coordinate].longitude);
+                for (int j =0; j<[[[visiblePinsArray objectAtIndex:i] mediaDictArray] count]; j++) {
                     
                     //read visiblePins's rawCoodinateArray----
-                    SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[[[visiblePinsArray objectAtIndex:i] rawCoodinateArray] objectAtIndex:j] coordinate].latitude, [[[[visiblePinsArray objectAtIndex:i] rawCoodinateArray] objectAtIndex:j] coordinate].longitude) title:@"1 music" subtitle:nil];
-                    CLLocation *myRawAnnotationLocation = [[CLLocation alloc] initWithLatitude:rawAnnotation.coordinate.latitude longitude:rawAnnotation.coordinate.longitude];
-                    NSArray *myRawAnnotationLocationArray = [NSArray arrayWithObject:myRawAnnotationLocation];            
-                    [rawAnnotation setRawCoodinateArray:myRawAnnotationLocationArray];
                     
+                    SimpleAnnotation *rawAnnotation = [[SimpleAnnotation alloc] initWithLocationCoordinate:CLLocationCoordinate2DMake([[[[[visiblePinsArray objectAtIndex:i] mediaDictArray] objectAtIndex:j] objectForKey:@"Latitude"] doubleValue], [[[[[visiblePinsArray objectAtIndex:i] mediaDictArray] objectAtIndex:j] objectForKey:@"Longitude"] doubleValue]) title:@"1 music" subtitle:nil];
                     
-                    //nil happens bug   escape bug, if you why plesase delete "if" below
-                    if ([[visiblePinsArray objectAtIndex:i] mediaTitleArray]==nil) {           
-                        rawAnnotation.mediaTitleArray = [NSArray arrayWithObjects:[NSString stringWithString:@"error title 2"], nil];
-                        [myMapView addAnnotation:rawAnnotation];
-                        [myMapView setDelegate:self];
-                        //check
-                        NSLog(@"visiblePin error desc: %@" ,[[rawAnnotation mediaTitleArray] description]);
-                    }else {
-                        
-                        NSArray *titleArray= [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaTitleArray]];
-                        NSLog(@"visiblePins No.%i: count:%i desc:%@", i,[titleArray count], [titleArray description]);//if raw pin(not clustered pin), count is 1
-                        rawAnnotation.mediaTitleArray = [NSArray arrayWithObject:[titleArray objectAtIndex:j]];
-                        NSLog(@"ADD RAW PIN: titleArray's desc:%@ LAT:%f LON:%f", [rawAnnotation.mediaTitleArray description], [rawAnnotation coordinate].latitude, [rawAnnotation coordinate].longitude);
-                        [myMapView addAnnotation:rawAnnotation];
-                        [myMapView setDelegate:self];
-                        //check
-                        NSLog(@"titleCheck:%@" ,[[rawAnnotation mediaTitleArray] description]);
-                    }
+                    NSArray *myMediaDictArray= [NSArray arrayWithArray:[[visiblePinsArray objectAtIndex:i] mediaDictArray]];
+                    rawAnnotation.mediaDictArray = [NSArray arrayWithObject:[myMediaDictArray objectAtIndex:j]];
+                    [myMapView addAnnotation:rawAnnotation];
+                    [myMapView setDelegate:self];
                 } 
             }
             
@@ -771,26 +695,16 @@ calloutAccessoryControlTapped:(UIControl*)control
                     if ([clusteredArray count]>0) {
                         NSLog(@"CLUSTERING %u pins----------------------------------------------------------------------------------------------", [clusteredArray count]);
                         NSMutableArray *clusterTitle = [NSMutableArray array];
-                        NSMutableArray *clusterCoodinate = [NSMutableArray array];
                         for (int k=0; k<[clusteredArray count]; k++) {
-                            NSLog(@"here add this:%@",[[[clusteredArray objectAtIndex:k] mediaTitleArray] description]);
-                            NSArray *clusterTitleArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaTitleArray]];
-                            NSLog(@"results:%@", [clusterTitleArray description]);
-                            [clusterTitle addObjectsFromArray: clusterTitleArray];                        
-                            NSArray *clusterCoodinateArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] rawCoodinateArray]];
-                            [clusterCoodinate addObjectsFromArray:clusterCoodinateArray];
+                            NSArray *clusterMediaDictArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaDictArray]];
+                            [clusterTitle addObjectsFromArray: clusterMediaDictArray];                
                         }
                         //draw pin on the central of the grid   
                         SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
                                                                  initWithLocationCoordinate:CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude)
-                                                                 title:[NSString stringWithFormat:@"%i music", clusterCoodinate.count]
+                                                                 title:[NSString stringWithFormat:@"%i music", clusterTitle.count]
                                                                  subtitle:nil];
-                        [newCluterAnnotation setUrl:@"http://apple.com"];
-                        NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
-                        newCluterAnnotation.mediaTitleArray = [NSArray arrayWithArray: clusterTitle];
-                        newCluterAnnotation.rawCoodinateArray = [NSArray arrayWithArray:clusterCoodinate];
-                        NSLog(@"cluster LAT:%f LON:%f RAWCOO DESC:%@",[newCluterAnnotation coordinate].latitude, [newCluterAnnotation coordinate].longitude, [[newCluterAnnotation rawCoodinateArray] description]);
-                        
+                        newCluterAnnotation.mediaDictArray = [NSArray arrayWithArray: clusterTitle];
                         [myMapView addAnnotation:newCluterAnnotation];
                         [myMapView setDelegate:self];                
                         NSLog(@"Finished Clustering-(zoom in version)---------------------------------------------------------------------------------------");
@@ -815,25 +729,18 @@ calloutAccessoryControlTapped:(UIControl*)control
                     if ([clusteredArray count]>0) {
                         NSLog(@"CLUSTERING %u pins----------------------------------------------------------------------------------------------", [clusteredArray count]);
                         NSMutableArray *clusterTitle = [NSMutableArray array];
-                        NSMutableArray *clusterCoodinate = [NSMutableArray array];
                         for (int k=0; k<[clusteredArray count]; k++) {
-                            NSLog(@"here add this:%@",[[[clusteredArray objectAtIndex:k] mediaTitleArray] description]);
-                            NSArray *clusterTitleArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaTitleArray]];
-                            NSLog(@"results:%@", [clusterTitleArray description]);
-                            [clusterTitle addObjectsFromArray: clusterTitleArray];                        
-                            NSArray *clusterCoodinateArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] rawCoodinateArray]];
-                            [clusterCoodinate addObjectsFromArray:clusterCoodinateArray];
+                            NSArray *clusterMediaDictArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaDictArray]];
+                            NSLog(@"results:%@", [clusterMediaDictArray description]);
+                            [clusterTitle addObjectsFromArray: clusterMediaDictArray];                        
                         }
                         //draw pin on the central of the grid                
                         SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
                                                                  initWithLocationCoordinate:CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude)
-                                                                 title:[NSString stringWithFormat:@"%i music", clusterCoodinate.count]
+                                                                 title:[NSString stringWithFormat:@"%i music", clusterTitle.count]
                                                                  subtitle:nil];
-                        [newCluterAnnotation setUrl:@"http://apple.com"];
                         NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
-                        newCluterAnnotation.mediaTitleArray = [NSArray arrayWithArray: clusterTitle];
-                        newCluterAnnotation.rawCoodinateArray = [NSArray arrayWithArray:clusterCoodinate];
-                        NSLog(@"cluster LAT:%f LON:%f RAWCOO DESC:%@",[newCluterAnnotation coordinate].latitude, [newCluterAnnotation coordinate].longitude, [[newCluterAnnotation rawCoodinateArray] description]);                        
+                        newCluterAnnotation.mediaDictArray = [NSArray arrayWithArray: clusterTitle];
                         [myMapView addAnnotation:newCluterAnnotation];
                         [myMapView setDelegate:self];                
                         NSLog(@"Finished Clustering-zoom out version---------------------------------------------------------------------------------------");

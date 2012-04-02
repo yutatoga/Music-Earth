@@ -12,13 +12,9 @@
 
 
 @synthesize coordinate;
-@synthesize rawCoodinateArray;
 @synthesize annotationTitle;
 @synthesize annotationSubtitle;
-@synthesize url;
-@synthesize mediaTitleArray;
-@synthesize mediaArtist;
-
+@synthesize mediaDictArray;
 
 - (NSString *)title {  
 	return annotationTitle;  
@@ -36,15 +32,13 @@
 	coordinate.longitude = coord.longitude;  
 	self.annotationTitle = annTitle;  
 	self.annotationSubtitle = annSubtitle;  
-	return self;  
+	return self;
 }  
 
 
 - (void) dealloc {  
 	[annotationTitle release];  
 	[annotationSubtitle release];  
-	[url release];
-    [mediaTitleArray release];
 	[super dealloc];  
 }  
 
