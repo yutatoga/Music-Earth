@@ -10,8 +10,11 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <AudioToolbox/AudioToolbox.h>
+
 #import "SimpleAnnotation.h"
 #import "CustomAnnotationView.h"
+
 @class AlbumViewController;
 
 @interface Music_EarthViewController : UIViewController<MPMediaPickerControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate>{

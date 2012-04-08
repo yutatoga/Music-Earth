@@ -20,6 +20,32 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+
+//audio session
+static void propertyListener(void *                  inClientData,
+                             AudioSessionPropertyID	inID,
+                             UInt32                  inDataSize,
+                             const void *            inData){
+    //デバイスに変更があった場合
+    if(inID == kAudioSessionProperty_AudioRouteChange){
+        printf("kAudioSessionProperty_AudioRouteChange\n");
+        NSDictionary *dict = (NSDictionary*)inData;
+        NSLog(@"dict = %@",dict); //変更理由
+        NSLog(@"device: %@", [dict objectForKey:@"OutputDeviceDidChange_NewRoute"]);
+    }
+    //ヴォリュームの変更
+    if(inID == kAudioSessionProperty_CurrentHardwareOutputVolume){
+        printf("kAudioSessionProperty_CurrentHardwareOutputVolume\n");
+        float *volume = (float*)inData;
+        NSLog(@"volume = %f",*volume);
+    }
+    //マイク等が利用可能・不可能になった場合
+    if(inID == kAudioSessionProperty_AudioInputAvailable){
+        printf("kAudioSessionProperty_AudioInputAvailable\n");
+        
+    }
+}
+
 #pragma mark - View lifecycle
 
 #pragma mark -
@@ -126,6 +152,11 @@
     [myLocationManager startUpdatingHeading];
     myMapView.showsUserLocation = YES;
     
+    MKCoordinateRegion  region = myMapView.region;
+    region.span.latitudeDelta = 0.01;
+    region.span.longitudeDelta = 0.01;
+    [myMapView setRegion:region animated:YES];
+    
     //time
     timerClock=[NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateClock:) userInfo:nil repeats:YES];
     
@@ -176,6 +207,7 @@
     //[airplayButton setShowsVolumeSlider:NO];
     //[viewAirPlayButton addSubview:airplayButton];
     //air play button
+    //SHOW ONLY THERE IS AIR PLAY SYSTEM!!!
     airplayButton = [[MPVolumeView alloc] init];
     airplayButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
     airplayButton.frame = CGRectMake(0, 0, 57, 33);//original size is 38x22
@@ -188,13 +220,31 @@
     [viewVolumeBack addSubview:viewVolume];
     //CGSize check = [viewVolume sizeThatFits:CGSizeMake(300, 200)];
     //NSLog(@"checkWidth:%f", check.width);
-    //NSLog(@"checkHeight:%f", check.height);//result is that height is needed 22px.(2012_03_11)
+    //NSLog(@"checkHeight:%f", check.height);//result is that height is needed 22px.(2012_03_11) 
     
     //labelAirplay.text = [NSString stringWithFormat:@"%f", player.volume];
     
-    //navigate
     
-    // this line calls the viewDidLoad method of detailController
+    //audio session
+    AudioSessionInitialize(NULL, NULL, NULL, NULL);
+    UInt32 category = kAudioSessionCategory_PlayAndRecord;
+    UInt32 size = sizeof(UInt32);
+    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, 
+                            size,
+                            &category);
+    AudioSessionSetActive(YES);
+    
+    //プロパティリスナーを登録する
+    AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, 
+                                    propertyListener, 
+                                    self);
+    AudioSessionAddPropertyListener(kAudioSessionProperty_CurrentHardwareOutputVolume, 
+                                    propertyListener, 
+                                    self);
+    AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, 
+                                    propertyListener, 
+                                    self);
+    
 }
 #pragma mark -
 #pragma mark iPod
@@ -505,7 +555,6 @@
 //time------------------------------------------------------------------
 -(void) updateClock:(NSTimer*) theTimer{
     NSDate *date = [NSDate date];
-    NSLog(@"Date0:%@", [date description]);
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     //date
     [formatter setDateStyle:NSDateFormatterFullStyle];
@@ -522,8 +571,8 @@
         labelPastTime.text = [NSString stringWithFormat:@"%01i:%02i ", (int)sliderPlayerPos.value/60, (int)sliderPlayerPos.value%60];
         labelRestTime.text = [NSString stringWithFormat:@"-%01i:%02i ", ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)/60, ((int)sliderPlayerPos.maximumValue-(int)sliderPlayerPos.value)%60];        
     }
-    
 }
+
 #pragma mark -
 #pragma mark scene
 //scene----------------------------------------------------------------------------------
@@ -627,12 +676,7 @@ calloutAccessoryControlTapped:(UIControl*)control
     AlbumViewController *myAlbumViewController= [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
     myAlbumViewController.annotationLatitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].latitude];    
     myAlbumViewController.annotationLongitude = [NSString stringWithFormat:@"%f", [(SimpleAnnotation*)view.annotation coordinate].longitude];
-    
-    NSMutableArray *myMediaTitleArray = [NSMutableArray array];
-    for (int i=0; i<[[(SimpleAnnotation*)view.annotation mediaDictArray] count]; i++) {
-        [myMediaTitleArray addObject:[[[(SimpleAnnotation*)view.annotation mediaDictArray] objectAtIndex:i] objectForKey:@"Title"]];
-    }
-    myAlbumViewController.annotationMediaTitleArray = [NSArray arrayWithArray: myMediaTitleArray];// array!    
+    myAlbumViewController.annotationMediaDictArray = [NSArray arrayWithArray: [(SimpleAnnotation*)view.annotation mediaDictArray]];  
     [[self navigationController] pushViewController:myAlbumViewController animated:YES];    
 }
 

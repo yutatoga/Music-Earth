@@ -12,15 +12,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="Music_EarthViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3" userLabel="View_main">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="1rH-eT-XSI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="-20" width="320" height="389"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
+                            <view contentMode="scaleToFill" id="8aI-Ck-wcE">
+                                <rect key="frame" x="0.0" y="-20" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" id="cLB-Ih-FUI" userLabel="View_playerState">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="78"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ns-Po-bdy" userLabel="Button_scene1_back">
@@ -219,15 +224,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" image="myCircleLine2.png" id="iiQ-Bc-yC7">
-                                <rect key="frame" x="10" y="86" width="50" height="50"/>
+                                <rect key="frame" x="4" y="124" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="193-location-arrow@2x.png" id="R9l-sM-HWT">
-                                <rect key="frame" x="23" y="99" width="24" height="24"/>
+                                <rect key="frame" x="17" y="137" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="AtT-VO-bGS" userLabel="View_debug">
-                                <rect key="frame" x="0.0" y="230" width="320" height="95"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="date" lineBreakMode="tailTruncation" minimumFontSize="10" id="2Yn-ja-ays">
@@ -360,7 +365,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.6410975302419355" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="VtK-dF-0P9" userLabel="View_musicUI">
-                                <rect key="frame" x="0.0" y="325" width="321" height="91"/>
+                                <rect key="frame" x="-0.5" y="369" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="2DD-sZ-zb5" userLabel="Button_like_white">
@@ -527,21 +532,22 @@
                         <outlet property="labelZoomRange" destination="YlS-1a-2Bj" id="NGc-kz-T9P"/>
                         <outlet property="myMapView" destination="1rH-eT-XSI" id="von-L9-DO5"/>
                         <outlet property="sliderPlayerPos" destination="m2a-JT-k6N" id="itD-a3-0Wb"/>
-                        <outlet property="viewAirplay" destination="bZy-Uu-LD7" id="5LF-aW-h7X"/>
+                        <outlet property="viewAirplay" destination="bZy-Uu-LD7" id="kdG-SX-GSu"/>
                         <outlet property="viewVolumeBack" destination="mV2-Kx-pQw" id="i64-Ic-nIN"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="167" y="-41"/>
+            <point key="canvasLocation" x="223" y="-219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QHq-pK-QJb">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlu-AN-G6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="q7W-PL-Tmm" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="jaF-IC-9iY">
-                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackTranslucent"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackTranslucent" id="jaF-IC-9iY">
+                        <rect key="frame" x="0.0" y="-74" width="0.0" height="74"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -569,75 +575,6 @@
         <image name="pause_x2.png" width="34" height="52"/>
         <image name="play_x2.png" width="57" height="50"/>
     </resources>
-    <classes>
-        <class className="MPVolumeView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPVolumeView.h"/>
-        </class>
-        <class className="Music_EarthViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/Music_EarthViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dislike"/>
-                <relationship kind="action" name="flipTOMoreSide"/>
-                <relationship kind="action" name="flipToMainSide"/>
-                <relationship kind="action" name="likeBlue"/>
-                <relationship kind="action" name="likeWhite"/>
-                <relationship kind="action" name="playOrPause"/>
-                <relationship kind="action" name="playerPosChange"/>
-                <relationship kind="action" name="repeatBlue"/>
-                <relationship kind="action" name="repeatOne"/>
-                <relationship kind="action" name="repeatWhite"/>
-                <relationship kind="action" name="scene1"/>
-                <relationship kind="action" name="scene2"/>
-                <relationship kind="action" name="showMediaPicker"/>
-                <relationship kind="action" name="shuffleBlue"/>
-                <relationship kind="action" name="shuffleWhite"/>
-                <relationship kind="action" name="skipToNext"/>
-                <relationship kind="action" name="skipToPrevious"/>
-                <relationship kind="action" name="volumeChange"/>
-                <relationship kind="action" name="volvol"/>
-                <relationship kind="outlet" name="airplayButton" candidateClass="MPVolumeView"/>
-                <relationship kind="outlet" name="buttonLikeBlue" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonLikeWhite" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonPause" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonPlay" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonRepeatBlue" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonRepeatOne" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonRepeatWhite" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonScene1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonScene1Back" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonScene2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonScene2Back" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonShuffleBlue" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonShuffleWhite" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="compassImg" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageArtWork" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="labelAirplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelAlbumTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelArtist" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelIndexPathRow" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelLatitude" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelLongitude" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelMapSize" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelPastTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelRestTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelSongTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelTappedLatitude" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelTappedLongitude" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelVolumeChangedTimes" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelVolumeNum" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelZoomRange" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="sliderPlayerPos" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="sliderVolume" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="viewAirplay" candidateClass="UIView"/>
-                <relationship kind="outlet" name="viewMapBack" candidateClass="UIView"/>
-                <relationship kind="outlet" name="viewVolume" candidateClass="MPVolumeView"/>
-                <relationship kind="outlet" name="viewVolumeBack" candidateClass="UIView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

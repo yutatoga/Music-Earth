@@ -16,7 +16,7 @@
 
 @synthesize annotationLatitude;
 @synthesize annotationLongitude;
-@synthesize annotationMediaTitleArray;
+@synthesize annotationMediaDictArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -74,7 +74,7 @@
     //1. get correct times that current coodinate is equal to user defaults
     // this time I use one to one pin so use 1 but i will chante grouping pin
     
-    return [annotationMediaTitleArray count];
+    return [annotationMediaDictArray count];
     //old ver
     //return  [songItems count];
 }
@@ -89,7 +89,7 @@
     // Configure the cell...
     if (cell == nil) {
         //cell = [[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
                                        reuseIdentifier:CellIdentifier];
                 
     }
@@ -104,7 +104,8 @@
     
     //cell.textLabel.text = [NSString stringWithFormat:@"Song：LAT%@LON%@", annotationLatitude, annotationLongitude];
     //cell.textLabel.text = [NSString stringWithFormat:@"%@ by %@", annotationMediaTitle, annotationMediaArtist];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [annotationMediaTitleArray objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[annotationMediaDictArray objectAtIndex:indexPath.row] objectForKey:@"Title"]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[annotationMediaDictArray objectAtIndex:indexPath.row] objectForKey:@"Artist"]];
     
     //oldver
     //cell.textLabel.text = [item valueForProperty:MPMediaItemPropertyTitle];
@@ -170,16 +171,16 @@
     NSString *cellText = selectedCell.textLabel.text;
     
     //test
-    NSLog(@"all music in the tapped pin NUM:%i DESC:%@", [annotationMediaTitleArray count], [annotationMediaTitleArray description]);
+    NSLog(@"all music in the tapped pin NUM:%i DESC:%@", [annotationMediaDictArray count], [annotationMediaDictArray description]);
     NSLog(@"selected music:INDEX%i TITLE:%@", indexPath.row, cellText);
     
     //search song 
     MPMediaQuery* query = [MPMediaQuery songsQuery];
     NSMutableArray *collections = [[NSMutableArray alloc] initWithCapacity:1];
     //below row user tapped 
-    for (int i=indexPath.row; i<annotationMediaTitleArray.count; i++) {
+    for (int i=indexPath.row; i<annotationMediaDictArray.count; i++) {
         MPMediaPropertyPredicate* pred;
-        pred = [MPMediaPropertyPredicate predicateWithValue:[annotationMediaTitleArray objectAtIndex:i] forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
+        pred = [MPMediaPropertyPredicate predicateWithValue:[[annotationMediaDictArray objectAtIndex:i] objectForKey:@"Title"] forProperty:MPMediaItemPropertyTitle comparisonType:MPMediaPredicateComparisonEqualTo];
         [query addFilterPredicate:pred];
         [collections addObjectsFromArray:query.items];
         [query  removeFilterPredicate:pred];

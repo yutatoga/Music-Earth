@@ -58,6 +58,7 @@
 		8DE97CE81506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE71506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png */; };
 		8DE97CEA1506C7DB00154D2F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE91506C7DB00154D2F /* Default.png */; };
 		8DE97CEC1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */; };
+		8DEB8DBC1532383C00C10978 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEB8DBB1532383C00C10978 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		8DE97CE71506C69200154D2F /* MusicEarth4iPhoneRetinaBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MusicEarth4iPhoneRetinaBlack.png; path = ../MusicEarth4iPhoneRetinaBlack.png; sourceTree = "<group>"; };
 		8DE97CE91506C7DB00154D2F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MusicEarth4iPhoneNotRetinaBlack.png; path = ../MusicEarth4iPhoneNotRetinaBlack.png; sourceTree = "<group>"; };
+		8DEB8DBB1532383C00C10978 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DEB8DBC1532383C00C10978 /* AudioToolbox.framework in Frameworks */,
 				8DE97CBE15068AB500154D2F /* MediaPlayer.framework in Frameworks */,
 				8DE97CBC15068AA100154D2F /* MapKit.framework in Frameworks */,
 				8DE97CBA15068A9800154D2F /* CoreLocation.framework in Frameworks */,
@@ -142,6 +145,7 @@
 		8DE97C89150688EB00154D2F = {
 			isa = PBXGroup;
 			children = (
+				8DEB8DBB1532383C00C10978 /* AudioToolbox.framework */,
 				8DE97CBD15068AB500154D2F /* MediaPlayer.framework */,
 				8DE97CBB15068AA100154D2F /* MapKit.framework */,
 				8DE97CB915068A9800154D2F /* CoreLocation.framework */,
@@ -262,7 +266,7 @@
 		8DE97C8B150688EB00154D2F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 8DE97C8E150688EB00154D2F /* Build configuration list for PBXProject "Music Earth" */;
 			compatibilityVersion = "Xcode 3.2";
