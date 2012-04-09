@@ -59,6 +59,8 @@
 		8DE97CEA1506C7DB00154D2F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CE91506C7DB00154D2F /* Default.png */; };
 		8DE97CEC1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */; };
 		8DEB8DBC1532383C00C10978 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEB8DBB1532383C00C10978 /* AudioToolbox.framework */; };
+		8DEB8DC815325A9100C10978 /* 10-microphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB8DC715325A9000C10978 /* 10-microphone@2x.png */; };
+		8DEB8DDB1533396B00C10978 /* 10-microphone@2x_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB8DDA1533396B00C10978 /* 10-microphone@2x_highlight.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +124,8 @@
 		8DE97CE91506C7DB00154D2F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MusicEarth4iPhoneNotRetinaBlack.png; path = ../MusicEarth4iPhoneNotRetinaBlack.png; sourceTree = "<group>"; };
 		8DEB8DBB1532383C00C10978 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8DEB8DC715325A9000C10978 /* 10-microphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-microphone@2x.png"; sourceTree = "<group>"; };
+		8DEB8DDA1533396B00C10978 /* 10-microphone@2x_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-microphone@2x_highlight.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +200,8 @@
 		8DE97C9F150688EB00154D2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8DEB8DDA1533396B00C10978 /* 10-microphone@2x_highlight.png */,
+				8DEB8DC715325A9000C10978 /* 10-microphone@2x.png */,
 				8D5820AE150FDD510065DCDA /* myRepeat_white.png */,
 				8DE97CEB1506C81100154D2F /* MusicEarth4iPhoneNotRetinaBlack.png */,
 				8DE97CE91506C7DB00154D2F /* Default.png */,
@@ -329,6 +335,8 @@
 				8D21195A150D6D3D0005DAC1 /* pinRed.png in Resources */,
 				8D5820AF150FDD510065DCDA /* myRepeat_white.png in Resources */,
 				8D5820B4150FE8200065DCDA /* AlbumViewController.xib in Resources */,
+				8DEB8DC815325A9100C10978 /* 10-microphone@2x.png in Resources */,
+				8DEB8DDB1533396B00C10978 /* 10-microphone@2x_highlight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

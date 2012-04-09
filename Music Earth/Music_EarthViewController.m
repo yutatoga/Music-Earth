@@ -26,12 +26,21 @@ static void propertyListener(void *                  inClientData,
                              AudioSessionPropertyID	inID,
                              UInt32                  inDataSize,
                              const void *            inData){
+    Music_EarthViewController *controller = inClientData;
     //デバイスに変更があった場合
     if(inID == kAudioSessionProperty_AudioRouteChange){
         printf("kAudioSessionProperty_AudioRouteChange\n");
         NSDictionary *dict = (NSDictionary*)inData;
         NSLog(@"dict = %@",dict); //変更理由
         NSLog(@"device: %@", [dict objectForKey:@"OutputDeviceDidChange_NewRoute"]);
+        if ([[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"HeadsetInOut"] ||
+            [[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"Headphone"] ||
+            [[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"Headset"] ||
+            [[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"HeadphonesAndMicrophone"]) {
+            [controller showButtonMic];
+        }else {
+            [controller hideButtonMic];
+        }
     }
     //ヴォリュームの変更
     if(inID == kAudioSessionProperty_CurrentHardwareOutputVolume){
@@ -44,6 +53,68 @@ static void propertyListener(void *                  inClientData,
         printf("kAudioSessionProperty_AudioInputAvailable\n");
         
     }
+}
+
+- (void)showButtonMic{
+    NSLog(@"show buttonMic");
+    buttonMicWhite.hidden = false;
+    buttonMicBlue.hidden = true;
+}
+
+- (void)hideButtonMic{
+    NSLog(@"hide buttonMic");
+    [self micStop];
+    buttonMicWhite.hidden = true;
+    buttonMicBlue.hidden = true;
+}
+-(void)prepareAUGraph{
+    AUNode remoteIONode;
+    AudioUnit remoteIOUnit;
+    
+    NewAUGraph(&myAUGraph);
+    AUGraphOpen(myAUGraph);
+    
+    AudioComponentDescription cd;
+	cd.componentType = kAudioUnitType_Output;
+	cd.componentSubType = kAudioUnitSubType_RemoteIO;
+	cd.componentManufacturer = kAudioUnitManufacturer_Apple;
+	cd.componentFlags = cd.componentFlagsMask = 0;
+	
+	AUGraphAddNode(myAUGraph, &cd, &remoteIONode);
+    AUGraphNodeInfo(myAUGraph, remoteIONode, NULL, &remoteIOUnit);
+    
+    //マイク入力をオンにする
+    UInt32 flag = 1;
+    AudioUnitSetProperty(remoteIOUnit,
+                         kAudioOutputUnitProperty_EnableIO,
+                         kAudioUnitScope_Input,
+                         1, //Remote Input
+                         &flag,
+                         sizeof(flag));
+    
+    AUGraphConnectNodeInput(myAUGraph,
+                            remoteIONode, 1, //Remote Inputと 
+                            remoteIONode, 0  //Remote Outputを接続
+                            );
+    AUGraphInitialize(myAUGraph);
+    //allow mix
+    OSStatus propertySetError = 0;
+    UInt32 allowMixing = true;
+    propertySetError = AudioSessionSetProperty (
+                                                kAudioSessionProperty_OverrideCategoryMixWithOthers, 
+                                                sizeof (allowMixing), 
+                                                &allowMixing 
+                                                );
+}
+
+-(void)micPlay{
+    if(!isMicPlaying)AUGraphStart(myAUGraph);
+    isMicPlaying = YES;
+}
+
+-(void)micStop{
+    if(isMicPlaying)AUGraphStop(myAUGraph);
+    isMicPlaying = NO;
 }
 
 #pragma mark - View lifecycle
@@ -244,6 +315,8 @@ static void propertyListener(void *                  inClientData,
     AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, 
                                     propertyListener, 
                                     self);
+    [self prepareAUGraph];
+    
     
 }
 #pragma mark -
@@ -801,6 +874,19 @@ calloutAccessoryControlTapped:(UIControl*)control
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
     NSLog(@"REGION WILL CHANGE");
     
+}
+
+
+-(IBAction)micSwitch{
+    if(isMicPlaying){
+        [self micStop];
+        buttonMicWhite.hidden = false;
+        buttonMicBlue.hidden = true;
+    }else {
+        [self micPlay];
+        buttonMicBlue.hidden = false;
+        buttonMicWhite.hidden = true;
+    }   
 }
 
 #pragma mark -

@@ -490,6 +490,36 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.63763230846774188" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ZPg-lb-1i2" userLabel="Button_mic_white">
+                                        <rect key="frame" x="17" y="45" width="40" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="11" minY="6" maxX="11" maxY="6"/>
+                                        <state key="normal" image="10-microphone@2x.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted" image="10-microphone@2x.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="micSwitch" destination="2" eventType="touchUpInside" id="nKL-xp-D44"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="lBh-uz-8KB" userLabel="Button_mic_blue">
+                                        <rect key="frame" x="17" y="45" width="40" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="11" minY="6" maxX="11" maxY="6"/>
+                                        <state key="normal" image="10-microphone@2x_highlight.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted" image="10-microphone@2x.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="micSwitch" destination="2" eventType="touchUpInside" id="lD9-NS-6rg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
                             </view>
@@ -501,6 +531,8 @@
                     <connections>
                         <outlet property="buttonLikeBlue" destination="MsK-5c-QiS" id="vNf-Eh-CKf"/>
                         <outlet property="buttonLikeWhite" destination="2DD-sZ-zb5" id="4gh-C5-NNa"/>
+                        <outlet property="buttonMicBlue" destination="lBh-uz-8KB" id="fuK-RF-znL"/>
+                        <outlet property="buttonMicWhite" destination="ZPg-lb-1i2" id="AUn-UU-fMj"/>
                         <outlet property="buttonPause" destination="9BP-rv-oxM" id="S8n-Ea-Hkh"/>
                         <outlet property="buttonPlay" destination="GRC-iv-gDN" id="PIX-wq-a08"/>
                         <outlet property="buttonRepeatBlue" destination="5Fz-tY-Ofr" id="Pqd-43-Max"/>
@@ -559,6 +591,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="10-microphone@2x.png" width="24" height="36"/>
+        <image name="10-microphone@2x_highlight.png" width="24" height="36"/>
         <image name="193-location-arrow@2x.png" width="48" height="48"/>
         <image name="back_x2.png" width="62" height="44"/>
         <image name="music_2@2x_grey_50x50.png" width="50" height="50"/>

@@ -79,6 +79,11 @@
     //clustering
     IBOutlet UILabel *labelZoomRange;
     IBOutlet UILabel *labelMapSize;
+    //play back device
+    IBOutlet UIButton *buttonMicWhite;
+    IBOutlet UIButton *buttonMicBlue;
+    AUGraph myAUGraph;
+    BOOL isMicPlaying;
 }
 
 -(IBAction) playOrPause;
@@ -96,5 +101,12 @@
 -(IBAction) repeatOne;
 -(IBAction) shuffleWhite;
 -(IBAction) shuffleBlue;
+//mic
+-(void) showButtonMic;
+-(void) hideButtonMic;
+-(void) prepareAUGraph;
+-(void) micPlay;
+-(void) micStop;
+-(IBAction) micSwitch;
 
 @end
