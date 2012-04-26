@@ -11,6 +11,8 @@
 
 #import "Music_EarthViewController.h"
 #import "AlbumViewController.h"
+#import "SettingViewController.h"
+
 @implementation Music_EarthViewController
 
 
@@ -231,7 +233,7 @@ static void propertyListener(void *                  inClientData,
     //time
     timerClock=[NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateClock:) userInfo:nil repeats:YES];
     
-    //read user defaults
+    //read user defaultstitleForHeaderInSection
     //play button
     buttonPlay.hidden = true;
     buttonPause.hidden = false;
@@ -245,7 +247,7 @@ static void propertyListener(void *                  inClientData,
     
     //1.read uer defaul and add pins on map
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *arrayOld=[defaults arrayForKey:@"userData"];//DICTIONARY IN ARRAI!!
+    NSArray *arrayOld=[defaults arrayForKey:@"privateLog"];//DICTIONARY IN ARRAI!!
     NSLog(@"read pinNum: %d", arrayOld.count);
     
     NSMutableArray* array = [NSMutableArray array];
@@ -264,7 +266,7 @@ static void propertyListener(void *                  inClientData,
     }
     //[array addObject:myArray];
     
-    [defaults setObject:array forKey:@"userData"];
+    [defaults setObject:array forKey:@"privateLog"];
     
     if ( ![defaults synchronize] ) {
         NSLog( @"failed ..." );
@@ -317,6 +319,16 @@ static void propertyListener(void *                  inClientData,
                                     self);
     [self prepareAUGraph];
     
+    
+    
+    //hide some button in OtO version
+    buttonLikeBlue.hidden = true;
+    buttonLikeWhite.hidden = true;
+    buttonScene1.hidden = true;
+    buttonScene1Back.hidden = true;
+    buttonScene2.hidden = true;
+    buttonScene2Back.hidden = true;
+    buttonDislike.hidden =true;
     
 }
 #pragma mark -
@@ -507,7 +519,7 @@ static void propertyListener(void *                  inClientData,
                                 sceneNSNum, @"Scene",
                                 nil];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *arrayOld=[defaults arrayForKey:@"userData"];
+    NSArray *arrayOld=[defaults arrayForKey:@"privateLog"];
     NSLog(@"arrayOldNum: %d", arrayOld.count);
     
     NSMutableArray* array = [NSMutableArray array];
@@ -518,12 +530,12 @@ static void propertyListener(void *                  inClientData,
     //add new pin
     [array addObject:pin];
     //[array addObject:myArray];
-    [defaults setObject:array forKey:@"userData"];
+    [defaults setObject:array forKey:@"privateLog"];
     
     if ( ![defaults synchronize] ) {
         NSLog( @"failed ..." );
     }
-    //NSDictionary* hoge = [userDefaults dictionaryForKey:@"userData"];
+    //NSDictionary* hoge = [userDefaults dictionaryForKey:@"privateLog"];
     NSLog(@"%d", array.count);
     
     
@@ -608,14 +620,20 @@ static void propertyListener(void *                  inClientData,
 #pragma mark map
 //map----------------------------------------------------
 -(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    NSLog(@"NEW LOCATION!");
     labelLatitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
     labelLongitude.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
     MKCoordinateRegion  region = myMapView.region;
     region.center.latitude = newLocation.coordinate.latitude;
     region.center.longitude = newLocation.coordinate.longitude;
-    region.span.latitudeDelta = 0.01;
-    region.span.longitudeDelta = 0.01;
+    //*should be fix******************************************************************************************************
+    //region.span.latitudeDelta = 0.01;
+    //region.span.longitudeDelta = 0.01;
+    region.span.latitudeDelta = myMapView.region.span.latitudeDelta;
+    region.span.longitudeDelta = myMapView.region.span.longitudeDelta;
+    NSLog(@"Delta LAT:%f LON :%f", myMapView.region.span.latitudeDelta, myMapView.region.span.longitudeDelta);
+    
     [myMapView setRegion:region animated:YES];
 }
 
@@ -887,6 +905,14 @@ calloutAccessoryControlTapped:(UIControl*)control
         buttonMicBlue.hidden = false;
         buttonMicWhite.hidden = true;
     }   
+}
+
+-(IBAction)showSettingView{
+    // the detail view does not want a toolbar so hide it
+    [self.navigationController setToolbarHidden:YES animated:NO];
+    SettingViewController *mySettingViewController = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
+    
+    [[self navigationController] pushViewController:mySettingViewController animated:YES];
 }
 
 #pragma mark -

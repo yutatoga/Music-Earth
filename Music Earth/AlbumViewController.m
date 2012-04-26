@@ -79,6 +79,16 @@
     //return  [songItems count];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return @"from your library";
+    } else {
+        return @"from everyone's library";
+    }
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //MPMediaItem *item = [songItems objectAtIndex:indexPath.row];

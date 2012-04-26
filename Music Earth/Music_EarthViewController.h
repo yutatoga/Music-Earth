@@ -60,6 +60,7 @@
     //rating
     IBOutlet UIButton *buttonLikeWhite;
     IBOutlet UIButton *buttonLikeBlue;
+    IBOutlet UIButton *buttonDislike;
     //xml
     int sceneNum;
     
@@ -108,5 +109,7 @@
 -(void) micPlay;
 -(void) micStop;
 -(IBAction) micSwitch;
+//setting view
+-(IBAction) showSettingView;
 
 @end

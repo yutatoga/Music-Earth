@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Music_EarthAppDelegate : UIResponder <UIApplicationDelegate>
+@interface Music_EarthAppDelegate : UIResponder <UIApplicationDelegate>{
+    float mySliderValue2;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 //@property (strong, nonatomic) UINavigationController *navController;
