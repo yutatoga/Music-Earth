@@ -85,6 +85,8 @@
     IBOutlet UIButton *buttonMicBlue;
     AUGraph myAUGraph;
     BOOL isMicPlaying;
+    //add pins after picker
+    BOOL pikcerDone;
     //debug
     IBOutlet UILabel *myDebugLabel;
 }
@@ -111,6 +113,7 @@
 -(void) micPlay;
 -(void) micStop;
 -(IBAction) micSwitch;
+-(void) changePlayPauseIcon;
 //setting view
 -(IBAction) showSettingView;
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define GRIDNUMX 10
-#define GRIDNUMY 10
+#define GRIDNUMX 4
+#define GRIDNUMY 3
 
 #import "Music_EarthViewController.h"
 #import "AlbumViewController.h"
@@ -34,14 +34,20 @@ static void propertyListener(void *                  inClientData,
         printf("kAudioSessionProperty_AudioRouteChange\n");
         NSDictionary *dict = (NSDictionary*)inData;
         NSLog(@"dict = %@",dict); //変更理由
+        /*
         NSLog(@"device: %@", [dict objectForKey:@"OutputDeviceDidChange_NewRoute"]);
         if ([[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"HeadsetInOut"] ||
             [[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"Headphone"] ||
             [[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"Headset"] ||
             [[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"HeadphonesAndMicrophone"]) {
             [controller showButtonMic];
-        }else {
+        } else {
             [controller hideButtonMic];
+        }
+         */
+        NSLog(@"%@",[dict objectForKey:@"OutputDeviceDidChange_NewRoute"]);
+        if ([[dict objectForKey:@"OutputDeviceDidChange_NewRoute"] isEqual:@"Speaker"]) {
+            [controller changePlayPauseIcon];
         }
     }
     //ヴォリュームの変更
@@ -56,7 +62,12 @@ static void propertyListener(void *                  inClientData,
         
     }
 }
+-(void)changePlayPauseIcon{
+    buttonPause.hidden = true;
+    buttonPlay.hidden = false;
+}
 
+/*
 - (void)showButtonMic{
     NSLog(@"show buttonMic");
     buttonMicWhite.hidden = false;
@@ -69,7 +80,9 @@ static void propertyListener(void *                  inClientData,
     buttonMicWhite.hidden = true;
     buttonMicBlue.hidden = true;
 }
--(void)prepareAUGraph{
+
+
+ -(void)prepareAUGraph{
     AUNode remoteIONode;
     AudioUnit remoteIOUnit;
     
@@ -103,11 +116,12 @@ static void propertyListener(void *                  inClientData,
     OSStatus propertySetError = 0;
     UInt32 allowMixing = true;
     propertySetError = AudioSessionSetProperty (
-                                                kAudioSessionProperty_OverrideCategoryMixWithOthers, 
+                                                kAudioSessionProperty_OverrideCategoryMixWithOthers,
                                                 sizeof (allowMixing), 
                                                 &allowMixing 
                                                 );
 }
+ */
 
 -(void)micPlay{
     if(!isMicPlaying)AUGraphStart(myAUGraph);
@@ -282,15 +296,18 @@ static void propertyListener(void *                  inClientData,
     //air play button
     //SHOW ONLY THERE IS AIR PLAY SYSTEM!!!
     airplayButton = [[MPVolumeView alloc] init];
-    airplayButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    airplayButton.transform = CGAffineTransformMakeScale(1, 1);
     airplayButton.frame = CGRectMake(0, 0, 57, 33);//original size is 38x22
     [airplayButton setShowsVolumeSlider:NO];
+    
     [viewAirplay addSubview:airplayButton];
+
     // volume
     viewVolume = [[MPVolumeView alloc] init];
     viewVolume.frame = CGRectMake(0, 0, 180, 22);
     [viewVolume setShowsRouteButton:NO];
     [viewVolumeBack addSubview:viewVolume];
+    
     //CGSize check = [viewVolume sizeThatFits:CGSizeMake(300, 200)];
     //NSLog(@"checkWidth:%f", check.width);
     //NSLog(@"checkHeight:%f", check.height);//result is that height is needed 22px.(2012_03_11) 
@@ -307,18 +324,22 @@ static void propertyListener(void *                  inClientData,
                             &category);
     AudioSessionSetActive(YES);
     
+    //mic feature
     //プロパティリスナーを登録する
+    
     AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, 
-                                    propertyListener, 
+                                    propertyListener ,
                                     self);
-    AudioSessionAddPropertyListener(kAudioSessionProperty_CurrentHardwareOutputVolume, 
+    /*
+    AudioSessionAddPropertyListener(kAudioSessionProperty_CurrentHardwareOutputVolume ,
                                     propertyListener, 
                                     self);
     AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, 
                                     propertyListener, 
                                     self);
-    [self prepareAUGraph];
     
+    [self prepareAUGraph];
+    */
     
     
     //hide some button in OtO version
@@ -330,6 +351,7 @@ static void propertyListener(void *                  inClientData,
     buttonScene2Back.hidden = true;
     buttonDislike.hidden =true;
     
+    pikcerDone = false;
 }
 #pragma mark -
 #pragma mark iPod
@@ -581,7 +603,8 @@ static void propertyListener(void *                  inClientData,
         NSLog(@"musicDistArray:%@", [[myAnnotation mediaDictArray] description]);
         [myMapView addAnnotation:myAnnotation];
         [myMapView setDelegate:self];
-    }     
+    }
+    NSLog(@"done update");
 }
 
 
@@ -597,7 +620,11 @@ static void propertyListener(void *                  inClientData,
     };
     [player setQueueWithItemCollection:collection];
     [player play];
+    pikcerDone = true;
 }
+
+
+
 - (void) mediaPickerDidCancel: (MPMediaPickerController *) mediaPicker {
     [self dismissModalViewControllerAnimated: YES];
 }
@@ -836,16 +863,27 @@ calloutAccessoryControlTapped:(UIControl*)control
                     
                     if ([clusteredArray count]>0) {
                         NSLog(@"CLUSTERING %u pins----------------------------------------------------------------------------------------------", [clusteredArray count]);
-                        MKCoordinateRegion ClusterRegion = MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight));
+                        MKCoordinateRegion clusterRegion = MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight));
+                        CLLocation *centralLoc = [[CLLocation alloc] initWithLatitude:clusterRegion.center.latitude longitude:clusterRegion.center.longitude];
+                        CLLocation *instantLoc = [[CLLocation alloc] initWithLatitude:[[clusteredArray objectAtIndex:0] coordinate].latitude longitude:[[clusteredArray objectAtIndex:0] coordinate].longitude];
+                        double minimumDist = [centralLoc distanceFromLocation:instantLoc];
+                        int clusterPosID = 0;
                         NSMutableArray *clusterTitle = [NSMutableArray array];
                         for (int k=0; k<[clusteredArray count]; k++) {
                             NSArray *clusterMediaDictArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaDictArray]];
                             [clusterTitle addObjectsFromArray: clusterMediaDictArray];
-                            //culculate meaning of coodinate
+                            //compare the distance from central and find the most nearest pin from central
+                            if (k>0) {
+                                CLLocation *instantLocForComparing = [[CLLocation alloc] initWithLatitude:[[clusteredArray objectAtIndex:k] coordinate].latitude longitude:[[clusteredArray objectAtIndex:k] coordinate].longitude];
+                                if ([centralLoc distanceFromLocation:instantLocForComparing] < minimumDist) {
+                                    minimumDist = [instantLoc distanceFromLocation:instantLocForComparing];
+                                    clusterPosID = k;
+                                }
+                            }
                         }
                         //draw pin on the central of the grid   
                         SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
-                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake(ClusterRegion.center.latitude, ClusterRegion.center.longitude)
+                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:clusterPosID] coordinate].latitude, [[clusteredArray objectAtIndex:clusterPosID] coordinate].longitude)
                                                                  title:[NSString stringWithFormat:@"%i music", clusterTitle.count]
                                                                  subtitle:nil];
                         newCluterAnnotation.mediaDictArray = [NSArray arrayWithArray: clusterTitle];
@@ -874,17 +912,29 @@ calloutAccessoryControlTapped:(UIControl*)control
                     NSLog(@"CLUSTERING--GRIDNUM:%02ux%02u / COUNT:%i", j, i, [clusteredArray count]);
                     if ([clusteredArray count]>0) {
                         NSLog(@"CLUSTERING %u pins----------------------------------------------------------------------------------------------", [clusteredArray count]);
-                        MKCoordinateRegion ClusterRegion = MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight));
+                        MKCoordinateRegion clusterRegion = MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight));
+                        CLLocation *centralLoc = [[CLLocation alloc] initWithLatitude:clusterRegion.center.latitude longitude:clusterRegion.center.longitude];
+                        CLLocation *instantLoc = [[CLLocation alloc] initWithLatitude:[[clusteredArray objectAtIndex:0] coordinate].latitude longitude:[[clusteredArray objectAtIndex:0] coordinate].longitude];
+                        double minimumDist = [centralLoc distanceFromLocation:instantLoc];
+                        int clusterPosID = 0;
                         NSMutableArray *clusterTitle = [NSMutableArray array];
                         for (int k=0; k<[clusteredArray count]; k++) {
                             NSArray *clusterMediaDictArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaDictArray]];
                             NSLog(@"results:%@", [clusterMediaDictArray description]);
                             [clusterTitle addObjectsFromArray: clusterMediaDictArray];
-                            //culculate meaning of coodinate
+                            //compare the distance from central and find the most nearest pin from central
+                            if (k>0) {
+                                CLLocation *instantLocForComparing = [[CLLocation alloc] initWithLatitude:[[clusteredArray objectAtIndex:k] coordinate].latitude longitude:[[clusteredArray objectAtIndex:k] coordinate].longitude];
+                                if ([centralLoc distanceFromLocation:instantLocForComparing] < minimumDist) {
+                                    minimumDist = [instantLoc distanceFromLocation:instantLocForComparing];
+                                    clusterPosID = k;
+                                }
+                            }
+                            
                         }
                         //draw pin on the central of the grid                
                         SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
-                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake(ClusterRegion.center.latitude, ClusterRegion.center.longitude)
+                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake([[clusteredArray objectAtIndex:clusterPosID] coordinate].latitude, [[clusteredArray objectAtIndex:clusterPosID] coordinate].longitude)
                                                                  title:[NSString stringWithFormat:@"%i music", clusterTitle.count]
                                                                  subtitle:nil];
                         NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
@@ -941,6 +991,10 @@ calloutAccessoryControlTapped:(UIControl*)control
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (pikcerDone) {
+        //add pin
+        [self updateView];
+    }
 }
 
 

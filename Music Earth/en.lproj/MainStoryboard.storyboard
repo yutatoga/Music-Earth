@@ -230,141 +230,134 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="AtT-VO-bGS" userLabel="View_debug">
-                                <rect key="frame" x="0.0" y="247" width="320" height="122"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="date" autoshrinkMode="minimumFontSize" id="2Yn-ja-ays">
-                                        <rect key="frame" x="4" y="41" width="140" height="21"/>
+                                        <rect key="frame" x="4" y="14" width="140" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="time" autoshrinkMode="minimumFontSize" id="GCp-OZ-u9h">
-                                        <rect key="frame" x="4" y="27" width="140" height="21"/>
+                                        <rect key="frame" x="4" y="0.0" width="140" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="longitude:" autoshrinkMode="minimumFontSize" id="3sr-k8-tp1">
-                                        <rect key="frame" x="4" y="72" width="86" height="21"/>
+                                        <rect key="frame" x="4" y="45" width="86" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="tappedLon:" autoshrinkMode="minimumFontSize" id="sL3-Nl-6ij">
-                                        <rect key="frame" x="152" y="54" width="96" height="21"/>
+                                        <rect key="frame" x="152" y="27" width="96" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="volNum:" autoshrinkMode="minimumFontSize" id="96e-d8-nLe">
-                                        <rect key="frame" x="4" y="86" width="86" height="21"/>
+                                        <rect key="frame" x="4" y="59" width="86" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="indexPath.row" autoshrinkMode="minimumFontSize" id="9Ac-Re-ax8">
-                                        <rect key="frame" x="152" y="27" width="86" height="21"/>
+                                        <rect key="frame" x="152" y="0.0" width="86" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="volChangeTimes:" autoshrinkMode="minimumFontSize" id="l22-t1-knP">
-                                        <rect key="frame" x="4" y="101" width="99" height="21"/>
+                                        <rect key="frame" x="4" y="74" width="99" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="volCT" autoshrinkMode="minimumFontSize" id="NzO-Jm-T2g">
-                                        <rect key="frame" x="98" y="101" width="46" height="21"/>
+                                        <rect key="frame" x="98" y="74" width="46" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="longitudeNum" autoshrinkMode="minimumFontSize" id="Ydh-Tu-Zkp">
-                                        <rect key="frame" x="60" y="72" width="69" height="21"/>
+                                        <rect key="frame" x="60" y="45" width="69" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="latitudeNum" autoshrinkMode="minimumFontSize" id="X91-ZD-QSu">
-                                        <rect key="frame" x="45" y="57" width="69" height="21"/>
+                                        <rect key="frame" x="45" y="30" width="69" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="latitude:" autoshrinkMode="minimumFontSize" id="xmp-LO-7u1">
-                                        <rect key="frame" x="4" y="56" width="71" height="21"/>
+                                        <rect key="frame" x="4" y="29" width="71" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="tappedLat:" autoshrinkMode="minimumFontSize" id="Noa-lr-WAh">
-                                        <rect key="frame" x="152" y="39" width="85" height="21"/>
+                                        <rect key="frame" x="152" y="12" width="85" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" text="volumeNum" autoshrinkMode="minimumFontSize" id="MkM-HS-pHW">
-                                        <rect key="frame" x="52" y="86" width="69" height="21"/>
+                                        <rect key="frame" x="52" y="59" width="69" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="indexPath.row" autoshrinkMode="minimumFontSize" id="oQB-b4-E4e">
-                                        <rect key="frame" x="240" y="27" width="80" height="21"/>
+                                        <rect key="frame" x="240" y="0.0" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="tappedLatNum" autoshrinkMode="minimumFontSize" id="oZO-ZA-hhM">
-                                        <rect key="frame" x="211" y="39" width="108" height="21"/>
+                                        <rect key="frame" x="211" y="12" width="108" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="tappedLonNum" autoshrinkMode="minimumFontSize" id="ZSs-Nd-tGL">
-                                        <rect key="frame" x="213" y="54" width="118" height="21"/>
+                                        <rect key="frame" x="213" y="27" width="118" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="zoomRange" autoshrinkMode="minimumFontSize" id="YlS-1a-2Bj">
-                                        <rect key="frame" x="152" y="86" width="167" height="21"/>
+                                        <rect key="frame" x="152" y="59" width="167" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" text="mapSize" autoshrinkMode="minimumFontSize" id="r9c-l8-RYQ">
-                                        <rect key="frame" x="152" y="101" width="167" height="21"/>
+                                        <rect key="frame" x="152" y="74" width="167" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="upper left X: Y:" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="nbX-6k-43w">
-                                        <rect key="frame" x="17" y="2" width="286" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.6410975302419355" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -486,7 +479,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="bZy-Uu-LD7" userLabel="View_airplay">
-                                        <rect key="frame" x="255" y="51" width="57" height="33"/>
+                                        <rect key="frame" x="264" y="54" width="38" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.64116053427419339" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                     </view>
@@ -495,7 +488,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.63763230846774188" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ZPg-lb-1i2" userLabel="Button_mic_white">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ZPg-lb-1i2" userLabel="Button_mic_white">
                                         <rect key="frame" x="17" y="45" width="40" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -510,7 +503,7 @@
                                             <action selector="micSwitch" destination="2" eventType="touchUpInside" id="nKL-xp-D44"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="lBh-uz-8KB" userLabel="Button_mic_blue">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="lBh-uz-8KB" userLabel="Button_mic_blue">
                                         <rect key="frame" x="17" y="45" width="40" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -574,7 +567,6 @@
                         <outlet property="labelVolumeChangedTimes" destination="NzO-Jm-T2g" id="1RG-zi-ydz"/>
                         <outlet property="labelVolumeNum" destination="MkM-HS-pHW" id="T5s-SY-WtB"/>
                         <outlet property="labelZoomRange" destination="YlS-1a-2Bj" id="NGc-kz-T9P"/>
-                        <outlet property="myDebugLabel" destination="nbX-6k-43w" id="rvu-Yv-L6N"/>
                         <outlet property="myMapView" destination="1rH-eT-XSI" id="von-L9-DO5"/>
                         <outlet property="sliderPlayerPos" destination="m2a-JT-k6N" id="itD-a3-0Wb"/>
                         <outlet property="viewAirplay" destination="bZy-Uu-LD7" id="kdG-SX-GSu"/>
@@ -624,6 +616,77 @@
         <image name="pause_x2.png" width="34" height="52"/>
         <image name="play_x2.png" width="57" height="50"/>
     </resources>
+    <classes>
+        <class className="MPVolumeView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPVolumeView.h"/>
+        </class>
+        <class className="Music_EarthViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/Music_EarthViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dislike"/>
+                <relationship kind="action" name="likeBlue"/>
+                <relationship kind="action" name="likeWhite"/>
+                <relationship kind="action" name="micSwitch"/>
+                <relationship kind="action" name="playOrPause"/>
+                <relationship kind="action" name="playerPosChange"/>
+                <relationship kind="action" name="repeatBlue"/>
+                <relationship kind="action" name="repeatOne"/>
+                <relationship kind="action" name="repeatWhite"/>
+                <relationship kind="action" name="scene1"/>
+                <relationship kind="action" name="scene2"/>
+                <relationship kind="action" name="showMediaPicker"/>
+                <relationship kind="action" name="showSettingView"/>
+                <relationship kind="action" name="shuffleBlue"/>
+                <relationship kind="action" name="shuffleWhite"/>
+                <relationship kind="action" name="skipToNext"/>
+                <relationship kind="action" name="skipToPrevious"/>
+                <relationship kind="outlet" name="airplayButton" candidateClass="MPVolumeView"/>
+                <relationship kind="outlet" name="buttonDislike" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonLikeBlue" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonLikeWhite" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonMicBlue" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonMicWhite" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonPause" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonPlay" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonRepeatBlue" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonRepeatOne" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonRepeatWhite" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonScene1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonScene1Back" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonScene2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonScene2Back" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonShuffleBlue" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonShuffleWhite" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="compassImg" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imageArtWork" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="labelAirplay" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelAlbumTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelArtist" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelIndexPathRow" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelLatitude" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelLongitude" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelMapSize" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelPastTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelRestTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelSongTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelTappedLatitude" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelTappedLongitude" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelVolumeChangedTimes" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelVolumeNum" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelZoomRange" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="myDebugLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="sliderPlayerPos" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="sliderVolume" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="viewAirplay" candidateClass="UIView"/>
+                <relationship kind="outlet" name="viewMapBack" candidateClass="UIView"/>
+                <relationship kind="outlet" name="viewVolume" candidateClass="MPVolumeView"/>
+                <relationship kind="outlet" name="viewVolumeBack" candidateClass="UIView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
         <simulatedOrientationMetrics key="orientation"/>
