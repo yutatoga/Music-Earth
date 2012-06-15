@@ -85,6 +85,8 @@
     IBOutlet UIButton *buttonMicBlue;
     AUGraph myAUGraph;
     BOOL isMicPlaying;
+    //debug
+    IBOutlet UILabel *myDebugLabel;
 }
 
 -(IBAction) playOrPause;
