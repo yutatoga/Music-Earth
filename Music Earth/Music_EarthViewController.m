@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define GRIDNUMX 3
-#define GRIDNUMY 3
+#define GRIDNUMX 10
+#define GRIDNUMY 10
 
 #import "Music_EarthViewController.h"
 #import "AlbumViewController.h"
@@ -825,23 +825,27 @@ calloutAccessoryControlTapped:(UIControl*)control
                     
                     NSSet *clusteredSet = [NSSet setWithSet:[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] ];
                     NSArray *clusteredArray = [NSArray arrayWithArray:[clusteredSet allObjects]];
-                    [myMapView removeAnnotations:[[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects]]; 
+                    [myMapView removeAnnotations:[[myMapView annotationsInMapRect:MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)] allObjects]];
+                    
+                    
+                    
+                    
+                    
+                    
                     NSLog(@"CLUSTERING--GRIDNUM:%02ux%02u / COUNT:%i", j, i, [clusteredArray count]);
+                    
                     if ([clusteredArray count]>0) {
                         NSLog(@"CLUSTERING %u pins----------------------------------------------------------------------------------------------", [clusteredArray count]);
+                        MKCoordinateRegion ClusterRegion = MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight));
                         NSMutableArray *clusterTitle = [NSMutableArray array];
-                        float instantLat = 0.0;
-                        float instantLon = 0.0;
                         for (int k=0; k<[clusteredArray count]; k++) {
                             NSArray *clusterMediaDictArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaDictArray]];
                             [clusterTitle addObjectsFromArray: clusterMediaDictArray];
                             //culculate meaning of coodinate
-                            instantLat += [[clusteredArray objectAtIndex:k] coordinate].latitude;
-                            instantLon += [[clusteredArray objectAtIndex:k] coordinate].longitude;
                         }
                         //draw pin on the central of the grid   
                         SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
-                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLat/[clusteredArray count], instantLon/[clusteredArray count])
+                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake(ClusterRegion.center.latitude, ClusterRegion.center.longitude)
                                                                  title:[NSString stringWithFormat:@"%i music", clusterTitle.count]
                                                                  subtitle:nil];
                         newCluterAnnotation.mediaDictArray = [NSArray arrayWithArray: clusterTitle];
@@ -870,20 +874,17 @@ calloutAccessoryControlTapped:(UIControl*)control
                     NSLog(@"CLUSTERING--GRIDNUM:%02ux%02u / COUNT:%i", j, i, [clusteredArray count]);
                     if ([clusteredArray count]>0) {
                         NSLog(@"CLUSTERING %u pins----------------------------------------------------------------------------------------------", [clusteredArray count]);
+                        MKCoordinateRegion ClusterRegion = MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight));
                         NSMutableArray *clusterTitle = [NSMutableArray array];
-                        float instantLat = 0.0;
-                        float instantLon = 0.0;
                         for (int k=0; k<[clusteredArray count]; k++) {
                             NSArray *clusterMediaDictArray = [NSArray arrayWithArray:[[clusteredArray objectAtIndex:k] mediaDictArray]];
                             NSLog(@"results:%@", [clusterMediaDictArray description]);
                             [clusterTitle addObjectsFromArray: clusterMediaDictArray];
                             //culculate meaning of coodinate
-                            instantLat += [[clusteredArray objectAtIndex:k] coordinate].latitude;
-                            instantLon += [[clusteredArray objectAtIndex:k] coordinate].longitude;
                         }
                         //draw pin on the central of the grid                
                         SimpleAnnotation *newCluterAnnotation = [[SimpleAnnotation alloc]
-                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake(instantLat/[clusteredArray count], instantLon/[clusteredArray count])
+                                                                 initWithLocationCoordinate:CLLocationCoordinate2DMake(ClusterRegion.center.latitude, ClusterRegion.center.longitude)
                                                                  title:[NSString stringWithFormat:@"%i music", clusterTitle.count]
                                                                  subtitle:nil];
                         NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
