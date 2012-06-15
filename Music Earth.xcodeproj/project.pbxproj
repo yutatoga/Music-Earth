@@ -37,6 +37,8 @@
 		8D5820AF150FDD510065DCDA /* myRepeat_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5820AE150FDD510065DCDA /* myRepeat_white.png */; };
 		8D5820B2150FE8110065DCDA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5820B1150FE8110065DCDA /* AlbumViewController.m */; };
 		8D5820B4150FE8200065DCDA /* AlbumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5820B3150FE8200065DCDA /* AlbumViewController.xib */; };
+		8D6FDE22154A6EE700E04123 /* AddGenreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FDE20154A6EE700E04123 /* AddGenreViewController.m */; };
+		8D6FDE23154A6EE700E04123 /* AddGenreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6FDE21154A6EE700E04123 /* AddGenreViewController.xib */; };
 		8DA5CF76150BBFEF00CF90CE /* myRepeat_blue_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF73150BBFEF00CF90CE /* myRepeat_blue_01.png */; };
 		8DA5CF77150BBFEF00CF90CE /* myRepeat_blue_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF74150BBFEF00CF90CE /* myRepeat_blue_02.png */; };
 		8DA5CF78150BBFEF00CF90CE /* myRepeat_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5CF75150BBFEF00CF90CE /* myRepeat_white.png */; };
@@ -113,6 +115,9 @@
 		8D5820B0150FE8110065DCDA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
 		8D5820B1150FE8110065DCDA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		8D5820B3150FE8200065DCDA /* AlbumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumViewController.xib; sourceTree = "<group>"; };
+		8D6FDE1F154A6EE700E04123 /* AddGenreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGenreViewController.h; sourceTree = "<group>"; };
+		8D6FDE20154A6EE700E04123 /* AddGenreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGenreViewController.m; sourceTree = "<group>"; };
+		8D6FDE21154A6EE700E04123 /* AddGenreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddGenreViewController.xib; sourceTree = "<group>"; };
 		8DA5CF73150BBFEF00CF90CE /* myRepeat_blue_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_blue_01.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_blue_01.png; sourceTree = "<group>"; };
 		8DA5CF74150BBFEF00CF90CE /* myRepeat_blue_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_blue_02.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_blue_02.png; sourceTree = "<group>"; };
 		8DA5CF75150BBFEF00CF90CE /* myRepeat_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myRepeat_white.png; path = ../../../../../../SystemTOGA/img/myIcon/saurce/myRepeat/ok/myRepeat_white.png; sourceTree = "<group>"; };
@@ -237,6 +242,9 @@
 				8D2E4CA415412B8B00A43EAB /* SceneViewController.h */,
 				8D2E4CA515412B8B00A43EAB /* SceneViewController.m */,
 				8D2E4CA615412B8B00A43EAB /* SceneViewController.xib */,
+				8D6FDE1F154A6EE700E04123 /* AddGenreViewController.h */,
+				8D6FDE20154A6EE700E04123 /* AddGenreViewController.m */,
+				8D6FDE21154A6EE700E04123 /* AddGenreViewController.xib */,
 			);
 			path = "Music Earth";
 			sourceTree = "<group>";
@@ -318,7 +326,7 @@
 		8DE97C8B150688EB00154D2F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 8DE97C8E150688EB00154D2F /* Build configuration list for PBXProject "Music Earth" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -390,6 +398,7 @@
 				8D2E4C7715401F9100A43EAB /* SexViewController.xib in Resources */,
 				8D2E4CA315412B6E00A43EAB /* GenreViewController.xib in Resources */,
 				8D2E4CA815412B8B00A43EAB /* SceneViewController.xib in Resources */,
+				8D6FDE23154A6EE700E04123 /* AddGenreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +420,7 @@
 				8D2E4C7615401F9100A43EAB /* SexViewController.m in Sources */,
 				8D2E4CA215412B6E00A43EAB /* GenreViewController.m in Sources */,
 				8D2E4CA715412B8B00A43EAB /* SceneViewController.m in Sources */,
+				8D6FDE22154A6EE700E04123 /* AddGenreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

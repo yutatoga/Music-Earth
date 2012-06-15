@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GenreViewController : UITableViewController
-
+@interface GenreViewController : UITableViewController{
+    int myNumberOfRowsInSection1;
+}
+//@property( nonatomic, retain) int myNumberOfRowsInSection1;
 @end

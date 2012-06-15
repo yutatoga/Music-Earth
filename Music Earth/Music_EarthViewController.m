@@ -160,7 +160,7 @@ static void propertyListener(void *                  inClientData,
      name:MPMusicPlayerControllerVolumeDidChangeNotification
      object:player];
     //player position
-    labelPastTime.text =[NSString stringWithFormat:@"%d", player.currentPlaybackTime];
+    labelPastTime.text =[NSString stringWithFormat:@"%f", player.currentPlaybackTime];
     //player volume
     sliderVolume.value = player.volume;
     labelVolumeNum.text = [NSString stringWithFormat:@"%f", player.volume];
@@ -841,7 +841,9 @@ calloutAccessoryControlTapped:(UIControl*)control
                                                                  subtitle:nil];
                         newCluterAnnotation.mediaDictArray = [NSArray arrayWithArray: clusterTitle];
                         [myMapView addAnnotation:newCluterAnnotation];
-                        [myMapView setDelegate:self];                
+                        [myMapView setDelegate:self];
+                        
+                        NSLog(@"cluster spreaded! pos Lat:%f Lon:%f", CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude).latitude, CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude).longitude);
                         NSLog(@"Finished Clustering-(zoom in version)---------------------------------------------------------------------------------------");
                     }
                 }
@@ -877,7 +879,8 @@ calloutAccessoryControlTapped:(UIControl*)control
                         NSLog(@"clusterTitle Desc:%@ Count:%i",[clusterTitle description], [clusterTitle count]);
                         newCluterAnnotation.mediaDictArray = [NSArray arrayWithArray: clusterTitle];
                         [myMapView addAnnotation:newCluterAnnotation];
-                        [myMapView setDelegate:self];                
+                        [myMapView setDelegate:self];
+                        NSLog(@"cluster gathered! pos Lat:%f Lon:%f", CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude).latitude, CLLocationCoordinate2DMake([mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.latitude, [mapView convertRect:[mapView convertRegion:MKCoordinateRegionForMapRect(MKMapRectMake(clusterX, clusterY, clusterStepWidth, clusterStepHeight)) toRectToView:myMapView] toRegionFromView:myMapView].center.longitude).longitude);
                         NSLog(@"Finished Clustering-zoom out version---------------------------------------------------------------------------------------");
                     }
                 }
@@ -904,7 +907,7 @@ calloutAccessoryControlTapped:(UIControl*)control
         [self micPlay];
         buttonMicBlue.hidden = false;
         buttonMicWhite.hidden = true;
-    }   
+    } 
 }
 
 -(IBAction)showSettingView{

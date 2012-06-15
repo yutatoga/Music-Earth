@@ -7,6 +7,7 @@
 //
 
 #import "GenreViewController.h"
+#import "AddGenreViewController.h"
 
 @interface GenreViewController ()
 
@@ -37,6 +38,7 @@
     self.tableView.allowsSelectionDuringEditing = NO;
     self.tableView.editing = YES;
     //self.navigationItem.rightBarButtonItem = [self editButtonItem];
+    myNumberOfRowsInSection1 = 4;//should be change to the number which is readed in user defaults.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -97,11 +99,13 @@
 
     // Return the number of rows in the section.
     if (section == 1) {
-        return 4;        
+        return myNumberOfRowsInSection1;        
     }else {
         return 1;
     }
 }
+
+#pragma mark - cellForRowAtIndexPath
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -155,12 +159,20 @@
                 return cell;
                 break;
             default:
-                break;
+                if( cell == nil ) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.textLabel.text = @"ADDED";
+                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
                 return cell;
+                break;
+
         }
     }
     return nil;
 }
+
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -189,11 +201,25 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        myNumberOfRowsInSection1--;
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        /*
+        myNumberOfRowsInSection1++;
+        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:myNumberOfRowsInSection1-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+         */
+        //[[self navigationController] pushViewController:myAddGenreViewController animated:YES]; 
+        AddGenreViewController *myAddGenreViewController = [[AddGenreViewController alloc] initWithNibName:@"AddGenreViewController" bundle:nil];        
+        UINavigationController *navBar=[[UINavigationController alloc]initWithRootViewController:myAddGenreViewController];
+        
+        [self.navigationController presentModalViewController:navBar animated:YES];
+       
+        //[[self navigationController] presentModalViewController:myAddGenreViewController animated:YES];
+    }
 }
 
 
