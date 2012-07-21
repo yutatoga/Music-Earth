@@ -113,7 +113,7 @@ static void propertyListener(void *                  inClientData,
                             );
     AUGraphInitialize(myAUGraph);
     //allow mix
-    OSStatus propertySetError = 0;
+    OSStatus propertySetErfror = 0;
     UInt32 allowMixing = true;
     propertySetError = AudioSessionSetProperty (
                                                 kAudioSessionProperty_OverrideCategoryMixWithOthers,
